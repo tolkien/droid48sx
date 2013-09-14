@@ -24,7 +24,7 @@ LOCAL_PATH:= $(call my-dir)
 #
 include $(CLEAR_VARS)
 
-LOCAL_MODULE    := droid48
+LOCAL_MODULE    := droid48sx
 
 
 

@@ -16,7 +16,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="Droid48" buildProperties="" description="" id="0.331530184" name="Default" parent="org.eclipse.cdt.build.core.prefbase.cfg">
+				<configuration artifactName="Droid48sx" buildProperties="" description="" id="0.331530184" name="Default" parent="org.eclipse.cdt.build.core.prefbase.cfg">
 					<folderInfo id="0.331530184." name="/" resourcePath="">
 						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.526104931" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 							<targetPlatform id="org.eclipse.cdt.build.core.prefbase.toolchain.526104931.1254968497" name=""/>
@@ -65,7 +65,7 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="Droid48.null.112710207" name="Droid48"/>
+		<project id="Droid48sx.null.112710207" name="Droid48sx"/>
 	</storageModule>
 	<storageModule moduleId="refreshScope"/>
 	<storageModule moduleId="scannerConfiguration">

@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     >
     
-    <org.ab.x48.HPView
+    <org.czo.droid48sx.HPView
       android:id="@+id/hpview"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"

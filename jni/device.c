@@ -193,7 +193,7 @@ static int freq_counter = 0;
 static char speaker_state = 0;
 
 jint
-Java_org_ab_x48_X48_fillAudioData( JNIEnv*  env, jobject  this, jshortArray array) {
+Java_org_czo_droid48sx_X48_fillAudioData( JNIEnv*  env, jobject  this, jshortArray array) {
 
 	/*struct timeval tv;
 	gettimeofday(&tv, NULL);

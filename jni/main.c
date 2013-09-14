@@ -247,7 +247,7 @@ printf("%s\n", nl_langinfo(CODESET));*/
 
 
 void
-Java_org_ab_x48_X48_registerClass( JNIEnv* env, jobject caller, jobject callback )
+Java_org_czo_droid48sx_X48_registerClass( JNIEnv* env, jobject caller, jobject callback )
 {
 	LOGI("--registerClass--");
 	android_env = env;
@@ -263,28 +263,28 @@ Java_org_ab_x48_X48_registerClass( JNIEnv* env, jobject caller, jobject callback
 }
 
 jstring
-Java_org_ab_x48_X48_stopHPEmulator( JNIEnv* env, jobject thiz )
+Java_org_czo_droid48sx_X48_stopHPEmulator( JNIEnv* env, jobject thiz )
 {
 	exit (0);
 	//exit_state = 0;
 }
 
 jstring
-Java_org_ab_x48_X48_saveState( JNIEnv* env, jobject thiz )
+Java_org_czo_droid48sx_X48_saveState( JNIEnv* env, jobject thiz )
 {
 	LOGI("save_state");
 	write_files();
 }
 
 jstring
-Java_org_ab_x48_X48_resetHPEmulator( JNIEnv* env, jobject thiz )
+Java_org_czo_droid48sx_X48_resetHPEmulator( JNIEnv* env, jobject thiz )
 {
 	do_reset();
 }
 
 
 jstring
-Java_org_ab_x48_X48_startHPEmulator( JNIEnv* env, jobject thiz )
+Java_org_czo_droid48sx_X48_startHPEmulator( JNIEnv* env, jobject thiz )
 {
 
 	LOGI("init_emulator");
@@ -363,7 +363,7 @@ sigset_t set;
 }
 
 jint
-Java_org_ab_x48_X48_buttonPressed( JNIEnv*  env,
+Java_org_czo_droid48sx_X48_buttonPressed( JNIEnv*  env,
                                       jobject  this,
                                       jint     x) {
 	button_pressed(x);
@@ -372,7 +372,7 @@ Java_org_ab_x48_X48_buttonPressed( JNIEnv*  env,
 
 
 jint
-Java_org_ab_x48_X48_buttonReleased( JNIEnv*  env,
+Java_org_czo_droid48sx_X48_buttonReleased( JNIEnv*  env,
                                       jobject  this,
                                       jint     x) {
 	button_released(x);
@@ -381,7 +381,7 @@ Java_org_ab_x48_X48_buttonReleased( JNIEnv*  env,
 
 
 jint
-Java_org_ab_x48_X48_loadProg( JNIEnv*  env,
+Java_org_czo_droid48sx_X48_loadProg( JNIEnv*  env,
                                       jobject  this,
                                       jstring     desc) {
 	const char* cDesc = (*env)->GetStringUTFChars(env, desc, 0);

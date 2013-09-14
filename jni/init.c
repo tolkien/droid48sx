@@ -1157,12 +1157,12 @@ read_files()
  
 
  FILE          *sd;
-	if (NULL == (sd = fopen("/sdcard/.hp48/", "rw"))) {
-		strcpy(path, "/data/data/org.ab.x48/");
+	if (NULL == (sd = fopen("/sdcard/.droid48sx/", "rw"))) {
+		strcpy(path, "/data/data/org.czo.droid48sx/");
 		
 	}
 	else
-		strcpy(path, "/sdcard/.hp48/");
+		strcpy(path, "/sdcard/.droid48sx/");
 
   //get_home_directory(path);
  LOGI("path: %s", path); 
@@ -1619,12 +1619,12 @@ write_files()
   make_dir = 0;
   //get_home_directory(path);
   FILE          *sd;
-	if (NULL == (sd = fopen("/sdcard/.hp48/", "rw"))) {
-		strcpy(path, "/data/data/org.ab.x48/");
+	if (NULL == (sd = fopen("/sdcard/.droid48sx/", "rw"))) {
+		strcpy(path, "/data/data/org.czo.droid48sx/");
 		//fclose(sd);
 	}
 	else
-		strcpy(path, "/sdcard/.hp48/");
+		strcpy(path, "/sdcard/.droid48sx/");
 
   if (stat(path, &st) == -1)
     {

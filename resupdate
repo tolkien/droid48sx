@@ -1,0 +1,43 @@
+#!/bin/sh
+
+#orig png in hdpi : 104x72 et ABC 104x44
+mkdir -p res/drawable
+mkdir -p res/drawable-hdpi
+mkdir -p res/drawable-large
+mkdir -p res/drawable-large-hdpi
+mkdir -p res/drawable-large-xhdpi
+mkdir -p res/drawable-xhdpi
+mkdir -p res/drawable-xlarge
+
+
+#drawable : 52x36
+for b in k01 k02 k03 k04 k05 k06 k07 k08 k09 k10 k11 k12 k13 k14 k15 k16 k17 k18 k19 k20 k21 k22 k23 k24 k26 k27 k28 k29 k30 k31 k32 k33 k34 k35 k36 k37 k38 k39 k40 k41 k42 k43 k44 k45 k46 k47 k48 k49
+do
+ convert res/drawable-hdpi/$b.png -geometry 52x36 res/drawable/$b.png
+done
+convert res/drawable-hdpi/k25.png -geometry 104x36 res/drawable/k25.png
+
+
+#xhdpi : 156x108
+for b in k01 k02 k03 k04 k05 k06 k07 k08 k09 k10 k11 k12 k13 k14 k15 k16 k17 k18 k19 k20 k21 k22 k23 k24 k26 k27 k28 k29 k30 k31 k32 k33 k34 k35 k36 k37 k38 k39 k40 k41 k42 k43 k44 k45 k46 k47 k48 k49
+do
+ convert res/drawable-hdpi/$b.png -geometry 156x108 res/drawable-xhdpi/$b.png
+done
+convert res/drawable-hdpi/k25.png -geometry 312x108 res/drawable-xhdpi/k25.png
+
+#ldpi : 0123: 26x19, FUNC: 33x19, 
+for b in k01 k02 k03 k04 k05 k06 k07 k08 k09 k10 k11 k12 k13 k14 k15 k16 k17 k18 k19 k20 k21 k22 k23 k24 k26 k27 k28 k29 k30 k31 k32 k33 k34 k35 k36 k37 k38 k39 k40 k41 k42 k43 k44 k45 k46 k47 k48 k49
+do
+ convert res/drawable-hdpi/$b.png -geometry 33x19 res/drawable-ldpi/$b.png
+done
+convert res/drawable-hdpi/k25.png -geometry 66x19 res/drawable-ldpi/k25.png
+
+
+cp -f res/drawable-hdpi/* res/drawable-large/
+cp -f res/drawable-hdpi/* res/drawable-large-hdpi/
+cp -f res/drawable-xhdpi/* res/drawable-xlarge/
+cp -f res/drawable-xhdpi/* res/drawable-large-xhdpi/
+
+
+
+

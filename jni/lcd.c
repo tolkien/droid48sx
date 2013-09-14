@@ -167,7 +167,7 @@ jbooleanArray ann_array;
 int flipable = 0;
 
 void
-Java_org_ab_x48_X48_setBlankColor( JNIEnv*  env,
+Java_org_czo_droid48sx_X48_setBlankColor( JNIEnv*  env,
                                       jobject  this, jshort color) {
 	int i, j;
 	for(i=0;i<ANDROID_BUF_HEADER_LENGTH;i++)
@@ -189,7 +189,7 @@ Java_org_ab_x48_X48_setBlankColor( JNIEnv*  env,
 }
 
 void
-Java_org_ab_x48_X48_flipScreen( JNIEnv*  env,
+Java_org_czo_droid48sx_X48_flipScreen( JNIEnv*  env,
                                       jobject  this) {
 
 	flipable = 1;
@@ -198,7 +198,7 @@ Java_org_ab_x48_X48_flipScreen( JNIEnv*  env,
 
 
 jint
-Java_org_ab_x48_X48_fillScreenData( JNIEnv*  env,
+Java_org_czo_droid48sx_X48_fillScreenData( JNIEnv*  env,
                                       jobject  this, jshortArray array) {
 										 
 	if (flipable == 1)
