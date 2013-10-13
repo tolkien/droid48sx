@@ -24,48 +24,32 @@ import android.view.WindowManager.LayoutParams;
 public class X48 extends Activity {
     
 	private HPView mainView;
+	private boolean need_to_quit;
 	static final private int LOAD_ID = Menu.FIRST +1;
 	static final private int SAVE_ID = Menu.FIRST +2;
-	static final private int SETTINGS_ID = Menu.FIRST +5 ;
 	static final private int QUIT_ID = Menu.FIRST +3 ;
 	static final private int RESET_ID = Menu.FIRST +4 ;
+	static final private int SETTINGS_ID = Menu.FIRST +5 ;
+	static final private int LITEKBD_ID = Menu.FIRST +6 ;
 	
 	static final private int ROM_ID = 123;
+	
+	private static EmulatorThread thread;
+	
 	
     // http://www.hpcalc.org/hp48/pc/emulators/gxrom-r.zip
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //if (savedInstanceState == null) {
-     	   Log.i("x48", "starting activity");
-     	  /*if (!isRomReady()) {
-     		  // need to download the rom
-     		  Log.i("x48", "Need to download the rom...");
-     		 
-     		  Intent intent = new Intent(this, ROMDownloadActivity.class);
-     		 startActivityForResult(intent, 1);
-     	  } else {*/
-     	  AssetUtil.copyAsset(getResources().getAssets(), false);
-     	  readyToGo() ;
-     	  //}
-     	 if (!AssetUtil.isFilesReady()) {
-         	showDialog(DIALOG_ROM_KO);
-         }
-       // }
-        
-     	
+        Log.i("x48", "starting activity");
+        AssetUtil.copyAsset(getResources().getAssets(), false);
+        readyToGo() ;
+        if (!AssetUtil.isFilesReady()) {
+        	showDialog(DIALOG_ROM_KO);
+        }
     }
-    
-    
-    /*
-    private boolean isRomReady() {
-    	SharedPreferences mPrefs = getSharedPreferences("x48", 0);
-   	  String romLocation = mPrefs.getString("rom_location", null);
-   	  return (romLocation != null && new File(romLocation).exists() && new File(romLocation).length() == 524288);
-    }
-   */
-    
+ 
     public void readyToGo() {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         requestWindowFeature(Window.FEATURE_PROGRESS);
@@ -73,6 +57,10 @@ public class X48 extends Activity {
         mainView = (HPView) findViewById(R.id.hpview);
         
         checkPrefs();
+        
+        thread = new EmulatorThread(this);
+    	thread.start();
+    	mainView.resume();
     }
     
     public void checkPrefs() {
@@ -98,14 +86,12 @@ public class X48 extends Activity {
     public void changeKeybLite() {
     	if (mainView != null) {
     		SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-	    	if (!mPrefs.getBoolean("disableLite", false)) {
 	    		mainView.setKeybLite(!mainView.isKeybLite());
 		    	Editor e = mPrefs.edit();
 		    	e.putBoolean("keybLite", mainView.isKeybLite());
 		    	e.commit();
 		    	mainView.backBuffer = null;
 		    	mainView.needFlip = true;
-	    	}
     	}
     }
     
@@ -121,15 +107,15 @@ public class X48 extends Activity {
     	mainView.refreshIcons(i);
     }
     
-    public native String startHPEmulator();
-    public native String resetHPEmulator();
-    public native String saveState();
-    public native String stopHPEmulator();
+    public native void startHPEmulator();
+    public native void resetHPEmulator();
+    public native void saveState();
+    public native void stopHPEmulator();
     public native int buttonPressed(int code);
     public native int buttonReleased(int code);
     public native void registerClass(X48 instance);
     public native int fillAudioData(short data []);
-    public native int fillScreenData(short data []);
+    public native int fillScreenData(short data [], boolean ann []);
     public native void flipScreen();
     public native int loadProg(String filename);
     public native void setBlankColor(short s);
@@ -148,9 +134,10 @@ public class X48 extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.i("x48", "resuming");
+		Log.i("x48", "resume");
 		if (mainView  != null)
 			mainView.resume();
+		Log.i("x48", "resumed");
 	}
 
 	 /**
@@ -165,6 +152,7 @@ public class X48 extends Activity {
        // given them shortcuts.
        //menu.add(0, RESET_ID, 0, R.string.reset);
        
+       menu.add(0, LITEKBD_ID, 0, R.string.toggle_lite_keyb);
        menu.add(0, SAVE_ID, 0, R.string.save_state);
        menu.add(0, LOAD_ID, 0, R.string.load_prog);
        menu.add(0, SETTINGS_ID, 0, R.string.settings);
@@ -184,14 +172,14 @@ public class X48 extends Activity {
        switch (item.getItemId()) {
        case RESET_ID:
 	    	  AssetUtil.copyAsset(getResources().getAssets(), true);
-	    	  stopHPEmulator();
-	    	   mainView.stop();
+	    	  //stopHPEmulator();
 	           finish();
-	    	   return true;
-	       case SAVE_ID:
+	           need_to_quit = true;
+                   saveonExit = false; //czo: dont save after reset
+	           return true;
+       case SAVE_ID:
 	    	  saveState();
 	    	   return true;
-	       
        	case LOAD_ID:
        		//loadProg("/data/data/org.czo.droid48sx/SKUNK");
        		Intent loadFileIntent = new Intent();
@@ -199,13 +187,15 @@ public class X48 extends Activity {
        		startActivityForResult(loadFileIntent, LOAD_ID);
        		//flipScreen();
        		break;
+       	case LITEKBD_ID:
+                changeKeybLite();
+       		break;
        	case SETTINGS_ID:
        		Intent settingsIntent = new Intent();
        		settingsIntent.setClass(this, Settings.class);
        		startActivityForResult(settingsIntent, SETTINGS_ID);
-       		
        		break;
-	       case QUIT_ID:
+	case QUIT_ID:
 	    	   //stopHPEmulator();
 	    	  // mainView.stop();
 	           finish();
@@ -374,13 +364,8 @@ public class X48 extends Activity {
 
 	@Override
 	protected void onStop() {
-		/*if (mainView  != null)
-			mainView.stop();*/
 		super.onStop();
 		Log.i("x48", "stop");
-		/*stopHPEmulator();
-		mainView.stop();
-		System.exit(1);*/
 	}
 	
 	@Override
@@ -394,10 +379,8 @@ public class X48 extends Activity {
 		super.onPause();
 		Log.i("x48", "pause");
 		if (mainView  != null)
-			mainView.pause(false);
-		/*stopHPEmulator();
-		mainView.stop();
-		System.exit(1);*/
+			mainView.pause();
+		Log.i("x48", "paused");
 	}
 
 	@Override
@@ -409,7 +392,8 @@ public class X48 extends Activity {
 		stopHPEmulator();
 		if (mainView  != null)
 			mainView.unpauseEvent();
-		
+		if (need_to_quit)
+			System.exit(0);
 	}
 	
 	@Override

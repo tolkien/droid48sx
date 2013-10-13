@@ -254,36 +254,35 @@ Java_org_czo_droid48sx_X48_registerClass( JNIEnv* env, jobject caller, jobject c
 	android_callback = (*android_env)->NewGlobalRef(env, callback);
 	jclass x48 = (*android_env)->GetObjectClass(env, android_callback);
 	LOGI("--x48 registered--");
-	refreshMainScreen = (*android_env)->GetMethodID(android_env, x48, "refreshMainScreen", "([S)V");
 	waitEvent = (*android_env)->GetMethodID(android_env, x48, "waitEvent", "()I");
-	refreshIcons = (*android_env)->GetMethodID(android_env, x48, "refreshIcons", "([Z)V");
-	emulatorReady = (*android_env)->GetMethodID(android_env, x48, "emulatorReady", "()V");
 	pauseEvent = (*android_env)->GetMethodID(android_env, x48, "pauseEvent", "()V");
 	LOGI("--methods registered--");
 }
 
-jstring
+void
 Java_org_czo_droid48sx_X48_stopHPEmulator( JNIEnv* env, jobject thiz )
 {
-	exit (0);
-	//exit_state = 0;
+	//exit (0);
+	LOGI("exit_state = 0");
+	exit_state = 0;
+	
 }
 
-jstring
+void
 Java_org_czo_droid48sx_X48_saveState( JNIEnv* env, jobject thiz )
 {
 	LOGI("save_state");
 	write_files();
 }
 
-jstring
+void
 Java_org_czo_droid48sx_X48_resetHPEmulator( JNIEnv* env, jobject thiz )
 {
 	do_reset();
 }
 
 
-jstring
+void
 Java_org_czo_droid48sx_X48_startHPEmulator( JNIEnv* env, jobject thiz )
 {
 
@@ -345,7 +344,7 @@ sigset_t set;
 
  LOGI("emulate loop");
 
-(*android_env)->CallVoidMethod(android_env, android_callback, emulatorReady);
+//(*android_env)->CallVoidMethod(android_env, android_callback, emulatorReady);
   
   do {
 
@@ -359,7 +358,7 @@ sigset_t set;
   } while (exit_state);
   LOGI("exit loop");
 
-    return (*env)->NewStringUTF(env, "Hello from JNI !");
+    
 }
 
 jint

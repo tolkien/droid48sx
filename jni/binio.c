@@ -153,21 +153,21 @@ RPL_CreateTemp(DWORD l)
 	DWORD a, b, c;
 	BYTE *p;
 
-	l += 6;									// memory for link field (5) + marker (1) and end
-	a = Read5(TEMPTOP);						// tail address of top object
-	b = Read5(RSKTOP);						// tail address of rtn stack
-	c = Read5(DSKTOP);						// top of data stack
-	if ((b+l)>c) return 0;					// check if there's enough memory to move DSKTOP
-	Write5(TEMPTOP, a+l);					// adjust new end of top object
-	Write5(RSKTOP,  b+l);					// adjust new end of rtn stack
-	Write5(AVMEM, (c-b-l)/5);				// calculate free memory (*5 nibbles)
+	l += 6;				// memory for link field (5) + marker (1) and end
+	a = Read5(TEMPTOP);		// tail address of top object
+	b = Read5(RSKTOP);		// tail address of rtn stack
+	c = Read5(DSKTOP);		// top of data stack
+	if ((b+l)>c) return 0;		// check if there's enough memory to move DSKTOP
+	Write5(TEMPTOP, a+l);		// adjust new end of top object
+	Write5(RSKTOP,  b+l);		// adjust new end of rtn stack
+	Write5(AVMEM, (c-b-l)/5);	// calculate free memory (*5 nibbles)
 	p = (BYTE *)malloc(b-a);				
   memset(p,0,b-a);
 	Npeek(p,a,b-a);
 	Nwrite(p,a+l,b-a);
 	free(p);
-	Write5(a+l-5,l);						// set object length field
-	return (a+1);							// return base address of new object
+	Write5(a+l-5,l);		// set object length field
+	return (a+1);			// return base address of new object
 }
 
 void
@@ -224,6 +224,11 @@ LOGI("Loading filename: %s", filename);
 
   bin_size   = st.st_size;
   bin_buffer = (BYTE *)malloc(bin_size * 2);
+  if (bin_buffer == 0)
+  {
+    fclose(fp);
+    return 0;
+  }
 
   if (fread(bin_buffer + bin_size, 1, (size_t)bin_size, fp) != bin_size)
   {
@@ -232,6 +237,7 @@ LOGI("Loading filename: %s", filename);
     return 0;
   }
   fclose(fp);
+
 
   bBinary =  ((bin_buffer[bin_size+0]=='H')
           &&  (bin_buffer[bin_size+1]=='P')
@@ -265,8 +271,11 @@ LOGI("Loading filename: %s", filename);
     Write5(dwAddress+5,bin_size+5);   // length of String
     Nwrite(bin_buffer,dwAddress+10,bin_size);  // data
   }
+
   RPL_Push(dwAddress);
 LOGI("Done loading filename: %s", filename);
 
   return 1;
 }
+
+

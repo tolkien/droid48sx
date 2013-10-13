@@ -14,16 +14,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Paint.Style;
+import android.graphics.Shader.TileMode;
+import android.graphics.Typeface;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
@@ -34,11 +38,11 @@ import android.view.SurfaceView;
 public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
 	private static final int MAX_TOUCHES = 49;
-	private static EmulatorThread thread;
 	private Thread drawThread;
 	private X48 x48;
 	private Bitmap mainScreen;
 	private SurfaceHolder mSurfaceHolder;
+	private boolean surfaceValid;
 	private Bitmap  annImages [];
 	boolean ann [];
 	int ann_pos [] = { 62, 105, 152, 197, 244, 287 };
@@ -85,8 +89,6 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
         annImages [3] = BitmapFactory.decodeResource(x48.getResources(), R.drawable.ann04);
         annImages [4] = BitmapFactory.decodeResource(x48.getResources(), R.drawable.ann05);
         annImages [5] = BitmapFactory.decodeResource(x48.getResources(), R.drawable.ann06);
-       // mBackgroundImageLand = BitmapFactory.decodeResource(x48.getResources(), R.drawable.skin_landscape);
-        //mBackgroundImage = BitmapFactory.decodeResource(x48.getResources(), R.drawable.skin);
         
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inScaled = false;
@@ -104,7 +106,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 		audioTask = new TimerTask() {
 			@Override
 			public void run() {
-				if (mRun && track.getState() == AudioTrack.STATE_INITIALIZED) {
+				if (pause && track.getState() == AudioTrack.STATE_INITIALIZED) {
 					if (sound) {
 						track.play();
 						track.write(audiobuf, 0, x48.fillAudioData(audiobuf));
@@ -184,7 +186,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 							screenPaint.setFilterBitmap(false);
 							if (!land && fullWidth) {
 								screenPaint.setFilterBitmap(true);
-								lcd_ratio = ((land?h:(float)w)-7) / 131;
+								lcd_ratio = ((land?(float)h:(float)w)+0f) / 133f;
 							}
 							int start_w = (int) (131*lcd_ratio);
 							int start_h = (int) (71*lcd_ratio);
@@ -567,9 +569,12 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 	            			code = i;
 	            	}
 		            }	            
-	            if (code == -1 && actionCode == MotionEvent.ACTION_DOWN && currentOrientation != Configuration.ORIENTATION_LANDSCAPE ) {
+	            //if (code == -1 && actionCode == MotionEvent.ACTION_DOWN && currentOrientation != Configuration.ORIENTATION_LANDSCAPE ) {
+	            if (code == -1 && actionCode == MotionEvent.ACTION_DOWN) {
 	            	//x48.flipkeyboard();
-	            	((X48) getContext()).changeKeybLite();
+                     /* 2013/10/05 : Modified by Olivier Sirol <czo@free.fr> */ 
+                    x48.openOptionsMenu();
+	          //  	((X48) getContext()).changeKeybLite();
 	            	return true;
 	            }
 	       
@@ -730,24 +735,17 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		Log.i("x48", "Surface created");
-		if (thread == null) {
-			thread = new EmulatorThread(x48);
-			thread.start();
-		}
+		
+		surfaceValid = true;
+		drawThread = new Thread(this);
+		drawThread.start();
+		
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		Log.i("x48", "Surface destroyed");
-		/*if (thread != null) {
-	        while (retry) {
-	            try {
-	                thread.join();
-	                retry = false;
-	            } catch (InterruptedException e) {
-	            }
-	        }
-		}*/
+		surfaceValid = false;
 	}
 
 	@Override
@@ -757,62 +755,38 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
         }
     }
 	
-	public void stop() {
-		Log.i("x48", "Stopping..");
-		if (thread != null)
-			thread.interrupt();
-		thread = null;
-	}
-	
 	public void refreshIcons(boolean ann []) {
 		this.ann = ann;
-		//x48.flipScreen();
-		//refreshMainScreen(null);
 	}
 	
-	private boolean mRun;
+	private boolean pause;
 	
-	public void pause(boolean fast) {
-		mRun = false;
-		if (fast && drawThread != null) {
-			try {
-				drawThread.join(0);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+	public void pause() {
+		pause = true;
 	}
 	
 	public void resume() {
-		Log.i("x48", "resume");
-		if (thread != null) {
-			mRun = true;
-			drawThread = new Thread(this);
-			drawThread.start();
-		}
+		pause = false;
 	}
 
 	@Override
 	public void run() {
 		Log.i("x48", "drawing thread started");
 		x48.flipScreen();
-		while (mRun) {
-			try {
-			Thread.sleep(40);
-
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			/*
-			short data [] = x48.getScreen();
-			if (data != null && data.length > 0)
-				refreshMainScreen(data);*/
-			if (needFlip || x48.fillScreenData(buf) == 1) {
+		while (surfaceValid) {
+			if (needFlip || x48.fillScreenData(buf, ann) == 1) {
 				needFlip = false;
 				refreshMainScreen(buf);
 			}
+			do {
+				try {
+					Thread.sleep(40);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			} while (pause && surfaceValid);
 		}
-		Log.i("x48", "drawing thread stopped");
+		//Log.i("x48", "drawing thread stopped");
 	}
 
 	@Override

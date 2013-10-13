@@ -46,6 +46,7 @@
 #define ROMPTAB_SX	0x707d9
 #define ROMPTAB_GX	0x809a3
 
+/* czo 48GX defs
 #define TEMPOB      0x806E9
 #define TEMPTOP     0x806EE
 #define RSKTOP      0x806F3
@@ -53,6 +54,18 @@
 #define AVMEM       0x807ED
 #define INTRPPTR    0x8072F
 #define SYSTEMFLAGS 0x80843
+*/
+
+#define TEMPOB      0x7056A
+#define TEMPTOP     0x7056F
+#define RSKTOP      0x70574
+#define DSKTOP      0x70579
+#define EDITLINE    0x7057E
+#define AVMEM       0x7066E
+#define INTRPPTR    0x705B0
+#define SYSTEMFLAGS 0x706C5
+
+
 /*
  * Object Prologs
  */

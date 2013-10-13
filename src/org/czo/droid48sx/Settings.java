@@ -38,13 +38,6 @@ public class Settings extends PreferenceActivity {
 	        keybLitePref.setDefaultValue(false);
 	        inlinePrefCat.addPreference(keybLitePref);
 	        
-	        CheckBoxPreference disableLite = new CheckBoxPreference(this);
-	        disableLite.setKey("disableLite");
-	        disableLite.setTitle(R.string.disableLite);
-	        disableLite.setSummary(R.string.disableLite_summary);
-	        disableLite.setDefaultValue(true);
-	        inlinePrefCat.addPreference(disableLite);
-	        
 	        ListPreference backKeyPref = new ListPreference(this);
 	        backKeyPref.setEntries(R.array.backkey_entries);
 	        backKeyPref.setEntryValues(R.array.backkey_values);
