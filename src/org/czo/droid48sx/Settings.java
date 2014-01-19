@@ -3,6 +3,7 @@ package org.czo.droid48sx;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
@@ -31,13 +32,6 @@ public class Settings extends PreferenceActivity {
 	        savePref.setDefaultValue(true);
 	        inlinePrefCat.addPreference(savePref);
 	        
-	        CheckBoxPreference keybLitePref = new CheckBoxPreference(this);
-	        keybLitePref.setKey("keybLite");
-	        keybLitePref.setTitle(R.string.show_lite_keyb);
-	        keybLitePref.setSummary(R.string.show_lite_keyb_summary);
-	        keybLitePref.setDefaultValue(false);
-	        inlinePrefCat.addPreference(keybLitePref);
-	        
 	        ListPreference backKeyPref = new ListPreference(this);
 	        backKeyPref.setEntries(R.array.backkey_entries);
 	        backKeyPref.setEntryValues(R.array.backkey_values);
@@ -48,28 +42,9 @@ public class Settings extends PreferenceActivity {
 	        backKeyPref.setSummary(R.string.choose_backkey_value);
 	        inlinePrefCat.addPreference(backKeyPref);
 	        
-	        CheckBoxPreference togglePref = new CheckBoxPreference(this);
-	        togglePref.setKey("no_loadprog_msgbox");
-	        togglePref.setTitle(R.string.choose_msgbox);
-	        togglePref.setSummary(R.string.choose_msgbox_value);
-	        inlinePrefCat.addPreference(togglePref);
-	        
 	        PreferenceCategory inlineDispPrefCat = new PreferenceCategory(this);
 	        inlineDispPrefCat.setTitle(R.string.display_preferences);
 	        root.addPreference(inlineDispPrefCat);
-	        
-	        CheckBoxPreference hapticPref = new CheckBoxPreference(this);
-	        hapticPref.setKey("haptic");
-	        hapticPref.setTitle(R.string.haptic_feedback);
-	        hapticPref.setDefaultValue(true);
-	        inlineDispPrefCat.addPreference(hapticPref);
-	        
-	        CheckBoxPreference soundPref = new CheckBoxPreference(this);
-	        soundPref.setKey("sound");
-	        soundPref.setTitle(R.string.sound);
-	        soundPref.setSummary(R.string.sound_summary);
-	        soundPref.setDefaultValue(false);
-	        inlineDispPrefCat.addPreference(soundPref);
 	        
 	        CheckBoxPreference largeLCDPref = new CheckBoxPreference(this);
 	        largeLCDPref.setKey("large_width");
@@ -78,6 +53,13 @@ public class Settings extends PreferenceActivity {
 	        largeLCDPref.setDefaultValue(true);
 	        inlineDispPrefCat.addPreference(largeLCDPref);
 	        
+	        CheckBoxPreference keybLitePref = new CheckBoxPreference(this);
+	        keybLitePref.setKey("keybLite");
+	        keybLitePref.setTitle(R.string.show_lite_keyb);
+	        keybLitePref.setSummary(R.string.show_lite_keyb_summary);
+	        keybLitePref.setDefaultValue(false);
+	        inlineDispPrefCat.addPreference(keybLitePref);
+
 	        CheckBoxPreference scaleControlsPref = new CheckBoxPreference(this);
 	        scaleControlsPref.setKey("scale_buttons");
 	        scaleControlsPref.setTitle(R.string.scale_buttons);
@@ -91,18 +73,6 @@ public class Settings extends PreferenceActivity {
 	        fullScreenPref.setSummary(R.string.full_screen_summary);
 	        fullScreenPref.setDefaultValue(false);
 	        inlineDispPrefCat.addPreference(fullScreenPref);
-	        
-	        ListPreference listPref = new ListPreference(this);
-	        listPref.setEntries(R.array.contrast_entries);
-	        listPref.setEntryValues(R.array.contrast_values);
-	        listPref.setDefaultValue("1");
-	        listPref.setDialogTitle(R.string.choose_contrast_value);
-	        listPref.setKey("contrast");
-	        listPref.setTitle(R.string.choose_contrast);
-	        listPref.setSummary(R.string.choose_contrast_value);
-	        inlineDispPrefCat.addPreference(listPref);
-	        
-	       
 	        
 	        PreferenceCategory portPrefCat = new PreferenceCategory(this);
 	        portPrefCat.setTitle(R.string.ramcards_preferences);
@@ -125,6 +95,15 @@ public class Settings extends PreferenceActivity {
 	        port2Pref.setKey("port2");
 	        port2Pref.setTitle(R.string.port2_install);
 	        portPrefCat.addPreference(port2Pref);
+	        
+	        PreferenceCategory buildPrefCat = new PreferenceCategory(this);
+	        buildPrefCat.setTitle(R.string.build_preferences);
+	        root.addPreference(buildPrefCat);
+
+	        Preference buildPref = new Preference(this);
+	        buildPref.setTitle(R.string.build_tag);
+	        buildPref.setSummary(R.string.build_date);
+	        buildPrefCat.addPreference(buildPref);
 	        
 	        setResult(RESULT_OK);
 	        

@@ -245,6 +245,7 @@ printf("%s\n", nl_langinfo(CODESET));*/
   return 0;
 }
 
+char    external_path   [1024];
 
 void
 Java_org_czo_droid48sx_X48_registerClass( JNIEnv* env, jobject caller, jobject callback )
@@ -252,7 +253,7 @@ Java_org_czo_droid48sx_X48_registerClass( JNIEnv* env, jobject caller, jobject c
 	LOGI("--registerClass--");
 	android_env = env;
 	android_callback = (*android_env)->NewGlobalRef(env, callback);
-	jclass x48 = (*android_env)->GetObjectClass(env, android_callback);
+    jclass x48 = (*android_env)->GetObjectClass(env, android_callback);
 	LOGI("--x48 registered--");
 	waitEvent = (*android_env)->GetMethodID(android_env, x48, "waitEvent", "()I");
 	pauseEvent = (*android_env)->GetMethodID(android_env, x48, "pauseEvent", "()V");
@@ -378,7 +379,6 @@ Java_org_czo_droid48sx_X48_buttonReleased( JNIEnv*  env,
 
 }
 
-
 jint
 Java_org_czo_droid48sx_X48_loadProg( JNIEnv*  env,
                                       jobject  this,
@@ -387,4 +387,16 @@ Java_org_czo_droid48sx_X48_loadProg( JNIEnv*  env,
 	int c = read_bin_file(cDesc);
 	(*env)->ReleaseStringUTFChars(env, desc, cDesc);
 	return c;
+}
+
+void
+Java_org_czo_droid48sx_X48_getExternalPath( JNIEnv*  env,
+                                      jobject  this,
+                                      jstring     path) {
+ const char * fp = (*env)->GetStringUTFChars(env, path, NULL);
+	strcpy(external_path, fp);
+	(*env)->ReleaseStringUTFChars(env, path, fp);
+  LOGI("external_path C: %s", external_path);
+
+
 }

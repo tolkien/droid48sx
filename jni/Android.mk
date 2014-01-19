@@ -18,6 +18,10 @@
 # uploaded in
 #
 
+APP_OPTIM := debug
+
+TARGET_FORMAT_STRING_CFLAGS := -Wformat
+
 LOCAL_PATH:= $(call my-dir)
 
 # first lib, which will be built statically

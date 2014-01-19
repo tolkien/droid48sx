@@ -20,11 +20,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
+import android.widget.Toast;
 
 public class X48 extends Activity {
     
 	private HPView mainView;
 	private boolean need_to_quit;
+        private String external_path;
 	static final private int LOAD_ID = Menu.FIRST +1;
 	static final private int SAVE_ID = Menu.FIRST +2;
 	static final private int QUIT_ID = Menu.FIRST +3 ;
@@ -43,6 +45,11 @@ public class X48 extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("x48", "starting activity");
+
+	external_path = getExternalFilesDir(null).getAbsolutePath();
+        Log.i("x48", "external_path java: " + external_path);
+        getExternalPath(external_path);
+	
         AssetUtil.copyAsset(getResources().getAssets(), false);
         readyToGo() ;
         if (!AssetUtil.isFilesReady()) {
@@ -118,6 +125,7 @@ public class X48 extends Activity {
     public native int fillScreenData(short data [], boolean ann []);
     public native void flipScreen();
     public native int loadProg(String filename);
+    public native void getExternalPath(String path);
     public native void setBlankColor(short s);
     
     public void emulatorReady() {
@@ -153,10 +161,10 @@ public class X48 extends Activity {
        //menu.add(0, RESET_ID, 0, R.string.reset);
        
        menu.add(0, LITEKBD_ID, 0, R.string.toggle_lite_keyb);
-       menu.add(0, SAVE_ID, 0, R.string.save_state);
        menu.add(0, LOAD_ID, 0, R.string.load_prog);
-       menu.add(0, SETTINGS_ID, 0, R.string.settings);
+       menu.add(0, SAVE_ID, 0, R.string.save_state);
        menu.add(0, RESET_ID, 0, R.string.reset_memory);
+       menu.add(0, SETTINGS_ID, 0, R.string.settings);
        menu.add(0, QUIT_ID, 0, R.string.button_quit);
 
        return true;
@@ -172,16 +180,17 @@ public class X48 extends Activity {
        switch (item.getItemId()) {
        case RESET_ID:
 	    	  AssetUtil.copyAsset(getResources().getAssets(), true);
+                   Toast.makeText(getApplicationContext(), "Reset done...", Toast.LENGTH_SHORT).show();
 	    	  //stopHPEmulator();
 	           finish();
 	           need_to_quit = true;
                    saveonExit = false; //czo: dont save after reset
 	           return true;
        case SAVE_ID:
-	    	  saveState();
+	    	   saveState();
+                   Toast.makeText(getApplicationContext(), "State saved...", Toast.LENGTH_SHORT).show();
 	    	   return true;
        	case LOAD_ID:
-       		//loadProg("/data/data/org.czo.droid48sx/SKUNK");
        		Intent loadFileIntent = new Intent();
        		loadFileIntent.setClass(this, ProgListView.class);
        		startActivityForResult(loadFileIntent, LOAD_ID);
@@ -335,12 +344,14 @@ public class X48 extends Activity {
 		   if (size == 0) {
 			   if (port.exists()) {
 				   port.delete();
+				   Log.i("x48", "Deleting port" + number + " file.");
 				   change = true;
 			   }
 		   } else {
 			   if (port.exists() && port.length() == 1024 * size) {
 				   
 			   } else {
+				   Log.i("x48", "Port" + number + " file does not exists or is incomplete. Writing a blank file.");
 				   byte data [] = new byte [1024];
 				   for(int i=0;i<data.length;i++)
 					   data[i] = 0;

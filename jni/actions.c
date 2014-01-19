@@ -17,6 +17,10 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#ifdef __OPTIMIZE__
+#error Optimization enabled. That's not right!
+#endif
+
 /* $Log: actions.c,v $
  * Revision 1.15  1995/01/11  18:20:01  ecd
  * major update to support HP48 G/GX

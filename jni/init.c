@@ -1003,7 +1003,7 @@ int size;
       if (st.st_size != size / 2)
         {
           if (!quiet)
-            LOGE( "%s: strange size %s, expected %d, found %ld\n",
+            LOGE( "%s: strange size %s, expected %d, found %lld\n",
                     progname, name, size / 2, st.st_size);
           fclose(fp);
           return 0;
@@ -1163,6 +1163,8 @@ read_files()
 	}
 	else
 		strcpy(path, "/sdcard/.droid48sx/");
+
+//#strcpy(path, external_path);
 
   //get_home_directory(path);
  LOGI("path: %s", path); 

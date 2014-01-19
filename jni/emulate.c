@@ -2423,7 +2423,6 @@ schedule()
     //usleep(500);
   }
 */
-
   GetEvent();
 }
 
@@ -2479,6 +2478,7 @@ emulate()
 
     usleep(3);
 */
+
     if (schedule_event-- == 0)
       {
         schedule();

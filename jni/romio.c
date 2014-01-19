@@ -95,7 +95,7 @@ int *size;
     }
   else if (four[0])
     {
-      LOGI("%d\n", st.st_size);
+      LOGI("%lld\n", st.st_size);
       *size = st.st_size;
     }
   else
@@ -138,7 +138,7 @@ int *size;
 
       if (st.st_size != *size / 2)
         {
-        LOGE( "strange size %s, expected %d, found %ld\n",
+        LOGE( "strange size %s, expected %d, found %lld\n",
                   name, *size / 2, st.st_size);
           free(*mem);
           *mem = NULL;

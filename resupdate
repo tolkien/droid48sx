@@ -1,4 +1,5 @@
 #!/bin/sh
+#/* 2014/01/18 : Modified by Olivier Sirol <czo@ipgp.fr> */ 
 
 #orig png in hdpi : 104x72 et ABC 104x44
 mkdir -p res/drawable

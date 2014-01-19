@@ -13,7 +13,7 @@
 <string name="prog_ko">This program cannot be loaded.\nMake sure it\'s a valid one and you have enough memory to load it</string>
 <string name="rom_ko">Rom files not found! This shouldn\'t happen :\\. Quitting now...</string>
 <string name="general_preferences">General settings</string>
-<string name="display_preferences">Display/Sound settings</string>
+<string name="display_preferences">Display settings</string>
 
 <string name="choose_contrast">Contrast</string>
 <string name="choose_contrast_value">Select the contrast</string>
@@ -22,7 +22,7 @@
 <string name="choose_msgbox">No program popup</string>
 <string name="choose_msgbox_value">No message box after loading</string>
 <string name="settings">Settings</string>
-<string name="ramcards_preferences">For advanced users: Ports settings</string>
+<string name="ramcards_preferences">Ports settings</string>
 <string name="port1_install">Port1 setting</string>
 <string name="port2_install">Port2 setting</string>
 <string name="ram_install">Choose an installation option</string>
@@ -50,7 +50,10 @@
 <string name="full_screen">Hide the status bar</string>
 <string name="full_screen_summary">Full screen mode</string>
 <string name="scale_buttons">Autoscale touch controls</string>
-<string name="scale_buttons_summary">Scale when touch controls are too large (less sharp though)</string>
+<string name="scale_buttons_summary">Scale HP48 buttons</string>
 <string name="sound">Enable sound</string>
 <string name="sound_summary">EXPERIMENTAL: system beeps ok, so far</string>
+<string name="build_preferences">Droid48sx build info</string>
+<string name="build_tag">v1.36-1-ge55b7da</string>
+<string name="build_date">Sat Jan 18 14:11:38 CET 2014</string>
 </resources>
