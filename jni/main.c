@@ -245,7 +245,7 @@ printf("%s\n", nl_langinfo(CODESET));*/
   return 0;
 }
 
-char    external_path   [1024];
+char    config_dir   [1024];
 
 void
 Java_org_czo_droid48sx_X48_registerClass( JNIEnv* env, jobject caller, jobject callback )
@@ -394,9 +394,9 @@ Java_org_czo_droid48sx_X48_getExternalPath( JNIEnv*  env,
                                       jobject  this,
                                       jstring     path) {
  const char * fp = (*env)->GetStringUTFChars(env, path, NULL);
-	strcpy(external_path, fp);
+	strcpy(config_dir, fp);
 	(*env)->ReleaseStringUTFChars(env, path, fp);
-  LOGI("external_path C: %s", external_path);
+  LOGI("config_dir C: %s", config_dir);
 
 
 }

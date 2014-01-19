@@ -54,6 +54,6 @@
 <string name="sound">Enable sound</string>
 <string name="sound_summary">EXPERIMENTAL: system beeps ok, so far</string>
 <string name="build_preferences">Droid48sx build info</string>
-<string name="build_tag">v1.36-1-ge55b7da</string>
-<string name="build_date">Sat Jan 18 14:11:38 CET 2014</string>
+<string name="build_tag">v1.36-2-g126d63d</string>
+<string name="build_date">Mon Jan 20 00:13:57 CET 2014</string>
 </resources>

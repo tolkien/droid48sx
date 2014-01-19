@@ -26,7 +26,7 @@ public class X48 extends Activity {
     
 	private HPView mainView;
 	private boolean need_to_quit;
-        private String external_path;
+        private String config_dir;
 	static final private int LOAD_ID = Menu.FIRST +1;
 	static final private int SAVE_ID = Menu.FIRST +2;
 	static final private int QUIT_ID = Menu.FIRST +3 ;
@@ -46,9 +46,10 @@ public class X48 extends Activity {
         super.onCreate(savedInstanceState);
         Log.i("x48", "starting activity");
 
-	external_path = getExternalFilesDir(null).getAbsolutePath();
-        Log.i("x48", "external_path java: " + external_path);
-        getExternalPath(external_path);
+        // /sdcard
+	config_dir = getExternalFilesDir(null).getAbsolutePath() + "/";
+        Log.i("x48", "config_dir java: " + config_dir);
+        getExternalPath(config_dir);
 	
         AssetUtil.copyAsset(getResources().getAssets(), false);
         readyToGo() ;

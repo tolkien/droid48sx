@@ -2,14 +2,16 @@
 # Copyright (C) 2012 Olivier Sirol <czo@free.fr>
 # License: GPL (http://www.gnu.org/copyleft/gpl.html)
 # Started: Jan 2012
-# Last Change: Sunday 19 January 2014, 11:50
-# Edit Time: 1:28:26
+# Last Change: Sunday 19 January 2014, 22:22
+# Edit Time: 2:25:27
 # Description:
 #
 # $Id: $
 #
 
-all:
+release:
+	perl -i -pe 'BEGIN {$$A=`git describe`; chomp $$A} END ; s:<string name="build_tag">.*</string>:<string name="build_tag">$$A</string>: ' res/values/strings.xml
+	perl -i -pe 'BEGIN {$$A=`date`; chomp $$A} END ; s:<string name="build_date">.*</string>:<string name="build_date">$$A</string>: ' res/values/strings.xml
 	ndk-build V=1
 	./resupdate
 	ant release
@@ -17,6 +19,8 @@ all:
 	@echo "<- done!"
 
 debug:
+	perl -i -pe 'BEGIN {$$A=`git describe`; chomp $$A} END ; s:<string name="build_tag">.*</string>:<string name="build_tag">$$A (DEBUG)</string>: ' res/values/strings.xml
+	perl -i -pe 'BEGIN {$$A=`date`; chomp $$A} END ; s:<string name="build_date">.*</string>:<string name="build_date">$$A</string>: ' res/values/strings.xml
 	ndk-build V=1 NDK_DEBUG=1
 	./resupdate
 	ant debug

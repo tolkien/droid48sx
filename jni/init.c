@@ -1157,16 +1157,18 @@ read_files()
  
 
  FILE          *sd;
-	if (NULL == (sd = fopen("/sdcard/.droid48sx/", "rw"))) {
+
+/*	if (NULL == (sd = fopen("/sdcard/.droid48sx/", "rw"))) {
 		strcpy(path, "/data/data/org.czo.droid48sx/");
-		
 	}
 	else
 		strcpy(path, "/sdcard/.droid48sx/");
+*/
 
-//#strcpy(path, external_path);
+ //strcpy(path, config_dir);
+ strcpy(path, "/sdcard/.droid48sx/");
 
-  //get_home_directory(path);
+ //get_home_directory(path);
  LOGI("path: %s", path); 
  
   saturn.rom = (word_4 *)NULL;
@@ -1621,12 +1623,16 @@ write_files()
   make_dir = 0;
   //get_home_directory(path);
   FILE          *sd;
-	if (NULL == (sd = fopen("/sdcard/.droid48sx/", "rw"))) {
+	/*
+         if (NULL == (sd = fopen("/sdcard/.droid48sx/", "rw"))) {
 		strcpy(path, "/data/data/org.czo.droid48sx/");
 		//fclose(sd);
 	}
 	else
 		strcpy(path, "/sdcard/.droid48sx/");
+        */
+  //strcpy(path, config_dir);
+  strcpy(path, "/sdcard/.droid48sx/");
 
   if (stat(path, &st) == -1)
     {

@@ -242,7 +242,7 @@ typedef struct saturn_t {
 
 #define NIBBLES_PER_ROW 0x22
 
-extern char    external_path    [1024];
+extern char    config_dir    [1024];
 
 extern int		got_alarm;
 
