@@ -2,6 +2,9 @@ package org.czo.droid48sx;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.io.InputStream;
 import java.io.IOException;
 
 
@@ -26,13 +29,16 @@ public class X48 extends Activity {
     
 	private HPView mainView;
 	private boolean need_to_quit;
-        private String config_dir;
+        public static String config_dir;
 	static final private int LOAD_ID = Menu.FIRST +1;
 	static final private int SAVE_ID = Menu.FIRST +2;
 	static final private int QUIT_ID = Menu.FIRST +3 ;
 	static final private int RESET_ID = Menu.FIRST +4 ;
 	static final private int SETTINGS_ID = Menu.FIRST +5 ;
 	static final private int LITEKBD_ID = Menu.FIRST +6 ;
+	static final private int SAVE_CHEKPOINT_ID = Menu.FIRST +7 ;
+	static final private int RESTORE_CHEKPOINT_ID = Menu.FIRST +8 ;
+	static final private int FULL_RESET_ID = Menu.FIRST +9 ;
 	
 	static final private int ROM_ID = 123;
 	
@@ -47,7 +53,14 @@ public class X48 extends Activity {
         Log.i("x48", "starting activity");
 
         // /sdcard
-	config_dir = getExternalFilesDir(null).getAbsolutePath() + "/";
+	config_dir = getExternalFilesDir(null).getAbsolutePath() + "/" ;
+	//config_dir = "/badone" ;
+	File hpDir = new File(config_dir);
+	if (!hpDir.exists() || !hpDir.isDirectory()) {
+           Log.i("x48", "ERROR: cannot open " + config_dir);
+           Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_SHORT).show();
+        }  
+
         Log.i("x48", "config_dir java: " + config_dir);
         getExternalPath(config_dir);
 	
@@ -163,30 +176,114 @@ public class X48 extends Activity {
        
        menu.add(0, LITEKBD_ID, 0, R.string.toggle_lite_keyb);
        menu.add(0, LOAD_ID, 0, R.string.load_prog);
-       menu.add(0, SAVE_ID, 0, R.string.save_state);
-       menu.add(0, RESET_ID, 0, R.string.reset_memory);
+       //menu.add(0, SAVE_ID, 0, R.string.save_state);
+       menu.add(0, FULL_RESET_ID, 0, R.string.full_reset_memory);
+       menu.add(0, RESTORE_CHEKPOINT_ID, 0, R.string.restore_checkpoint);
+       menu.add(0, SAVE_CHEKPOINT_ID, 0, R.string.save_checkpoint);
        menu.add(0, SETTINGS_ID, 0, R.string.settings);
        menu.add(0, QUIT_ID, 0, R.string.button_quit);
 
        return true;
    }
 
-   
+   public void deleteFile(File src) throws IOException {
+    if (src.exists()) { 
+     src.delete();
+    } 
+   }
+
+   public void copyFile(File src, File dst) throws IOException {
+    if (src.exists()) { 
+     InputStream in = new FileInputStream(src);
+     OutputStream out = new FileOutputStream(dst);
+
+     // Transfer bytes from in to out
+     byte[] buf = new byte[1024];
+     int len;
+     while ((len = in.read(buf)) > 0) {
+      out.write(buf, 0, len);
+     }
+     in.close();
+     out.close();
+    } 
+   }
 
    /**
     * Called when a menu item is selected.
     */
    @Override
    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+
+    SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+    Editor spe = mPrefs.edit();
+
        switch (item.getItemId()) {
+       case FULL_RESET_ID:
+                   try {
+                        for (String s:new String[]{ "hp48", "ram", "rom", "port1", "port2" } ) {
+                             deleteFile( new File (X48.config_dir + s));
+                            }
+                   spe.putString("port1", "0");
+                   spe.putString("port2", "0");
+                   spe.commit(); 
+                   deleteFile( new File (X48.config_dir + "port1"));
+                   deleteFile( new File (X48.config_dir + "port2"));
+                   }
+                   catch (IOException e) { }
+   				
+	    	   Toast.makeText(getApplicationContext(), "Reset done...", Toast.LENGTH_SHORT).show();
+	    	 
+                   finish();
+	           need_to_quit = true;
+                   saveonExit = false; //czo: dont save after reset
+	           return true;
        case RESET_ID:
-	    	  AssetUtil.copyAsset(getResources().getAssets(), true);
-                   Toast.makeText(getApplicationContext(), "Reset done...", Toast.LENGTH_SHORT).show();
+                   AssetUtil.copyAsset(getResources().getAssets(), true);
 	    	  //stopHPEmulator();
 	           finish();
 	           need_to_quit = true;
                    saveonExit = false; //czo: dont save after reset
 	           return true;
+       case SAVE_CHEKPOINT_ID:
+	    	   saveState();
+                   File hpDir = new File(X48.config_dir, "checkpoint");
+		   if (!hpDir.exists()) { hpDir.mkdir();}
+                   try {
+                        for (String s:new String[]{ "port1", "port2" } ) {
+                             deleteFile( new File (X48.config_dir + "checkpoint/" + s));
+                            }
+                        for (String s:new String[]{ "hp48", "ram", "rom", "port1", "port2" } ) {
+                             copyFile( new File (X48.config_dir + s), new File (X48.config_dir + "checkpoint/" + s));
+                            }
+                   }
+                   catch (IOException e) { }
+                   Toast.makeText(getApplicationContext(), "Checkpoint saved...", Toast.LENGTH_SHORT).show();
+	    	   return true;
+       case RESTORE_CHEKPOINT_ID:
+                   try {
+                        for (String s:new String[]{ "port1", "port2" } ) {
+                             deleteFile( new File (X48.config_dir + s));
+                            }
+                        for (String s:new String[]{ "hp48", "ram", "rom", "port1", "port2" } ) {
+                             copyFile( new File (X48.config_dir + "checkpoint/" + s), new File (X48.config_dir + s));
+                            }
+                   File p1=new File (X48.config_dir + "port1");
+                   if (p1.exists()) {
+                      spe.putString("port1", ""+p1.length()/1024);
+                   }
+                   File p2=new File (X48.config_dir + "port2");
+                   if (p1.exists()) {
+                      spe.putString("port2", ""+p2.length()/1024);
+                   }
+                   spe.commit(); 
+
+                   }
+                   catch (IOException e) { }
+                   Toast.makeText(getApplicationContext(), "Checkpoint restored...", Toast.LENGTH_SHORT).show();
+	           finish();
+	           need_to_quit = true;
+                   saveonExit = false; //czo: dont save after reset
+	    	   return true;
        case SAVE_ID:
 	    	   saveState();
                    Toast.makeText(getApplicationContext(), "State saved...", Toast.LENGTH_SHORT).show();

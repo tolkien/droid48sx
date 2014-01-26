@@ -9,19 +9,14 @@ import android.content.res.AssetManager;
 import android.util.Log;
 
 public class AssetUtil {
-	
+
 	public static void copyAsset(AssetManager am, boolean force) {
-		File sd = new File("/sdcard");
-		if (sd.exists() && sd.isDirectory()) {
-			File hpDir = new File("/sdcard/.droid48sx");
+			File hpDir = new File(X48.config_dir);
 			copyAsset(am, hpDir.exists() || hpDir.mkdir(), force);
-		} else {
-			copyAsset(am, false, force);
-		}
 	}
 	
 	public static File getSDDir() {
-		File hpDir = new File("/sdcard/.droid48sx");
+		File hpDir = new File(X48.config_dir);
 		if (hpDir.exists())
 			return hpDir;
 		return null;
@@ -45,8 +40,7 @@ public class AssetUtil {
 					//required = 524288;
 				//boolean SKUNK = assets[i].equals("SKUNK");
 				if (hp48 || rom || ram) {
-					String rep = sd?"/sdcard/.droid48sx/":"/data/data/org.czo.droid48sx/";
-					File fout = new File(rep + assets[i]);
+					File fout = new File(X48.config_dir + assets[i]);
 					if (!fout.exists() || fout.length() == 0 || (required > 0 && fout.length() != required) || force) {
 						Log.i("x48", "Overwriting " + assets[i]);
 						FileOutputStream out = new FileOutputStream(fout);
@@ -67,12 +61,7 @@ public class AssetUtil {
 	}
 	
 	public static boolean isFilesReady() {
-		File hpDir = new File("/sdcard/.droid48sx");
-		if (!hpDir.exists() || !hpDir.isDirectory()) {
-			hpDir = new File("/data/data/org.czo.droid48sx/");
-			if (!hpDir.exists() || !hpDir.isDirectory())
-				return false;
-		}
+		File hpDir = new File(X48.config_dir);
 		File hp = new File(hpDir, "hp48");
 		File rom = new File(hpDir, "rom");
 		File ram = new File(hpDir, "ram");

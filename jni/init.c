@@ -1165,8 +1165,8 @@ read_files()
 		strcpy(path, "/sdcard/.droid48sx/");
 */
 
- //strcpy(path, config_dir);
- strcpy(path, "/sdcard/.droid48sx/");
+ strcpy(path, config_dir);
+ //strcpy(path, "/sdcard/.droid48sx/");
 
  //get_home_directory(path);
  LOGI("path: %s", path); 
@@ -1631,8 +1631,8 @@ write_files()
 	else
 		strcpy(path, "/sdcard/.droid48sx/");
         */
-  //strcpy(path, config_dir);
-  strcpy(path, "/sdcard/.droid48sx/");
+  strcpy(path, config_dir);
+  //strcpy(path, "/sdcard/.droid48sx/");
 
   if (stat(path, &st) == -1)
     {

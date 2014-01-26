@@ -7,6 +7,7 @@
 <string name="button_download">Download and install ROM from HPcalc.org</string>
 <string name="button_quit">Quit</string>
 <string name="reset_memory">Reset memory and quit</string>
+<string name="full_reset_memory">Full reset</string>
 <string name="help">Help</string>
 <string name="ok">Ok</string>
 <string name="prog_ok">The program/object has been put on the stack.\nNow, some HP knowledge is necessary:\n\n- if this is a library, push 0, then STO and shut down (right shift + on) / restart (on) the calculator: the program will be available in the Library (shift right + 2) menu.\n\n- If this is a regular object (dir, external, etc.), push a name between quotes on the stack (for example, \'prog\'), then push STO: the prog will be available in the VAR menu</string>
@@ -44,7 +45,7 @@
 <string name="haptic_feedback">Haptic feedback</string>
 <string name="large_width">Large LCD screen</string>
 <string name="large_width_summary">Portrait mode only</string>
-<string name="toggle_lite_keyb">Toggle Minimal controls</string>
+<string name="toggle_lite_keyb">Toggle minimal controls</string>
 <string name="show_lite_keyb">Minimal controls</string>
 <string name="show_lite_keyb_summary">Enable Minimal controls ui</string>
 <string name="full_screen">Hide the status bar</string>
@@ -53,7 +54,9 @@
 <string name="scale_buttons_summary">Scale HP48 buttons</string>
 <string name="sound">Enable sound</string>
 <string name="sound_summary">EXPERIMENTAL: system beeps ok, so far</string>
+<string name="save_checkpoint">Save checkpoint</string>
+<string name="restore_checkpoint">Restore checkpoint</string>
 <string name="build_preferences">Droid48sx build info</string>
-<string name="build_tag">v1.36-2-g126d63d</string>
-<string name="build_date">Mon Jan 20 00:13:57 CET 2014</string>
+<string name="build_tag">v1.36-3-gabab144</string>
+<string name="build_date">Sun Jan 26 16:26:50 CET 2014</string>
 </resources>
