@@ -1,0 +1,1602 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<m48SkinFile>
+	<global>
+		<title>Emu48 Real 48SX</title>
+		<message>Based on a scan of original calculator. LCD scaled 2x for maximum sharpness of pixel.</message>
+		<hardware>Yorke</hardware>
+		<model>S</model>
+		<framerate>24</framerate>
+		<rom>
+            <filename>/ROMs/HP48S/rom.48s</filename>
+			<patch>
+				<filename>/ROMs/HP48S/beeppatch.48s</filename>
+			</patch>
+        </rom>
+		<soundfiles>
+			<soundfile>
+				<id>1</id>
+				<filename>../Sounds/tock.wav</filename>
+			</soundfile>
+		</soundfiles>
+		<lcdsettings>
+			<interpolation><disabled /></interpolation>
+			<colors>
+				<!-- Foreground colors --> 
+				<color><!--  0 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!--  1 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!--  2 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				
+				<color><!--  3 --><red>112</red><green>157</green><blue>114</blue><alpha>255</alpha></color>
+				<color><!--  4 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!--  5 --><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+				
+				<color><!--  6 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!--  7 --><red>  0</red><green>  0</green><blue>  0</blue><alpha> 52</alpha></color>
+				<color><!--  8 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>102</alpha></color>
+				<color><!--  9 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>153</alpha></color>
+				<color><!-- 10 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>204</alpha></color>
+				
+				<color><!-- 11 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				
+				<color><!-- 12 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 13 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 14 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 15 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 16 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				
+				<color><!-- 17 --><red> 60</red><green> 65</green><blue>118</blue><alpha>255</alpha></color>
+				<color><!-- 18 --><red>133</red><green>172</green><blue>162</blue><alpha>255</alpha></color>
+				<color><!-- 19 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				
+				<color><!-- 20 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 21 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 22 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 23 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 24 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 25 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 26 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 27 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 28 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 29 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 30 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!-- 31 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				
+				
+				<!-- Background colors --> 
+				<color><!--  0 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!--  1 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!--  2 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				
+				<color><!--  3 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				<color><!--  4 --><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+				<color><!--  5 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				
+				<color><!--  6 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!--  7 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!--  8 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!--  9 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 10 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				
+				<color><!-- 11 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				
+				<color><!-- 12 --><red>  0</red><green>  0</green><blue>  0</blue><alpha> 51</alpha></color>
+				<color><!-- 13 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>102</alpha></color>
+				<color><!-- 14 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>153</alpha></color>
+				<color><!-- 15 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>204</alpha></color>
+				<color><!-- 16 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+				
+				<color><!-- 17 --><red>133</red><green>172</green><blue>162</blue><alpha>255</alpha></color>
+				<color><!-- 18 --><red> 60</red><green> 65</green><blue>118</blue><alpha>255</alpha></color>
+				<color><!-- 19 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				
+				<color><!-- 20 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 21 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 22 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 23 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 24 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 25 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 26 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 27 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 28 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 29 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 30 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+				<color><!-- 31 --><red>  0</red><green>  0</green><blue>  0</blue><alpha>  0</alpha></color>
+			</colors>
+		</lcdsettings>
+	</global>
+    
+    <orientations>
+        <orientation>
+            <portrait />
+            
+            <texturefile>
+                <filename>Emu48_Real48SX_48s.png</filename>
+            </texturefile>
+
+            <statusbar>
+                <style>default</style>
+            </statusbar>         
+              
+            <background>
+                <color><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+            </background>
+            
+			<lcds>
+				<lcd>
+					<zorder>3</zorder>
+					<screen>
+						<origin><x>     29</x>    <y>      21</y>     </origin>
+						<size>	<width>262</width><height>128</height></size>
+					</screen>
+				</lcd>
+			</lcds>
+            
+            <faces>
+                <!-- Background for lcd -->
+                <face>
+                    <zorder>2</zorder>
+					<screen>
+						<origin><x>     28</x>    <y>      20</y>     </origin>
+						<size>	<width>264</width><height>130</height></size>
+					</screen>
+					<color><red>112</red><green>157</green><blue>114</blue><alpha>255</alpha></color>
+                </face>	
+                <face>
+					<!-- basic view --> 
+                    <zorder>1</zorder>
+                    <texture>
+                        <origin><x>      0</x>    <y>      32</y>     </origin>
+                        <size>	<width>320</width><height>480</height></size>
+                    </texture>
+                    <screen>
+                        <origin><x>      0</x>    <y>       0</y>     </origin>
+                        <size>	<width>320</width><height>480</height></size>
+                    </screen>
+                </face>    
+				
+                <face>
+					<!-- alpha view --> 
+                    <zorder>3</zorder>
+                    <logics>
+                        <logic>XX1XXX</logic>
+                    </logics>
+                    <texture>
+                        <origin><x>     31</x>    <y>       0</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </texture>
+                    <screen>
+                        <origin><x>     10</x>    <y>      25</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </screen>
+					<color><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+                </face>	
+				<face>
+					<!-- shift left view --> 
+                    <zorder>3</zorder>
+                    <logics>
+                        <logic>1XXXXX</logic>
+                    </logics>
+                    <texture>
+                        <origin><x>      0</x>    <y>       0</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </texture>
+                    <screen>
+                        <origin><x>     10</x>    <y>      45</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </screen>
+					<color><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+                </face>
+
+                <face>
+					<!-- shift right view --> 
+                    <zorder>3</zorder>
+                    <logics>
+                        <logic>X1XXXX</logic>
+                    </logics>
+                    <texture>
+                        <origin><x>     15</x>    <y>       0</y>     </origin>
+                        <size>	<width> 16</width><height> 11</height></size>
+                    </texture>
+                    <screen>
+                        <origin><x>     10</x>    <y>      65</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </screen>
+					<color><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+                </face>
+                <face>
+					<!-- wait view --> 
+                    <zorder>3</zorder>
+                    <logics>
+                        <logic>XXXX1X</logic>
+                    </logics>
+                    <texture>
+                        <origin><x>     63</x>    <y>       0</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </texture>
+                    <screen>
+                        <origin><x>    296</x>    <y>      25</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </screen>
+					<color><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+                </face>	
+                <face>
+					<!-- battery view --> 
+                    <zorder>3</zorder>
+                    <logics>
+                        <logic>XXX1XX</logic>
+                    </logics>
+                    <texture>
+                        <origin><x>     48</x>    <y>       0</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </texture>
+                    <screen>
+                        <origin><x>    295</x>    <y>      45</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </screen>
+					<color><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+                </face>	
+				
+                <face>
+					<!-- IO view --> 
+                    <zorder>3</zorder>
+                    <logics>
+                        <logic>XXXXX1</logic>
+                    </logics>
+                    <texture>
+                        <origin><x>     78</x>    <y>       0</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </texture>
+                    <screen>
+                        <origin><x>    295</x>    <y>      65</y>     </origin>
+                        <size>	<width> 15</width><height> 11</height></size>
+                    </screen>
+					<color><red>  0</red><green>  0</green><blue>  0</blue><alpha>255</alpha></color>
+                </face>	
+            </faces>  
+			  
+            <buttons>			
+                <button>
+                    <!-- MENU -->
+                    <type>menu</type>
+                    <zorder>6</zorder>
+					<screen>
+						<origin><x>     29</x>    <y>      21</y>     </origin>
+						<size>	<width>262</width><height>100</height></size>
+					</screen>
+                </button>
+				
+                <button>
+                    <!-- A -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>      5</x>    <y>     138</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    -19</x>    <y>     110</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+					<texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>1</out><in>16</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- B -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>     57</x>    <y>     138</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     33</x>    <y>     110</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>8</out><in>16</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- C -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    109</x>    <y>     138</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     85</x>    <y>     110</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>8</out><in>8</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- D -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    161</x>    <y>     138</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    137</x>    <y>     110</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>8</out><in>4</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- E -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    213</x>    <y>     138</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    189</x>    <y>     110</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>8</out><in>2</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- F -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    265</x>    <y>     138</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    241</x>    <y>     110</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>8</out><in>1</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+
+                <button>
+                    <!-- G -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>                           176+31
+                        <origin><x>      5</x>    <y>     176</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    -19</x>    <y>     148</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>2</out><in>16</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- H -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>     57</x>    <y>     176</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     33</x>    <y>     148</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>7</out><in>16</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- I -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    109</x>    <y>     176</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     85</x>    <y>     148</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>7</out><in>8</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- J -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    161</x>    <y>     176</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    137</x>    <y>     148</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>7</out><in>4</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- K -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    213</x>    <y>     176</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    189</x>    <y>     148</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>7</out><in>2</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- L -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    265</x>    <y>     176</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    241</x>    <y>     148</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>7</out><in>1</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                
+                <button>
+                    <!-- M -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>      5</x>    <y>     214</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    -19</x>    <y>     186</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>0</out><in>16</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- N -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>     57</x>    <y>     214</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     33</x>    <y>     186</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>6</out><in>16</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- O -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    109</x>    <y>     214</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     85</x>    <y>     186</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>6</out><in>8</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- P -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    161</x>    <y>     214</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    137</x>    <y>     186</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>6</out><in>4</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- Q -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    213</x>    <y>     214</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    189</x>    <y>     186</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>6</out><in>2</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- R -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    265</x>    <y>     214</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    241</x>    <y>     186</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>6</out><in>1</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                
+                <button>
+                    <!-- S -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>      5</x>    <y>     252</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    -19</x>    <y>     224</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>3</out><in>16</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- T -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>     57</x>    <y>     252</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     33</x>    <y>     224</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>5</out><in>16</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- U -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    109</x>    <y>     252</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     85</x>    <y>     224</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>5</out><in>8</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- V -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    161</x>    <y>     252</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    137</x>    <y>     224</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>5</out><in>4</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- W -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    213</x>    <y>     252</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    189</x>    <y>     224</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>5</out><in>2</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- X -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    265</x>    <y>     252</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    241</x>    <y>     224</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>5</out><in>1</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                
+                <button>
+                    <!-- ENTER -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>      5</x>    <y>     290</y>     </origin>
+                        <size>  <width>104</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>      7</x>    <y>     262</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>4</out><in>16</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- Y -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    109</x>    <y>     290</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     85</x>    <y>     262</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>4</out><in>8</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- Z -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    161</x>    <y>     290</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    137</x>    <y>     262</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>4</out><in>4</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- DEL -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    213</x>    <y>     290</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    189</x>    <y>     262</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>4</out><in>2</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- DROP -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    265</x>    <y>     290</y>     </origin>
+                        <size>  <width> 52</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    241</x>    <y>     262</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>4</out><in>1</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                
+                <button>
+                    <!-- alpha -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>      5</x>    <y>     328</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    -14</x>    <y>     300</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>3</out><in>32</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- 7 -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>     67</x>    <y>     328</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     48</x>    <y>     300</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>3</out><in>8</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- 8 -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    129</x>    <y>     328</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    110</x>    <y>     300</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>3</out><in>4</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- 9 -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    191</x>    <y>     328</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    172</x>    <y>     300</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>3</out><in>2</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- / -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    253</x>    <y>     328</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    234</x>    <y>     300</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>3</out><in>1</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                
+                <button>
+                    <!-- shift left -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>      5</x>    <y>     366</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    -14</x>    <y>     338</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>2</out><in>32</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- 4 -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>     67</x>    <y>     366</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     48</x>    <y>     338</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>2</out><in>8</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- 5 -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    129</x>    <y>     366</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    110</x>    <y>     338</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>2</out><in>4</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- 6 -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    191</x>    <y>     366</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    172</x>    <y>     338</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>2</out><in>2</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- * -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    253</x>    <y>     366</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    234</x>    <y>     338</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>2</out><in>1</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                
+                <button>
+                    <!-- shift right -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>      5</x>    <y>     404</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    -14</x>    <y>     376</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>1</out><in>32</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- 1 -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>     67</x>    <y>     404</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     48</x>    <y>     376</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>1</out><in>8</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- 2 -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    129</x>    <y>     404</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    110</x>    <y>     376</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>1</out><in>4</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- 3 -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    191</x>    <y>     404</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    172</x>    <y>     376</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>1</out><in>2</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- - -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    253</x>    <y>     404</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    234</x>    <y>     376</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>1</out><in>1</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                
+                <button>
+                    <!-- ON -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>      5</x>    <y>     442</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    -14</x>    <y>     414</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>0</out><in>32768</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- 0 -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>     67</x>    <y>     442</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>     48</x>    <y>     414</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>0</out><in>8</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- . -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    129</x>    <y>     442</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    110</x>    <y>     414</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>0</out><in>4</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- SPC -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    191</x>    <y>     442</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    172</x>    <y>     414</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>0</out><in>2</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+                <button>
+                    <!-- + -->
+                    <type>normal</type>
+                    <zorder>6</zorder>
+                    <toucharea>
+                        <origin><x>    253</x>    <y>     442</y>     </origin>
+                        <size>  <width> 61</width><height> 38</height></size>
+                    </toucharea>
+                    <screen>
+                        <origin><x>    234</x>    <y>     414</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+                    </screen>
+                    <texture>
+                        <origin><x>    412</x>    <y>       0</y>     </origin>
+                        <size>  <width>100</width><height>100</height></size>
+					</texture>
+                    <color><red>255</red><green>255</green><blue>255</blue><alpha>255</alpha></color>
+					<animation>
+						<fadein>0</fadein>
+						<holdon>1</holdon>
+						<fadeout>10</fadeout>
+					</animation>
+                    <out>0</out><in>1</in>
+                	<sound>
+						<ondown>1</ondown>
+					</sound>
+                </button>
+            </buttons>
+        </orientation>
+    </orientations>
+</m48SkinFile>

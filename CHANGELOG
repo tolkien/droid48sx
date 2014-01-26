@@ -1,0 +1,27 @@
+Droid48sx CHANGELOG
+===================
+
+
+https://play.google.com/store/apps/details?id=org.czo.droid48sx
+sources on https://github.com/czodroid/droid48sx
+
+- 26 Jan 2014
+ * Corrected "put program on stack" bug
+ * Corrected FC bug on android 4.3
+ * Data files are now stored on
+   /sdcard/Android/data/org.czo.droid48sx/files
+   (please copy your old files from /sdcard/.droid48sx)
+ * Menu is displayed when touching HP screen
+ * New menu : Save checkpoint (saves a backup copy of 
+   hp48/ram/rom/port1/port2) 
+ * New menu : Restore checkpoint (restores the backup
+   copy of hp48/ram/rom/port1/port2) 
+ * New menu : Full reset (deletes firmware/ram and 
+   deactivate ports, if calc is still hung, please
+   uninstall/reinstall)
+
+- 7 Nov 2012
+ * first release 
+
+--
+Olivier Sirol <czodroid@gmail.com>

@@ -1,5 +1,15 @@
 #!/bin/sh
-#/* 2014/01/18 : Modified by Olivier Sirol <czo@ipgp.fr> */ 
+#
+# Filename: resupdate
+# Copyright (C) 2012 Olivier Sirol <czo@free.fr>
+# License: GPL (http://www.gnu.org/copyleft/gpl.html)
+# Started: Sept 2012
+# Last Change: Sunday 26 January 2014, 17:41
+# Edit Time: 0:00:56
+# Description:
+#
+# $Id:$
+#
 
 #orig png in hdpi : 104x72 et ABC 104x44
 mkdir -p res/drawable
