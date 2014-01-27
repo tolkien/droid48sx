@@ -8,6 +8,7 @@ sources on https://github.com/czodroid/droid48sx
 - 26 Jan 2014
  * Corrected "put program on stack" bug
  * Corrected FC bug on android 4.3
+ * Corrected random freeze on android 4.4
  * Data files are now stored on
    /sdcard/Android/data/org.czo.droid48sx/files
    (please copy your old files from /sdcard/.droid48sx)

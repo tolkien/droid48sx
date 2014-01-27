@@ -156,10 +156,10 @@ public class X48 extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.i("x48", "resume");
+		//Log.i("x48", "resume");
 		if (mainView  != null)
 			mainView.resume();
-		Log.i("x48", "resumed");
+		//Log.i("x48", "resumed");
 	}
 
 	 /**
@@ -474,27 +474,27 @@ public class X48 extends Activity {
 	@Override
 	protected void onStop() {
 		super.onStop();
-		Log.i("x48", "stop");
+		//Log.i("x48", "stop");
 	}
 	
 	@Override
 	protected void onStart() {
 		super.onStart();
-		Log.i("x48", "start");
+		//Log.i("x48", "start");
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		Log.i("x48", "pause");
+		//Log.i("x48", "pause");
 		if (mainView  != null)
 			mainView.pause();
-		Log.i("x48", "paused");
+		//Log.i("x48", "paused");
 	}
 
 	@Override
 	protected void onDestroy() {
-		Log.i("x48", "onDestroy");
+		//Log.i("x48", "onDestroy");
 		super.onDestroy();
 		if (saveonExit)
 			saveState();

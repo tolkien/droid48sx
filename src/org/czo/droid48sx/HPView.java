@@ -170,7 +170,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
             		
 	            		if (backBuffer == null) {
 	            			
-	            			Log.i("x48", "init iibackBuffer !: " + keybLite);
+	            			//Log.i("x48", "init iibackBuffer !: " + keybLite);
 	            			backBuffer = Bitmap.createBitmap(c.getWidth(), c.getHeight(), Bitmap.Config.ARGB_8888);
 	            			Canvas backCanvas = new Canvas(backBuffer);
 	            			
@@ -734,7 +734,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		Log.i("x48", "Surface created");
+		//Log.i("x48", "Surface created");
 		
 		surfaceValid = true;
 		drawThread = new Thread(this);
@@ -744,7 +744,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		Log.i("x48", "Surface destroyed");
+		//Log.i("x48", "Surface destroyed");
 		surfaceValid = false;
 	}
 
@@ -771,7 +771,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 
 	@Override
 	public void run() {
-		Log.i("x48", "drawing thread started");
+		//Log.i("x48", "drawing thread started");
 		x48.flipScreen();
 		while (surfaceValid) {
 			if (needFlip || x48.fillScreenData(buf, ann) == 1) {
