@@ -140,7 +140,7 @@ public class ProgListView extends ListActivity {
             final TextView textView = new TextView(context);
 
             textView.setText(file.getName());
-//            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
 
             addView(imageView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
             addView(textView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
