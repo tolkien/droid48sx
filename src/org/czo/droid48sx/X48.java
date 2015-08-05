@@ -11,6 +11,7 @@ import java.io.IOException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,6 +50,9 @@ public class X48 extends Activity {
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         Log.i("x48", "starting activity");
 
@@ -72,11 +76,21 @@ public class X48 extends Activity {
     }
  
     public void readyToGo() {
+        
+        if (android.os.Build.VERSION.SDK_INT < 11 ) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
-        requestWindowFeature(Window.FEATURE_PROGRESS);
+//        requestWindowFeature(Window.FEATURE_ACTION_BAR);
+//    	requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+//    	requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
+//        requestWindowFeature(Window.FEATURE_PROGRESS);
+}
+
         setContentView(R.layout.main);
         mainView = (HPView) findViewById(R.id.hpview);
-        
+     
+        if (android.os.Build.VERSION.SDK_INT >= 11 ) {
+  getActionBar().hide();      
+    }
         checkPrefs();
         
         thread = new EmulatorThread(this);
@@ -89,7 +103,7 @@ public class X48 extends Activity {
 		saveonExit = mPrefs.getBoolean("saveOnExit", true);
 		if (mainView != null) {
 			mainView.setKeybLite(mPrefs.getBoolean("keybLite", false));
-			mainView.setHapticFeedbackEnabled(mPrefs.getBoolean("haptic", true));
+			mainView.setHapticFeedbackEnabled(mPrefs.getBoolean("haptic", false));
 			mainView.setSound(mPrefs.getBoolean("sound", false));
 			mainView.setFullWidth(mPrefs.getBoolean("large_width", true));
 			mainView.setScaleControls(mPrefs.getBoolean("scale_buttons", true));
@@ -167,14 +181,14 @@ public class X48 extends Activity {
     */
    @Override
    public boolean onCreateOptionsMenu(Menu menu) {
-       super.onCreateOptionsMenu(menu);
 
+       super.onCreateOptionsMenu(menu);
        // We are going to create two menus. Note that we assign them
        // unique integer IDs, labels from our string resources, and
        // given them shortcuts.
        //menu.add(0, RESET_ID, 0, R.string.reset);
        
-       menu.add(0, LITEKBD_ID, 0, R.string.toggle_lite_keyb);
+//       menu.add(0, LITEKBD_ID, 0, R.string.toggle_lite_keyb);
        menu.add(0, LOAD_ID, 0, R.string.load_prog);
        //menu.add(0, SAVE_ID, 0, R.string.save_state);
        menu.add(0, FULL_RESET_ID, 0, R.string.full_reset_memory);
@@ -182,6 +196,7 @@ public class X48 extends Activity {
        menu.add(0, SAVE_CHEKPOINT_ID, 0, R.string.save_checkpoint);
        menu.add(0, SETTINGS_ID, 0, R.string.settings);
        menu.add(0, QUIT_ID, 0, R.string.button_quit);
+
 
        return true;
    }

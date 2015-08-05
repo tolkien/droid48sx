@@ -2,8 +2,8 @@
 # Copyright (C) 2012 Olivier Sirol <czo@free.fr>
 # License: GPL (http://www.gnu.org/copyleft/gpl.html)
 # Started: Jan 2012
-# Last Change: Sunday 26 January 2014, 17:40
-# Edit Time: 2:25:52
+# Last Change: samedi 01 août 2015, 12:29
+# Edit Time: 2:29:37
 # Description:
 #
 # $Id: $
@@ -15,7 +15,8 @@ release:
 	ndk-build V=1
 	./resupdate
 	ant release
-	scp bin/droid48sx-release.apk czo@ananas:/var/www
+	cp bin/droid48sx-release.apk droid48sx-release-`date +%Y%m%d`.apk
+#	scp bin/droid48sx-release.apk czo@ananas:/var/www
 	@echo "<- done!"
 
 debug:

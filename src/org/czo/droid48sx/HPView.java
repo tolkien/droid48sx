@@ -571,9 +571,8 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 		            }	            
 	            //if (code == -1 && actionCode == MotionEvent.ACTION_DOWN && currentOrientation != Configuration.ORIENTATION_LANDSCAPE ) {
 	            if (code == -1 && actionCode == MotionEvent.ACTION_DOWN) {
-	            	//x48.flipkeyboard();
                      /* 2013/10/05 : Modified by Olivier Sirol <czo@free.fr> */ 
-                    x48.openOptionsMenu();
+                     x48.openOptionsMenu();
 	          //  	((X48) getContext()).changeKeybLite();
 	            	return true;
 	            }
@@ -597,8 +596,10 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 	                    break;
 	                }
 	            }
-	            if (code == -1 && action == MotionEvent.ACTION_DOWN && currentOrientation != Configuration.ORIENTATION_LANDSCAPE ) {
-	            	((X48) getContext()).changeKeybLite();
+	            //if (code == -1 && action == MotionEvent.ACTION_DOWN && currentOrientation != Configuration.ORIENTATION_LANDSCAPE ) {
+	            if (code == -1 && action == MotionEvent.ACTION_DOWN) {
+                     x48.openOptionsMenu();
+	            //	((X48) getContext()).changeKeybLite();
 	            	return true;
 	            }
 	       

@@ -31,6 +31,13 @@ public class Settings extends PreferenceActivity {
 	        savePref.setSummary(R.string.saveonexit_msgbox_value);
 	        savePref.setDefaultValue(true);
 	        inlinePrefCat.addPreference(savePref);
+
+	        CheckBoxPreference hapticPref = new CheckBoxPreference(this);
+	        hapticPref.setKey("haptic");
+	        hapticPref.setTitle(R.string.haptic_feedback);
+	        hapticPref.setSummary(R.string.haptic_feedback_summary);
+	        hapticPref.setDefaultValue(false);
+	        inlinePrefCat.addPreference(hapticPref);
 	        
 	        ListPreference backKeyPref = new ListPreference(this);
 	        backKeyPref.setEntries(R.array.backkey_entries);

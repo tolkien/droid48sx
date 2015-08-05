@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.util.TypedValue;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,6 +140,7 @@ public class ProgListView extends ListActivity {
             final TextView textView = new TextView(context);
 
             textView.setText(file.getName());
+//            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
 
             addView(imageView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
             addView(textView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
