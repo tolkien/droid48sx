@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Filename: resupdatedrawable
+# Copyright (C) 2012 Olivier Sirol <czo@free.fr>
+# License: GPL (http://www.gnu.org/copyleft/gpl.html)
+# Started: Sept 2012
+# Last Change: jeudi 06 août 2015, 12:55
+# Edit Time: 0:38:54
+# Description:
+#
+# $Id:$
+#
+
+allk="k01 k02 k03 k04 k05 k06 k07 k08 k09 k10 k11 k12 k13 k14 k15 k16 k17 k18 k19 k20 k21 k22 k23 k24 k26 k27 k28 k29 k30 k31 k32 k33 k34 k35 k36 k37 k38 k39 k40 k41 k42 k43 k44 k45 k46 k47 k48 k49"
+
+#
+for b in $allk
+do
+ convert store/img/drawable-hdpi/$b.png -geometry 312x216 res/drawable/$b.png
+done
+convert store/img/drawable-hdpi/k25.png -geometry 624x216 res/drawable/k25.png
+

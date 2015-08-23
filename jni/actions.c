@@ -18,7 +18,7 @@
  */
 
 #ifdef __OPTIMIZE__
-#error Optimization enabled. That's not right!
+#error Optimization enabled. Thats not right!
 #endif
 
 /* $Log: actions.c,v $

@@ -57,7 +57,11 @@ public class X48 extends Activity {
         Log.i("x48", "starting activity");
 
         // /sdcard
-	config_dir = getExternalFilesDir(null).getAbsolutePath() + "/" ;
+        if (getExternalFilesDir(null) != null) {
+	  config_dir = getExternalFilesDir(null).getAbsolutePath() + "/" ;
+        } else {
+	  config_dir = getFilesDir().getAbsolutePath() + "/" ;
+        }
 	//config_dir = "/badone" ;
 	File hpDir = new File(config_dir);
 	if (!hpDir.exists() || !hpDir.isDirectory()) {

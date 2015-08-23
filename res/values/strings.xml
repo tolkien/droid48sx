@@ -58,6 +58,6 @@
 <string name="save_checkpoint">Save checkpoint</string>
 <string name="restore_checkpoint">Restore checkpoint</string>
 <string name="build_preferences">Droid48sx build info</string>
-<string name="build_tag">v1.38-2-g418c0a6</string>
-<string name="build_date">mercredi 5 août 2015, 18:44:27 (UTC+0200)</string>
+<string name="build_tag">v1.38-3-g8585e68</string>
+<string name="build_date">mercredi 12 août 2015, 16:27:30 (UTC+0200)</string>
 </resources>
