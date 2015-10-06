@@ -96,9 +96,9 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
    keys[i] = BitmapFactory.decodeResource(x48.getResources(), R.drawable.k01 + i, opts);
   }
 
-  paint = new Paint(); 
-  paint.setStyle(Style.FILL); 
-  paint.setARGB(128, 250, 250, 250); 
+  paint = new Paint();
+  paint.setStyle(Style.FILL);
+  paint.setARGB(128, 250, 250, 250);
 
   screenPaint = null;
   screenPaint = new Paint();
@@ -170,7 +170,8 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 
      if (backBuffer == null) {
 
-      //Log.i("x48", "init iibackBuffer !: " + keybLite);
+      Log.i("x48", "init iibackBuffer !: " + keybLite);
+      Log.i("x48", "w: " + c.getWidth() + ", h:" + c.getHeight() );
       backBuffer = Bitmap.createBitmap(c.getWidth(), c.getHeight(), Bitmap.Config.ARGB_8888);
       Canvas backCanvas = new Canvas(backBuffer);
 
@@ -181,7 +182,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
       int srcColor = Color.rgb(63, 62, 60);
       p.setColor(srcColor);
       backCanvas.drawRect(0, 0, w, h, p);
-      /* presque fullscreen */ 
+      /* presque fullscreen */
       float lcd_ratio = (land?h:w) / 131;
       screenPaint.setFilterBitmap(false);
       if (!land && fullWidth) {
@@ -220,7 +221,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
       p.setColor(green);
       backCanvas.drawRect(0, 0, usable_w, start_h, p);
       p.setColor(func);
-      if (!keybLite || land) 
+      if (!keybLite || land)
        backCanvas.drawRect(0, start_h, usable_w, start_h+menu_key_height, p);
       matrixScreen = new Matrix();
 
@@ -460,25 +461,16 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
        int delta_y = 0;
        float ratio_kx = 0.0f;
        float ratio_ky = 0.0f;
-       if (bw < (int) key_width) {
-        delta_x = ((int)key_width-bw)/2;
-       } else if (bw > (int) key_width) {
-        if (scaleControls) {
-         float scaler = 1.0f;
-         if (k < 29)
-          scaler = 1.1f;
-         ratio_kx = scaler * key_width / (float) bw;
-        } else
-         delta_x = ((int)key_width-bw)/2;
-       }
-       if (bh < (int) key_height) {
-        delta_y = ((int)key_height-bh)/2;
-       } else if (bh > (int) key_height) {
-        if (scaleControls)
-         ratio_ky = key_height / (float) bh;
-        else
-         delta_y = ((int)key_height-bh)/2;
-       }
+
+       float scaler = 1.0f;
+       //if (k < 29) scaler = 1.0f;
+
+       delta_x = ((int)key_width-bw)/2;
+       ratio_kx = scaler * key_width / (float) bw;
+
+       delta_y = ((int)key_height-bh)/2;
+       ratio_ky = key_height / (float) bh;
+
        if (!keybLite && !land && (k == 30 || k == 31 || k == 32 ||
           k == 35 || k == 36 || k == 37 ||
           k == 40 || k == 41 || k == 42 || k == 39)) {
@@ -487,13 +479,15 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
         backCanvas.drawRect(buttons_coords[k][0], buttons_coords[k][1], buttons_coords[k][2], buttons_coords[k][3], p2);
        }
        // slight off:
-       buttons_coords[k][1] += bh*5/36;
-       buttons_coords[k][3] += bh*5/36;
+       //czo
+       //       buttons_coords[k][1] += bh*9/96; //36
+       //       buttons_coords[k][3] += bh*9/96;
        Matrix matrixKey = new Matrix();
        if (ratio_kx != 0 && ratio_ky != 0) {
         matrixKey.preScale(ratio_kx, ratio_ky);
        }
-       matrixKey.postTranslate(key_x + delta_x, key_y + delta_y);
+       //matrixKey.postTranslate(key_x + delta_x, key_y + delta_y);
+       matrixKey.postTranslate(key_x, key_y);
        keyMatrix[k] = matrixKey;
 
       }
@@ -509,7 +503,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
      c.drawBitmap(mainScreen, matrixScreen, screenPaint);
      for(int i=0;i<MAX_TOUCHES;i++) {
       if (touches[i] != 0) {
-       c.drawRoundRect(new RectF(new Rect(buttons_coords[i][0], buttons_coords[i][1], buttons_coords[i][2], buttons_coords[i][3])), 12f, 12f, paint);
+       c.drawRoundRect(new RectF(new Rect(buttons_coords[i][0], buttons_coords[i][1], buttons_coords[i][2], buttons_coords[i][3])), 20f, 20f, paint); //12f
       }
      }
 
@@ -568,13 +562,12 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
        if(touches[i] == pointerID)
         code = i;
       }
-     }	            
-     //if (code == -1 && actionCode == MotionEvent.ACTION_DOWN && currentOrientation != Configuration.ORIENTATION_LANDSCAPE ) {
+     }
      if (code == -1 && actionCode == MotionEvent.ACTION_DOWN) {
-      /* 2013/10/05 : Modified by Olivier Sirol <czo@free.fr> */ 
-      x48.openOptionsMenu();
+      /* 2013/10/05 : Modified by Olivier Sirol <czo@free.fr> */
+      x48.Menu();
       //  	((X48) getContext()).changeKeybLite();
-      return true;
+      return false;
      }
 
      if (code > -1) {
@@ -582,7 +575,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
       return true;
      }
     } else {
-     // old code used before the 1.29 version: 
+     // old code used before the 1.29 version:
      x = event.getX();
      y = event.getY();
 
@@ -596,9 +589,8 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
        break;
       }
      }
-     //if (code == -1 && action == MotionEvent.ACTION_DOWN && currentOrientation != Configuration.ORIENTATION_LANDSCAPE ) {
      if (code == -1 && action == MotionEvent.ACTION_DOWN) {
-      x48.openOptionsMenu();
+      x48.Menu();
       //	((X48) getContext()).changeKeybLite();
       return true;
      }
@@ -607,270 +599,273 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
       key(code, action == MotionEvent.ACTION_DOWN);
       return action == MotionEvent.ACTION_DOWN;
      }
-    }
-    }
 
-    return false;
-    }
-
-    private boolean keybLite = false;
-
-    public boolean isKeybLite() {
-     return keybLite;
-    }
-
-    public void setKeybLite(boolean keybLite) {
-     this.keybLite = keybLite;
-    }
-
-    private boolean sound = false;
-
-    public boolean isSound() {
-     return sound;
-    }
-
-    public void setSound(boolean sound) {
-     this.sound = sound;
-    }
-
-    public void key(int code, boolean down) {
-     key(code, down, 255); // Use pointerID 255 for keyboard
-    }
-
-    public synchronized void key(int code, boolean down, int pointerID) {
-     //Log.i("x48", "code: " + code + " / " + down);
-     if (code < MAX_TOUCHES) {
-      if (down) {
-       if (!multiTouch) {
-        for(int i=0;i<MAX_TOUCHES;i++) {
-         if (touches[i] != 0) {
-          Log.i("x48", "no multitouch !, force up of " + i);
-          queuedCodes.add(i + 100);
-          touches [i] = 0;
-          break;
-         }
-        }
-       }
-       Integer cI = code+1;
-       if (!queuedCodes.contains(cI)) {
-        queuedCodes.add(cI);
-        touches [code] = pointerID;
-        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,
-          HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING );
-       } else {
-        Log.i("x48", "rejected down");
-       }
-      }
-      else {
-       Integer cI = code+100;
-       if (!queuedCodes.contains(cI) && touches [code] != 0) {
-        queuedCodes.add(cI);
-        touches [code] = 0;
-       } else {
-        Log.i("x48", "rejected up");
-        if (!multiTouch) {
-         for(int i=0;i<MAX_TOUCHES;i++) {
-          if (touches[i] != 0) {
-           Log.i("x48", "forced up of " + i);
-           queuedCodes.add(i + 100);
-           touches [i] = 0;
-          }
-         }
-        }
-       }
-      }
-      x48.flipScreen();
-      this.notify();
-     }
-    }
-
-
-
-    public synchronized void pauseEvent() {
-     //Log.i("x48", "pauseEvent begin");
-     try {
-      this.wait();
-     } catch (InterruptedException e) {
-      //Log.i("x48", "pauseEvent: " + e.getMessage());
-     }
-     //Log.i("x48", "pauseEvent end");
-    }
-
-    public synchronized void unpauseEvent() {
-     //Log.i("x48", "unpauseEvent");
-     this.notify();
-    }
-
-    public synchronized int waitEvent() {
-     if (queuedCodes.size() == 0) {
-      return 0;
-     }
-     else {
-      int c = queuedCodes.remove(0);
-      return c;
-     }
-    }
-
-    protected int width;
-    protected int height;
-
-    @Override
-     public void surfaceChanged(SurfaceHolder holder, int format, int width,
-       int height) {
-      Log.i("x48", "width: " + width + " / height: " + height);
-      this.width = width;
-      this.height = height;
-      if (width < height)
-       currentOrientation = Configuration.ORIENTATION_PORTRAIT;
-      else
-       currentOrientation = Configuration.ORIENTATION_LANDSCAPE;
-      //initGraphicsElements();
-      backBuffer = null;
-      x48.flipScreen();
-     }
-
-    public void emulatorReady() {
-     resume();
-    }
-
-    @Override
-     public void surfaceCreated(SurfaceHolder holder) {
-      //Log.i("x48", "Surface created");
-
-      surfaceValid = true;
-      drawThread = new Thread(this);
-      drawThread.start();
-
-     }
-
-    @Override
-     public void surfaceDestroyed(SurfaceHolder holder) {
-      //Log.i("x48", "Surface destroyed");
-      surfaceValid = false;
-     }
-
-    @Override
-     public void onWindowFocusChanged(boolean hasWindowFocus) {
-      if (!hasWindowFocus) {
-       //mRun = false;
-      }
-     }
-
-    public void refreshIcons(boolean ann []) {
-     this.ann = ann;
-    }
-
-    private boolean pause;
-
-    public void pause() {
-     pause = true;
-    }
-
-    public void resume() {
-     pause = false;
-    }
-
-    @Override
-     public void run() {
-      //Log.i("x48", "drawing thread started");
-      x48.flipScreen();
-      while (surfaceValid) {
-       if (needFlip || x48.fillScreenData(buf, ann) == 1) {
-        needFlip = false;
-        refreshMainScreen(buf);
-       }
-       do {
-        try {
-         Thread.sleep(40);
-        } catch (InterruptedException e) {
-         e.printStackTrace();
-        }
-       } while (pause && surfaceValid);
-      }
-      //Log.i("x48", "drawing thread stopped");
-     }
-
-    @Override
-     public boolean onKeyDown(int keyCode, KeyEvent event) {
-      //Log.i("x48", "-->"+keyCode);
-      return actionKey(true, keyCode);
-     }
-
-    @Override
-     public boolean onKeyUp(int keyCode, KeyEvent event) {
-      //Log.i("x48", "--<"+keyCode);
-      return actionKey(false, keyCode);
-
-     }
-
-    private boolean actionKey(boolean d, int code) {
-     switch (code) {
-      case KeyEvent.KEYCODE_BACK: {
-                                   SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(x48);
-                                   String bString = mPrefs.getString("backkey", "0");
-                                   if (bString.equals("0"))
-                                    return false;
-                                   else if (bString.equals("1")) { 
-                                    if (d) key(28, true); else key(28, false); return true;
-                                   } else if (bString.equals("2")) { 
-                                    if (d) key(44, true); else key(44, false); return true;
-                                   } 
-                                  }
-
-      case KeyEvent.KEYCODE_0: if (d) key(45, true); else key(45, false); return true;
-      case KeyEvent.KEYCODE_1: if (d) key(40, true); else key(40, false); return true;
-      case KeyEvent.KEYCODE_2: if (d) key(41, true); else key(41, false); return true;
-      case KeyEvent.KEYCODE_3: if (d) key(42, true); else key(42, false); return true;
-      case KeyEvent.KEYCODE_4: if (d) key(35, true); else key(35, false); return true;
-      case KeyEvent.KEYCODE_5: if (d) key(36, true); else key(36, false); return true;
-      case KeyEvent.KEYCODE_6: if (d) key(37, true); else key(37, false); return true;
-      case KeyEvent.KEYCODE_7: if (d) key(30, true); else key(30, false); return true;
-      case KeyEvent.KEYCODE_8: if (d) key(31, true); else key(31, false); return true;
-      case KeyEvent.KEYCODE_9: if (d) key(32, true); else key(32, false); return true;
-      case KeyEvent.KEYCODE_ENTER: if (d) key(24, true); else key(24, false); return true;
-      case KeyEvent.KEYCODE_DEL: if (d) key(28, true); else key(28, false); return true;
-      case KeyEvent.KEYCODE_PERIOD: if (d) key(46, true); else key(46, false); return true;
-      case KeyEvent.KEYCODE_AT: if (d) key(29, true); else key(29, false); return true;
-
-      case KeyEvent.KEYCODE_A: if (d) key(0, true); else key(0, false); return true;
-      case KeyEvent.KEYCODE_B: if (d) key(1, true); else key(1, false); return true;
-      case KeyEvent.KEYCODE_C: if (d) key(2, true); else key(2, false); return true;
-      case KeyEvent.KEYCODE_D: if (d) key(3, true); else key(3, false); return true;
-      case KeyEvent.KEYCODE_E: if (d) key(4, true); else key(4, false); return true;
-      case KeyEvent.KEYCODE_F: if (d) key(5, true); else key(5, false); return true;
-      case KeyEvent.KEYCODE_G: if (d) key(6, true); else key(6, false); return true;
-      case KeyEvent.KEYCODE_H: if (d) key(7, true); else key(7, false); return true;
-      case KeyEvent.KEYCODE_I: if (d) key(8, true); else key(8, false); return true;
-      case KeyEvent.KEYCODE_J: if (d) key(9, true); else key(9, false); return true;
-      case KeyEvent.KEYCODE_K: if (d) key(10, true); else key(10, false); return true;
-      case KeyEvent.KEYCODE_L: if (d) key(11, true); else key(11, false); return true;
-      case KeyEvent.KEYCODE_M: if (d) key(12, true); else key(12, false); return true;
-      case KeyEvent.KEYCODE_N: if (d) key(13, true); else key(13, false); return true;
-      case KeyEvent.KEYCODE_O: if (d) key(14, true); else key(14, false); return true;
-      case KeyEvent.KEYCODE_P: if (d) key(15, true); else key(15, false); return true;
-      case KeyEvent.KEYCODE_Q: if (d) key(16, true); else key(16, false); return true;
-      case KeyEvent.KEYCODE_R: if (d) key(17, true); else key(17, false); return true;
-      case KeyEvent.KEYCODE_S: if (d) key(18, true); else key(18, false); return true;
-      case KeyEvent.KEYCODE_T: if (d) key(19, true); else key(19, false); return true;
-      case KeyEvent.KEYCODE_U: if (d) key(20, true); else key(20, false); return true;
-      case KeyEvent.KEYCODE_V: if (d) key(21, true); else key(21, false); return true;
-      case KeyEvent.KEYCODE_W: if (d) key(22, true); else key(22, false); return true;
-      case KeyEvent.KEYCODE_X: if (d) key(23, true); else key(23, false); return true;
-      case KeyEvent.KEYCODE_Y: if (d) key(25, true); else key(25, false); return true;
-      case KeyEvent.KEYCODE_Z: if (d) key(26, true); else key(26, false); return true;
-      case KeyEvent.KEYCODE_SPACE: if (d) key(47, true); else key(47, false); return true;
-
-                                    //case KeyEvent.KEYCODE_SHIFT_LEFT: if (d) key(34, true); else key(34, false); return true;
-                                    //case KeyEvent.KEYCODE_SHIFT_RIGHT: if (d) key(39, true); else key(39, false); return true;
-
-      case KeyEvent.KEYCODE_DPAD_UP: if (d) key(10, true); else key(10, false); return true;
-      case KeyEvent.KEYCODE_DPAD_DOWN: if (d) key(16, true); else key(16, false); return true;
-      case KeyEvent.KEYCODE_DPAD_LEFT: if (d) key(15, true); else key(15, false); return true;
-      case KeyEvent.KEYCODE_DPAD_RIGHT: if (d) key(17, true); else key(17, false); return true;
-      case KeyEvent.KEYCODE_DPAD_CENTER: if (d) key(24, true); else key(24, false); return true;
-
-      default: return false;
-     }
     }
 
    }
+
+   return false;
+  }
+
+ private boolean keybLite = false;
+
+ public boolean isKeybLite() {
+  return keybLite;
+ }
+
+ public void setKeybLite(boolean keybLite) {
+  this.keybLite = keybLite;
+ }
+
+ private boolean sound = false;
+
+ public boolean isSound() {
+  return sound;
+ }
+
+ public void setSound(boolean sound) {
+  this.sound = sound;
+ }
+
+ public void key(int code, boolean down) {
+  key(code, down, 255); // Use pointerID 255 for keyboard
+ }
+
+ public synchronized void key(int code, boolean down, int pointerID) {
+  //Log.i("x48", "code: " + code + " / " + down);
+  if (code < MAX_TOUCHES) {
+   if (down) {
+    if (!multiTouch) {
+     for(int i=0;i<MAX_TOUCHES;i++) {
+      if (touches[i] != 0) {
+       Log.i("x48", "no multitouch !, force up of " + i);
+       queuedCodes.add(i + 100);
+       touches [i] = 0;
+       break;
+      }
+     }
+    }
+    Integer cI = code+1;
+    if (!queuedCodes.contains(cI)) {
+     queuedCodes.add(cI);
+     touches [code] = pointerID;
+     performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,
+       HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING );
+    } else {
+     Log.i("x48", "rejected down");
+    }
+   }
+   else {
+    Integer cI = code+100;
+    if (!queuedCodes.contains(cI) && touches [code] != 0) {
+     queuedCodes.add(cI);
+     touches [code] = 0;
+    } else {
+     Log.i("x48", "rejected up");
+     if (!multiTouch) {
+      for(int i=0;i<MAX_TOUCHES;i++) {
+       if (touches[i] != 0) {
+        Log.i("x48", "forced up of " + i);
+        queuedCodes.add(i + 100);
+        touches [i] = 0;
+       }
+      }
+     }
+    }
+   }
+   x48.flipScreen();
+   this.notify();
+  }
+ }
+
+
+
+ public synchronized void pauseEvent() {
+  //Log.i("x48", "pauseEvent begin");
+  try {
+   this.wait();
+  } catch (InterruptedException e) {
+   //Log.i("x48", "pauseEvent: " + e.getMessage());
+  }
+  //Log.i("x48", "pauseEvent end");
+ }
+
+ public synchronized void unpauseEvent() {
+  //Log.i("x48", "unpauseEvent");
+  this.notify();
+ }
+
+ public synchronized int waitEvent() {
+  if (queuedCodes.size() == 0) {
+   return 0;
+  }
+  else {
+   int c = queuedCodes.remove(0);
+   return c;
+  }
+ }
+
+ protected int width;
+ protected int height;
+
+ @Override
+  public void surfaceChanged(SurfaceHolder holder, int format, int width,
+    int height) {
+   Log.i("x48", "width: " + width + " / height: " + height);
+   this.width = width;
+   this.height = height;
+   if (width < height)
+    currentOrientation = Configuration.ORIENTATION_PORTRAIT;
+   else
+    currentOrientation = Configuration.ORIENTATION_LANDSCAPE;
+   //initGraphicsElements();
+   backBuffer = null;
+   x48.flipScreen();
+  }
+
+ public void emulatorReady() {
+  resume();
+ }
+
+ @Override
+  public void surfaceCreated(SurfaceHolder holder) {
+   //Log.i("x48", "Surface created");
+
+   surfaceValid = true;
+   drawThread = new Thread(this);
+   drawThread.start();
+
+  }
+
+ @Override
+  public void surfaceDestroyed(SurfaceHolder holder) {
+   //Log.i("x48", "Surface destroyed");
+   surfaceValid = false;
+  }
+
+ @Override
+  public void onWindowFocusChanged(boolean hasWindowFocus) {
+   if (hasWindowFocus) {
+    //x48.checkfullscreen();
+    //mRun = false;
+   }
+  }
+
+ public void refreshIcons(boolean ann []) {
+  this.ann = ann;
+ }
+
+ private boolean pause;
+
+ public void pause() {
+  pause = true;
+ }
+
+ public void resume() {
+  pause = false;
+ }
+
+ @Override
+  public void run() {
+   //Log.i("x48", "drawing thread started");
+   x48.flipScreen();
+   while (surfaceValid) {
+    if (needFlip || x48.fillScreenData(buf, ann) == 1) {
+     needFlip = false;
+     refreshMainScreen(buf);
+    }
+    do {
+     try {
+      Thread.sleep(40);
+     } catch (InterruptedException e) {
+      e.printStackTrace();
+     }
+    } while (pause && surfaceValid);
+   }
+   //Log.i("x48", "drawing thread stopped");
+  }
+
+ @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+   //Log.i("x48", "-->"+keyCode);
+   return actionKey(true, keyCode);
+  }
+
+ @Override
+  public boolean onKeyUp(int keyCode, KeyEvent event) {
+   //Log.i("x48", "--<"+keyCode);
+   return actionKey(false, keyCode);
+
+  }
+
+ private boolean actionKey(boolean d, int code) {
+  switch (code) {
+   case KeyEvent.KEYCODE_BACK: {
+                                SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(x48);
+                                String bString = mPrefs.getString("backkey", "0");
+                                if (bString.equals("0"))
+                                 return false;
+                                else if (bString.equals("1")) {
+                                 if (d) key(28, true); else key(28, false); return true;
+                                } else if (bString.equals("2")) {
+                                 if (d) key(44, true); else key(44, false); return true;
+                                }
+                               }
+
+   case KeyEvent.KEYCODE_0: if (d) key(45, true); else key(45, false); return true;
+   case KeyEvent.KEYCODE_1: if (d) key(40, true); else key(40, false); return true;
+   case KeyEvent.KEYCODE_2: if (d) key(41, true); else key(41, false); return true;
+   case KeyEvent.KEYCODE_3: if (d) key(42, true); else key(42, false); return true;
+   case KeyEvent.KEYCODE_4: if (d) key(35, true); else key(35, false); return true;
+   case KeyEvent.KEYCODE_5: if (d) key(36, true); else key(36, false); return true;
+   case KeyEvent.KEYCODE_6: if (d) key(37, true); else key(37, false); return true;
+   case KeyEvent.KEYCODE_7: if (d) key(30, true); else key(30, false); return true;
+   case KeyEvent.KEYCODE_8: if (d) key(31, true); else key(31, false); return true;
+   case KeyEvent.KEYCODE_9: if (d) key(32, true); else key(32, false); return true;
+   case KeyEvent.KEYCODE_ENTER: if (d) key(24, true); else key(24, false); return true;
+   case KeyEvent.KEYCODE_DEL: if (d) key(28, true); else key(28, false); return true;
+   case KeyEvent.KEYCODE_PERIOD: if (d) key(46, true); else key(46, false); return true;
+   case KeyEvent.KEYCODE_AT: if (d) key(29, true); else key(29, false); return true;
+
+   case KeyEvent.KEYCODE_A: if (d) key(0, true); else key(0, false); return true;
+   case KeyEvent.KEYCODE_B: if (d) key(1, true); else key(1, false); return true;
+   case KeyEvent.KEYCODE_C: if (d) key(2, true); else key(2, false); return true;
+   case KeyEvent.KEYCODE_D: if (d) key(3, true); else key(3, false); return true;
+   case KeyEvent.KEYCODE_E: if (d) key(4, true); else key(4, false); return true;
+   case KeyEvent.KEYCODE_F: if (d) key(5, true); else key(5, false); return true;
+   case KeyEvent.KEYCODE_G: if (d) key(6, true); else key(6, false); return true;
+   case KeyEvent.KEYCODE_H: if (d) key(7, true); else key(7, false); return true;
+   case KeyEvent.KEYCODE_I: if (d) key(8, true); else key(8, false); return true;
+   case KeyEvent.KEYCODE_J: if (d) key(9, true); else key(9, false); return true;
+   case KeyEvent.KEYCODE_K: if (d) key(10, true); else key(10, false); return true;
+   case KeyEvent.KEYCODE_L: if (d) key(11, true); else key(11, false); return true;
+   case KeyEvent.KEYCODE_M: if (d) key(12, true); else key(12, false); return true;
+   case KeyEvent.KEYCODE_N: if (d) key(13, true); else key(13, false); return true;
+   case KeyEvent.KEYCODE_O: if (d) key(14, true); else key(14, false); return true;
+   case KeyEvent.KEYCODE_P: if (d) key(15, true); else key(15, false); return true;
+   case KeyEvent.KEYCODE_Q: if (d) key(16, true); else key(16, false); return true;
+   case KeyEvent.KEYCODE_R: if (d) key(17, true); else key(17, false); return true;
+   case KeyEvent.KEYCODE_S: if (d) key(18, true); else key(18, false); return true;
+   case KeyEvent.KEYCODE_T: if (d) key(19, true); else key(19, false); return true;
+   case KeyEvent.KEYCODE_U: if (d) key(20, true); else key(20, false); return true;
+   case KeyEvent.KEYCODE_V: if (d) key(21, true); else key(21, false); return true;
+   case KeyEvent.KEYCODE_W: if (d) key(22, true); else key(22, false); return true;
+   case KeyEvent.KEYCODE_X: if (d) key(23, true); else key(23, false); return true;
+   case KeyEvent.KEYCODE_Y: if (d) key(25, true); else key(25, false); return true;
+   case KeyEvent.KEYCODE_Z: if (d) key(26, true); else key(26, false); return true;
+   case KeyEvent.KEYCODE_SPACE: if (d) key(47, true); else key(47, false); return true;
+
+                                 //case KeyEvent.KEYCODE_SHIFT_LEFT: if (d) key(34, true); else key(34, false); return true;
+                                 //case KeyEvent.KEYCODE_SHIFT_RIGHT: if (d) key(39, true); else key(39, false); return true;
+
+   case KeyEvent.KEYCODE_DPAD_UP: if (d) key(10, true); else key(10, false); return true;
+   case KeyEvent.KEYCODE_DPAD_DOWN: if (d) key(16, true); else key(16, false); return true;
+   case KeyEvent.KEYCODE_DPAD_LEFT: if (d) key(15, true); else key(15, false); return true;
+   case KeyEvent.KEYCODE_DPAD_RIGHT: if (d) key(17, true); else key(17, false); return true;
+   case KeyEvent.KEYCODE_DPAD_CENTER: if (d) key(24, true); else key(24, false); return true;
+
+   default: return false;
+  }
+ }
+
+}

@@ -12,6 +12,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,18 +42,13 @@ public class X48 extends Activity {
  static final private int SAVE_CHEKPOINT_ID = Menu.FIRST +7 ;
  static final private int RESTORE_CHEKPOINT_ID = Menu.FIRST +8 ;
  static final private int FULL_RESET_ID = Menu.FIRST +9 ;
-
  static final private int ROM_ID = 123;
-
  private static EmulatorThread thread;
-
 
  // http://www.hpcalc.org/hp48/pc/emulators/gxrom-r.zip
 
  @Override
   public void onCreate(Bundle savedInstanceState) {
-
-
 
    super.onCreate(savedInstanceState);
    Log.i("x48", "starting activity");
@@ -67,7 +64,7 @@ public class X48 extends Activity {
    if (!hpDir.exists() || !hpDir.isDirectory()) {
     Log.i("x48", "ERROR: cannot open " + config_dir);
     Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_SHORT).show();
-   }  
+   }
 
    Log.i("x48", "config_dir java: " + config_dir);
    getExternalPath(config_dir);
@@ -89,15 +86,127 @@ public class X48 extends Activity {
   setContentView(R.layout.main);
   mainView = (HPView) findViewById(R.id.hpview);
 
-  if (android.os.Build.VERSION.SDK_INT >= 11 ) {
-   getActionBar().hide();      
-  }
+//  if (android.os.Build.VERSION.SDK_INT >= 11 ) {
+//   getActionBar().hide();
+//  }
   checkPrefs();
 
   thread = new EmulatorThread(this);
   thread.start();
   mainView.resume();
  }
+
+ private static boolean hide = true;
+ public void Menu() {
+  if (android.os.Build.VERSION.SDK_INT < 11 ) {
+   openOptionsMenu();
+  } else {
+   hide^=true;
+    SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+   if (android.os.Build.VERSION.SDK_INT < 19 ) {
+    if (hide) {
+   getActionBar().hide();
+       if (mPrefs.getBoolean("fullScreen", false)) {
+      mainView.setSystemUiVisibility(
+        HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        );
+       }
+    } else { //FIXME:
+    getActionBar().show();
+      if (mPrefs.getBoolean("fullScreen", false)) {
+      mainView.setSystemUiVisibility(
+        HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        );
+      }
+    }
+   } else { // >=19
+    if (hide) {  //hide action bar
+
+     getActionBar().hide();
+//     getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//     getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+     if (mPrefs.getBoolean("fullScreen", false)) {
+      mainView.setSystemUiVisibility(
+        HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        | HPView.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+        | HPView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+//        | HPView.SYSTEM_UI_FLAG_IMMERSIVE);
+        | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+     }
+    } else { //show  action bar
+     if (mPrefs.getBoolean("fullScreen", false)) {
+      mainView.setSystemUiVisibility(
+        HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        | HPView.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        );
+     }
+     //FIXME:
+//       getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#77262626"))); // actionbar was transparent on kitkat...
+//     getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//     getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+     getActionBar().show();
+    }
+   }
+  }
+ }
+
+ // This snippet hides the system bars.
+ public void hideSystemUI() {
+  if (android.os.Build.VERSION.SDK_INT >= 19 ) {
+   // Set the IMMERSIVE flag.
+   // Set the content to appear under the system bars so that the content
+   // doesn't resize when the system bars hide and show.
+//   getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//   getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+   if (mainView != null) {
+    mainView.setSystemUiVisibility(
+      HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
+      | HPView.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+      | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+      | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+      | HPView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+//      | HPView.SYSTEM_UI_FLAG_IMMERSIVE);
+      | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    getActionBar().hide();
+   }
+  } else {
+   getWindow().addFlags(LayoutParams.FLAG_FULLSCREEN);
+   getWindow().clearFlags(LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+  }
+ }
+
+ // This snippet shows the system bars. It does this by removing all the flags
+ // except for the ones that make the content appear under the system bars.
+ public void showSystemUI() {
+  if (android.os.Build.VERSION.SDK_INT >= 19 ) {
+   if (mainView != null) {
+    mainView.setSystemUiVisibility(
+      HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
+      );
+    getActionBar().hide();
+   }
+  } else {
+   getWindow().addFlags(LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+   getWindow().clearFlags(LayoutParams.FLAG_FULLSCREEN);
+  }
+ }
+
+ public void checkfullscreen() {
+  SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+  if (mPrefs.getBoolean("fullScreen", false)) {
+  hide = false;
+   hideSystemUI();
+  } else {
+  hide = true;
+   showSystemUI();
+  }
+ }
+
 
  public void checkPrefs() {
   SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -109,13 +218,7 @@ public class X48 extends Activity {
    mainView.setFullWidth(mPrefs.getBoolean("large_width", true));
    mainView.setScaleControls(mPrefs.getBoolean("scale_buttons", true));
   }
-  if (mPrefs.getBoolean("fullScreen", false)) {
-   getWindow().addFlags(LayoutParams.FLAG_FULLSCREEN);
-   getWindow().clearFlags(LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-  } else {
-   getWindow().addFlags(LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-   getWindow().clearFlags(LayoutParams.FLAG_FULLSCREEN);
-  }
+  checkfullscreen();
   mainView.requestLayout();
  }
 
@@ -182,34 +285,49 @@ public class X48 extends Activity {
   */
  @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-
+MenuItem item;
    super.onCreateOptionsMenu(menu);
    // We are going to create two menus. Note that we assign them
    // unique integer IDs, labels from our string resources, and
    // given them shortcuts.
    //menu.add(0, RESET_ID, 0, R.string.reset);
 
-   //       menu.add(0, LITEKBD_ID, 0, R.string.toggle_lite_keyb);
-   menu.add(0, LOAD_ID, 0, R.string.load_prog);
+   //menu.add(0, LITEKBD_ID, 0, R.string.toggle_lite_keyb);
    //menu.add(0, SAVE_ID, 0, R.string.save_state);
-   menu.add(0, FULL_RESET_ID, 0, R.string.full_reset_memory);
-   menu.add(0, RESTORE_CHEKPOINT_ID, 0, R.string.restore_checkpoint);
-   menu.add(0, SAVE_CHEKPOINT_ID, 0, R.string.save_checkpoint);
-   menu.add(0, SETTINGS_ID, 0, R.string.settings);
-   menu.add(0, QUIT_ID, 0, R.string.button_quit);
 
+   item = menu.add(0, FULL_RESET_ID, 0, R.string.full_reset_memory);
+   item.setIcon(R.drawable.ic_delete_white_24dp);
+   if (android.os.Build.VERSION.SDK_INT >= 11 ) { item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);}
+   
+   item = menu.add(0, RESTORE_CHEKPOINT_ID, 0, R.string.restore_checkpoint);
+   item.setIcon(R.drawable.ic_restore_white_24dp);
+   if (android.os.Build.VERSION.SDK_INT >= 11 ) { item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);}
+
+   item = menu.add(0, SAVE_CHEKPOINT_ID, 0, R.string.save_checkpoint);
+   item.setIcon(R.drawable.ic_archive_white_24dp);
+   if (android.os.Build.VERSION.SDK_INT >= 11 ) { item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);}
+
+   item = menu.add(0, SETTINGS_ID, 0, R.string.settings);
+   item.setIcon(R.drawable.ic_settings_white_24dp);
+   if (android.os.Build.VERSION.SDK_INT >= 11 ) { item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);}
+
+   item = menu.add(0, LOAD_ID, 0, R.string.load_prog);
+   item.setIcon(R.drawable.ic_playlist_add_white_24dp);
+
+   item = menu.add(0, QUIT_ID, 0, R.string.button_quit);
+   item.setIcon(R.drawable.ic_power_settings_new_white_24dp);
 
    return true;
   }
 
  public void deleteFile(File src) throws IOException {
-  if (src.exists()) { 
+  if (src.exists()) {
    src.delete();
-  } 
+  }
  }
 
  public void copyFile(File src, File dst) throws IOException {
-  if (src.exists()) { 
+  if (src.exists()) {
    InputStream in = new FileInputStream(src);
    OutputStream out = new FileOutputStream(dst);
 
@@ -221,7 +339,7 @@ public class X48 extends Activity {
    }
    in.close();
    out.close();
-  } 
+  }
  }
 
  /**
@@ -241,7 +359,7 @@ public class X48 extends Activity {
       }
       spe.putString("port1", "0");
       spe.putString("port2", "0");
-      spe.commit(); 
+      spe.commit();
       deleteFile( new File (X48.config_dir + "port1"));
       deleteFile( new File (X48.config_dir + "port2"));
      }
@@ -291,7 +409,7 @@ public class X48 extends Activity {
       if (p1.exists()) {
        spe.putString("port2", ""+p2.length()/1024);
       }
-      spe.commit(); 
+      spe.commit();
 
      }
      catch (IOException e) { }
@@ -338,7 +456,7 @@ public class X48 extends Activity {
   protected Dialog onCreateDialog(int id) {
    switch (id) {
     case DIALOG_PROG_OK: return new AlertDialog.Builder(X48.this)
-                         .setIcon(R.drawable.alert_dialog_icon)
+                         .setIcon(R.drawable.ic_warning_black_24dp)
                           .setTitle(R.string.help)
                           .setMessage(R.string.prog_ok)
                           .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -348,7 +466,7 @@ public class X48 extends Activity {
                             })
                          .create();
     case DIALOG_PROG_KO: return new AlertDialog.Builder(X48.this)
-                         .setIcon(R.drawable.alert_dialog_icon)
+                         .setIcon(R.drawable.ic_warning_black_24dp)
                           .setTitle(R.string.help)
                           .setMessage(R.string.prog_ko)
                           .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -359,7 +477,7 @@ public class X48 extends Activity {
                             })
                          .create();
     case DIALOG_ROM_KO: return new AlertDialog.Builder(X48.this)
-                        .setIcon(R.drawable.alert_dialog_icon)
+                        .setIcon(R.drawable.ic_warning_black_24dp)
                          .setTitle(R.string.help)
                          .setMessage(R.string.rom_ko)
                          .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -370,7 +488,7 @@ public class X48 extends Activity {
                            })
                         .create();
     case DIALOG_RAM_KO: return new AlertDialog.Builder(X48.this)
-                        .setIcon(R.drawable.alert_dialog_icon)
+                        .setIcon(R.drawable.ic_warning_black_24dp)
                          .setTitle(R.string.help)
                          .setMessage(R.string.ram_install_error)
                          .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -381,7 +499,7 @@ public class X48 extends Activity {
                            })
                         .create();
     case DIALOG_RAM_OK: return new AlertDialog.Builder(X48.this)
-                        .setIcon(R.drawable.alert_dialog_icon)
+                        .setIcon(R.drawable.ic_warning_black_24dp)
                          .setTitle(R.string.help)
                          .setMessage(R.string.ram_install_warning)
                          .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {

@@ -4,12 +4,14 @@
 # Copyright (C) 2012 Olivier Sirol <czo@free.fr>
 # License: GPL (http://www.gnu.org/copyleft/gpl.html)
 # Started: Sept 2012
-# Last Change: mercredi 12 août 2015, 16:27
-# Edit Time: 17:34:20
+# Last Change: dimanche 04 octobre 2015, 15:56
+# Edit Time: 17:36:01
 # Description:
 #
 # $Id:$
 #
+
+exit 4
 
 #orig png in hdpi : 104x72 et ABC 104x44
 mkdir -p res/drawable-hdpi

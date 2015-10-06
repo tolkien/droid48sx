@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# Filename: docrop
+# Copyright (C) 2015 Olivier Sirol <czo@free.fr>
+# License: GPL (http://www.gnu.org/copyleft/gpl.html)
+# Started: Jan 2015
+# Last Change: samedi 03 octobre 2015, 18:42
+# Edit Time: 1:17:03
+# Description:
+#  
+# HP48SX png : 1200x1782
+# k01 à k29 : 200x198
+# mais k25 (enter) double : 400x198
+# k30 à k49 : 240x198
+#
+# $Id: $
+#
+
+cd /home/czo/CzoDoc/i48/czo48sx/droid48sx/store/img/hp48crop || exit 4
+
+if [ $# -ne 1 ] ; then
+     echo "Error: arg needed"
+     echo "Syntax: docrop <file.png>"
+     exit 1
+fi
+
+IMG=$1
+
+rm k*.png
+rm s*.png
+convert $IMG -crop 6x9@ -scene 1 sA%02d.png
+convert sA25.png sA26.png +append sA25.png
+
+rm sA26.png
+for i in `seq 31 54`; do rm sA$i.png; done
+
+convert $IMG -crop 5x9@ -scene 1 sB%d.png
+for i in `seq 1 25`; do rm sB$i.png; done
+
+rename.pl -w '^s.*.png' '"k" . sprintf("%02d", $i++ + 1) . ".png"' -o e

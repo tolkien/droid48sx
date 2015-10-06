@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Filename: resupdate-ic_launcher
+# Copyright (C) 2012 Olivier Sirol <czo@free.fr>
+# License: GPL (http://www.gnu.org/copyleft/gpl.html)
+# Started: Sept 2012
+# Last Change: mardi 06 octobre 2015, 10:59
+# Edit Time: 1:32:06
+# Description:
+#
+# $Id:$
+#
+
+ICON=store/img/icon9.png
+convert $ICON -geometry 48x48   res/mipmap-mdpi/ic_launcher.png
+convert $ICON -geometry 72x72   res/mipmap-hdpi/ic_launcher.png
+convert $ICON -geometry 96x96   res/mipmap-xhdpi/ic_launcher.png
+convert $ICON -geometry 144x144 res/mipmap-xxhdpi/ic_launcher.png
+convert $ICON -geometry 192x192 res/mipmap-xxxhdpi/ic_launcher.png
+

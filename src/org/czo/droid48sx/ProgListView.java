@@ -126,24 +126,34 @@ public class ProgListView extends ListActivity {
    final File file = new File(path);
 
    if (position == 0 && PARENT_DIR.equals(path)) {
-    imageView.setImageResource(R.drawable.folder);
+    imageView.setImageResource(R.drawable.ic_folder_black_24dp);
+     imageView.setColorFilter(0x77ffffff);
    } else {
     if (file.isDirectory()) {
-     imageView.setImageResource(R.drawable.folder);
+     imageView.setImageResource(R.drawable.ic_folder_black_24dp);
+     imageView.setColorFilter(0x77ffffff);
     } else {
-     imageView.setImageResource(R.drawable.file);
+     imageView.setImageResource(R.drawable.ic_insert_drive_file_black_24dp);
+     imageView.setColorFilter(0x77ffffff);
     }
    }
-   imageView.setPadding(0, 1, 5, 0);
+   int p=(int)TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_DIP, 5, getResources() .getDisplayMetrics());
+//   imageView.setPadding(p,p,p,p);
 
    // create view for the directory name
    final TextView textView = new TextView(context);
 
    textView.setText(file.getName());
-   textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+   textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
 
-   addView(imageView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-   addView(textView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+   LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//setMargins (int left, int top, int right, int bottom)
+   layoutParams.setMargins(p, p, p, p);
+
+//   addView(imageView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+   addView(imageView, layoutParams);
+   addView(textView, layoutParams);
   }
  }
 

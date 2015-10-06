@@ -49,8 +49,8 @@
 <string name="toggle_lite_keyb">Toggle minimal controls</string>
 <string name="show_lite_keyb">Minimal controls</string>
 <string name="show_lite_keyb_summary">Enable Minimal controls ui</string>
-<string name="full_screen">Hide the status bar</string>
-<string name="full_screen_summary">Full screen mode</string>
+<string name="full_screen">Full screen mode</string>
+<string name="full_screen_summary">Hide the navigation and status bar</string>
 <string name="scale_buttons">Autoscale touch controls</string>
 <string name="scale_buttons_summary">Scale HP48 buttons</string>
 <string name="sound">Enable sound</string>
@@ -58,6 +58,6 @@
 <string name="save_checkpoint">Save checkpoint</string>
 <string name="restore_checkpoint">Restore checkpoint</string>
 <string name="build_preferences">Droid48sx build info</string>
-<string name="build_tag">v1.38-6-g16f75e4</string>
-<string name="build_date">mercredi 26 août 2015, 21:30:55 (UTC+0200)</string>
+<string name="build_tag">v1.38-7-ga018f60</string>
+<string name="build_date">mardi 6 octobre 2015, 11:37:04 (UTC+0200)</string>
 </resources>

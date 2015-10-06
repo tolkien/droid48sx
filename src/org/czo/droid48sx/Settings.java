@@ -53,6 +53,13 @@ public class Settings extends PreferenceActivity {
   inlineDispPrefCat.setTitle(R.string.display_preferences);
   root.addPreference(inlineDispPrefCat);
 
+  CheckBoxPreference fullScreenPref = new CheckBoxPreference(this);
+  fullScreenPref.setKey("fullScreen");
+  fullScreenPref.setTitle(R.string.full_screen);
+  fullScreenPref.setSummary(R.string.full_screen_summary);
+  fullScreenPref.setDefaultValue(false);
+  inlineDispPrefCat.addPreference(fullScreenPref);
+
   CheckBoxPreference largeLCDPref = new CheckBoxPreference(this);
   largeLCDPref.setKey("large_width");
   largeLCDPref.setTitle(R.string.large_width);
@@ -67,19 +74,12 @@ public class Settings extends PreferenceActivity {
   keybLitePref.setDefaultValue(false);
   inlineDispPrefCat.addPreference(keybLitePref);
 
-  CheckBoxPreference scaleControlsPref = new CheckBoxPreference(this);
-  scaleControlsPref.setKey("scale_buttons");
-  scaleControlsPref.setTitle(R.string.scale_buttons);
-  scaleControlsPref.setSummary(R.string.scale_buttons_summary);
-  scaleControlsPref.setDefaultValue(true);
-  inlineDispPrefCat.addPreference(scaleControlsPref);
-
-  CheckBoxPreference fullScreenPref = new CheckBoxPreference(this);
-  fullScreenPref.setKey("fullScreen");
-  fullScreenPref.setTitle(R.string.full_screen);
-  fullScreenPref.setSummary(R.string.full_screen_summary);
-  fullScreenPref.setDefaultValue(false);
-  inlineDispPrefCat.addPreference(fullScreenPref);
+  //CheckBoxPreference scaleControlsPref = new CheckBoxPreference(this);
+  //scaleControlsPref.setKey("scale_buttons");
+  //scaleControlsPref.setTitle(R.string.scale_buttons);
+  //scaleControlsPref.setSummary(R.string.scale_buttons_summary);
+  //scaleControlsPref.setDefaultValue(true);
+  //inlineDispPrefCat.addPreference(scaleControlsPref);
 
   PreferenceCategory portPrefCat = new PreferenceCategory(this);
   portPrefCat.setTitle(R.string.ramcards_preferences);

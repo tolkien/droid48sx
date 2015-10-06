@@ -2,8 +2,8 @@
 # Copyright (C) 2012 Olivier Sirol <czo@free.fr>
 # License: GPL (http://www.gnu.org/copyleft/gpl.html)
 # Started: Jan 2012
-# Last Change: mercredi 26 août 2015, 19:37
-# Edit Time: 2:34:12
+# Last Change: mercredi 02 septembre 2015, 21:21
+# Edit Time: 2:35:02
 # Description:
 #
 # $Id: $
@@ -14,7 +14,7 @@ release:
 	perl -i -pe 'BEGIN {$$A=`date`; chomp $$A} END ; s:<string name="build_date">.*</string>:<string name="build_date">$$A</string>: ' res/values/strings.xml
 	ndk-build V=1
 #./resupdate
-	./resupdatedrawable
+#./resupdatedrawable
 	ant release
 	cp bin/droid48sx-release.apk ../droid48sx-release-`date +%Y%m%d`.apk
 #	scp bin/droid48sx-release.apk czo@ananas:/var/www
@@ -25,7 +25,7 @@ debug:
 	perl -i -pe 'BEGIN {$$A=`date`; chomp $$A} END ; s:<string name="build_date">.*</string>:<string name="build_date">$$A</string>: ' res/values/strings.xml
 	ndk-build V=1 NDK_DEBUG=1
 #./resupdate
-	./resupdatedrawable
+#./resupdatedrawable
 	ant debug
 	scp bin/droid48sx-debug.apk czo@ananas:/var/www
 	@echo "<- done!"
@@ -40,15 +40,15 @@ clean:
 	ant clean
 	rm -fr libs
 	rm -fr obj
-	rm -f res/drawable/k*
-	rm -fr res/drawable-large
-	rm -fr res/drawable-large-hdpi
-	rm -fr res/drawable-large-xhdpi
-	rm -fr res/drawable-xlarge
-	rm -fr res/drawable-ldpi
-	rm -fr res/drawable-mdpi
-	rm -fr res/drawable-hdpi
-	rm -fr res/drawable-xhdpi
-	rm -fr res/drawable-xxhdpi
-	@echo "<- done!"
+#rm -f res/drawable/k*
+	#rm -fr res/drawable-large
+	#rm -fr res/drawable-large-hdpi
+	#rm -fr res/drawable-large-xhdpi
+	#rm -fr res/drawable-xlarge
+	#rm -fr res/drawable-ldpi
+	#rm -fr res/drawable-mdpi
+	#rm -fr res/drawable-hdpi
+	#rm -fr res/drawable-xhdpi
+	#rm -fr res/drawable-xxhdpi
+	#@echo "<- done!"
 
