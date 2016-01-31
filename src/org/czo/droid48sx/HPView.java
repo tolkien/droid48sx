@@ -178,8 +178,8 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
       int w = backBuffer.getWidth();
       int h = backBuffer.getHeight();
       Paint p = new Paint();
-      /* couleur fond bouttons */
-      int srcColor = Color.rgb(63, 62, 60);
+      /* couleur fond bouttons (landscape enter)*/
+      int srcColor = Color.rgb(56, 57, 51);
       p.setColor(srcColor);
       backCanvas.drawRect(0, 0, w, h, p);
       /* presque fullscreen */
@@ -213,7 +213,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
       icons_coords = new int [][] { { lcd_pos_x, 0 }, {(int)(lcd_pos_x+21*lcd_ratio), 0}, {(int)(lcd_pos_x+45*lcd_ratio), 0},
        {(int)(lcd_pos_x+67*lcd_ratio), 0}, {(int)(lcd_pos_x+91*lcd_ratio), 0}, {(int)(lcd_pos_x+112*lcd_ratio), 0} };
       /* couleur num central gx, meme que srcColor pour la sx */
-      int central   = Color.rgb(63, 62, 60);
+      int central   = Color.rgb(56, 57, 51);
       /* couleur ligne func */
       int func = Color.rgb(83, 81, 82);
       /* couleur fond screen */

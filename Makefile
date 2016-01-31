@@ -2,8 +2,8 @@
 # Copyright (C) 2012 Olivier Sirol <czo@free.fr>
 # License: GPL (http://www.gnu.org/copyleft/gpl.html)
 # Started: Jan 2012
-# Last Change: mercredi 02 septembre 2015, 21:21
-# Edit Time: 2:35:02
+# Last Change: dimanche 31 janvier 2016, 18:44
+# Edit Time: 2:39:07
 # Description:
 #
 # $Id: $
@@ -11,7 +11,7 @@
 
 release:
 	perl -i -pe 'BEGIN {$$A=`git describe --long`; chomp $$A} END ; s:<string name="build_tag">.*</string>:<string name="build_tag">$$A</string>: ' res/values/strings.xml
-	perl -i -pe 'BEGIN {$$A=`date`; chomp $$A} END ; s:<string name="build_date">.*</string>:<string name="build_date">$$A</string>: ' res/values/strings.xml
+	perl -i -pe 'BEGIN {$$A=`LC_ALL=C date`; chomp $$A} END ; s:<string name="build_date">.*</string>:<string name="build_date">$$A</string>: ' res/values/strings.xml
 	ndk-build V=1
 #./resupdate
 #./resupdatedrawable
@@ -22,7 +22,7 @@ release:
 
 debug:
 	perl -i -pe 'BEGIN {$$A=`git describe --long`; chomp $$A} END ; s:<string name="build_tag">.*</string>:<string name="build_tag">$$A (DEBUG)</string>: ' res/values/strings.xml
-	perl -i -pe 'BEGIN {$$A=`date`; chomp $$A} END ; s:<string name="build_date">.*</string>:<string name="build_date">$$A</string>: ' res/values/strings.xml
+	perl -i -pe 'BEGIN {$$A=`LC_ALL=C date`; chomp $$A} END ; s:<string name="build_date">.*</string>:<string name="build_date">$$A</string>: ' res/values/strings.xml
 	ndk-build V=1 NDK_DEBUG=1
 #./resupdate
 #./resupdatedrawable
