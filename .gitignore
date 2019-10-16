@@ -1,4 +1,10 @@
-local.properties
-/obj
-/libs
-/bin
+*.iml
+.gradle
+/local.properties
+/.idea/
+.DS_Store
+/captures
+/build/
+/app/build/
+/app/.externalNativeBuild/
+/app/.cxx/

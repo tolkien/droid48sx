@@ -1,63 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Droid48sx</string>
-<string name="load_prog">Put program on stack</string>
-<string name="save_state">Save memory/state</string>
-<string name="rom_legal">This emulator need a ROM to run. HP-ROM files are copyrighted by Hewlett Packard. But since fall 2000 HP ACO allowed the non commercial use of the HP48 ROM\'s even if you\'re not an owner of this calculator type. This download button will download and install the rom from the hpcalc.org site.</string>
-<string name="button_download">Download and install ROM from HPcalc.org</string>
-<string name="button_quit">Quit</string>
-<string name="reset_memory">Reset memory and quit</string>
-<string name="full_reset_memory">Full reset</string>
-<string name="help">Help</string>
-<string name="ok">Ok</string>
-<string name="prog_ok">The program/object has been put on the stack.\nNow, some HP knowledge is necessary:\n\n- if this is a library, push 0, then STO and shut down (right shift + on) / restart (on) the calculator: the program will be available in the Library (shift right + 2) menu.\n\n- If this is a regular object (dir, external, etc.), push a name between quotes on the stack (for example, \'prog\'), then push STO: the prog will be available in the VAR menu</string>
-<string name="prog_ko">This program cannot be loaded.\nMake sure it\'s a valid one and you have enough memory to load it</string>
-<string name="rom_ko">Rom files not found! This shouldn\'t happen :\\. Quitting now...</string>
-<string name="general_preferences">General settings</string>
-<string name="display_preferences">Display settings</string>
-
-<string name="choose_contrast">Contrast</string>
-<string name="choose_contrast_value">Select the contrast</string>
-<string name="choose_backkey">Back key behavior</string>
-<string name="choose_backkey_value">Choose the action when back is pressed</string>
-<string name="choose_msgbox">No program popup</string>
-<string name="choose_msgbox_value">No message box after loading</string>
-<string name="settings">Settings</string>
-<string name="ramcards_preferences">Ports settings</string>
-<string name="port1_install">Port1 setting</string>
-<string name="port2_install">Port2 setting</string>
-<string name="ram_install">Choose an installation option</string>
-<string name="ram_install_error">The ram cards cannot be install on internal memory</string>
-<string name="ram_install_warning">You need to quit this program to enable your ram cards.\nWARNING: you will experience an HP shutdown on the first restart ! Don\'t panic, it\'s normal, just press the "ON" button on the HP interface.\nYou might want to save the memory after this.</string>
-<string-array name="port_1_values"><item>0</item><item>128</item></string-array>
-<string-array name="port_1_entries"><item>None/Delete</item><item>128kB</item></string-array>
-<string-array name="port_2_values"><item>0</item><item>128</item></string-array>
-<string-array name="port_2_entries"><item>None/Delete</item><item>128kB</item></string-array>
-<string-array name="contrast_values"><item>0</item><item>1</item><item>2</item></string-array>
-<string-array name="contrast_entries"><item>Original HP</item><item>Default</item><item>Lighter</item></string-array>
-<string-array name="backkey_values"><item>0</item><item>1</item><item>2</item></string-array>
-<string-array name="backkey_entries"><item>Quit program</item><item>Drop button</item><item>ON button (cancel)</item></string-array>
-<string name="saveonexit_msgbox">Save on exit</string>
-<string name="open_numpad">Show/hide numpad</string>
-
-<string name="numpad_explain">You can also tap the LCD screen, more convenient !</string>
-<string name="saveonexit_msgbox_value">Save memory and stack on exit</string>
-<string name="haptic_feedback">Haptic feedback</string>
-<string name="haptic_feedback_summary">Enable Haptic feedback</string>
-<string name="large_width">Large LCD screen</string>
-<string name="large_width_summary">Portrait mode only</string>
-<string name="toggle_lite_keyb">Toggle minimal controls</string>
-<string name="show_lite_keyb">Minimal controls</string>
-<string name="show_lite_keyb_summary">Enable Minimal controls ui</string>
-<string name="full_screen">Full screen mode</string>
-<string name="full_screen_summary">Hide the navigation and status bar</string>
-<string name="scale_buttons">Autoscale touch controls</string>
-<string name="scale_buttons_summary">Scale HP48 buttons</string>
-<string name="sound">Enable sound</string>
-<string name="sound_summary">EXPERIMENTAL: system beeps ok, so far</string>
-<string name="save_checkpoint">Save checkpoint</string>
-<string name="restore_checkpoint">Restore checkpoint</string>
-<string name="build_preferences">Droid48sx build info</string>
-<string name="build_tag">1.39-3-g3d768a9</string>
-<string name="build_date">Mon Feb  1 00:03:25 CET 2016</string>
+    <string name="app_name">Droid48sx</string>
+    <string name="load_prog">Put program on stack</string>
+    <string name="save_state">Save memory/state</string>
+    <string name="rom_legal">This emulator need a ROM to run. HP-ROM files are copyrighted by Hewlett Packard. But since fall 2000 HP ACO allowed the non commercial use of the HP48 ROM\'s even if you\'re not an owner of this calculator type. This download button will download and install the rom from the hpcalc.org site.</string>
+    <string name="button_download">Download and install ROM from HPcalc.org</string>
+    <string name="button_quit">Quit</string>
+    <string name="reset_memory">Reset memory and quit</string>
+    <string name="full_reset_memory">Full reset</string>
+    <string name="help">Help</string>
+    <string name="ok">OK</string>
+    <string name="prog_ok">The program/object has been put on the stack.\nNow, some HP knowledge is necessary:\n\n- if this is a library, push 0, then STO and shut down (right shift + on) / restart (on) the calculator: the program will be available in the Library (shift right + 2) menu.\n\n- If this is a regular object (dir, external, etc.), push a name between quotes on the stack (for example, \'prog\'), then push STO: the prog will be available in the VAR menu</string>
+    <string name="prog_ko">This program cannot be loaded.\nMake sure it\'s a valid one and you have enough memory to load it</string>
+    <string name="rom_ko">Rom files not found! This shouldn\'t happen :\\. Quitting now!</string>
+    <string name="general_preferences">General settings</string>
+    <string name="display_preferences">Display settings</string>
+    <string name="choose_contrast">Contrast</string>
+    <string name="choose_contrast_value">Select the contrast</string>
+    <string name="choose_backkey">Back key behavior</string>
+    <string name="choose_backkey_value">Choose the action when back is pressed</string>
+    <string name="choose_msgbox">No program popup</string>
+    <string name="choose_msgbox_value">No message box after loading</string>
+    <string name="settings">Settings</string>
+    <string name="ramcards_preferences">Ports settings</string>
+    <string name="port1_install">Port1 setting</string>
+    <string name="port2_install">Port2 setting</string>
+    <string name="ram_install">Choose an installation option</string>
+    <string name="ram_install_error">The ram cards cannot be install on internal memory</string>
+    <string name="ram_install_warning">You need to quit this program to enable your ram cards.\nWARNING: you will experience an HP shutdown on the first restart ! Don\'t panic, it\'s normal, just press the "ON" button on the HP interface.\nYou might want to save the memory after this.</string>
+    <string-array name="port_1_values">
+        <item>0</item>
+        <item>128</item>
+    </string-array>
+    <string-array name="port_1_entries">
+        <item>None/Delete</item>
+        <item>128kB</item>
+    </string-array>
+    <string-array name="port_2_values">
+        <item>0</item>
+        <item>128</item>
+    </string-array>
+    <string-array name="port_2_entries">
+        <item>None/Delete</item>
+        <item>128kB</item>
+    </string-array>
+    <string-array name="contrast_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="contrast_entries">
+        <item>Original HP</item>
+        <item>Default</item>
+        <item>Lighter</item>
+    </string-array>
+    <string-array name="backkey_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="backkey_entries">
+        <item>Quit program</item>
+        <item>Drop button</item>
+        <item>ON button (cancel)</item>
+    </string-array>
+    <string name="saveonexit_msgbox">Save on exit</string>
+    <string name="open_numpad">Show/hide numpad</string>
+    <string name="numpad_explain">You can also tap the LCD screen, more convenient !</string>
+    <string name="saveonexit_msgbox_value">Save memory and stack on exit</string>
+    <string name="haptic_feedback">Haptic feedback</string>
+    <string name="haptic_feedback_summary">Enable Haptic feedback</string>
+    <string name="large_width">Large LCD screen</string>
+    <string name="large_width_summary">Screen is bigger in some situations</string>
+    <string name="toggle_lite_keyb">Toggle minimal controls</string>
+    <string name="show_lite_keyb">Minimal controls</string>
+    <string name="show_lite_keyb_summary">Enable Minimal controls ui</string>
+    <string name="full_screen">Full screen mode</string>
+    <string name="full_screen_summary">Hide the navigation and status bar</string>
+    <string name="scale_buttons">Autoscale touch controls</string>
+    <string name="scale_buttons_summary">Scale HP48 buttons</string>
+    <string name="sound">Enable sound</string>
+    <string name="sound_summary">EXPERIMENTAL: system beeps OK, so far</string>
+    <string name="save_checkpoint">Save checkpoint</string>
+    <string name="restore_checkpoint">Restore checkpoint</string>
+    <string name="build_preferences">Build info</string>
 </resources>

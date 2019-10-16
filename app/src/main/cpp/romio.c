@@ -88,7 +88,7 @@ int *size;
     {
       *size = 2 * st.st_size;
     }
-  else if (four[1] = 0x49)
+  else if (four[1] == 0x49)
     {
       LOGE( "%s is an HP49 ROM\n", name);
       *size = 2 * st.st_size;

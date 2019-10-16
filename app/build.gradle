@@ -1,0 +1,106 @@
+apply plugin: 'com.android.application'
+
+println("")
+// keystore.properties file, in the rootProject folder.
+def keystorePropertiesFile = rootProject.file("local.properties")
+def keystoreProperties = new Properties()
+def canSign = false
+if (keystorePropertiesFile.exists()) {
+    canSign = true
+    println("-> release will be signed")
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+int minutesSinceEpoch = System.currentTimeMillis() / 1000 / 60
+println("-> minutesSinceEpoch: " + minutesSinceEpoch)
+String buildDateYMD = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date(System.currentTimeMillis()))
+println("-> buildDateYMD:      " + buildDateYMD)
+String buildDateYHM = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date(System.currentTimeMillis()))
+println("-> buildDateYHM:      " + buildDateYHM)
+def gitVersionName = "git -C ${rootDir} describe --tags --long".execute().text.trim()
+println("-> gitVersionName:    " + gitVersionName)
+//defined in buildtypes
+def buildDateTxt
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "org.czo.droid48sx"
+        minSdkVersion 8
+        targetSdkVersion 28
+        versionCode minutesSinceEpoch
+        versionName "1.40"
+
+        def appIdSmall = applicationId.toString().replaceAll(/.*\./,'')
+        setProperty("archivesBaseName", "${appIdSmall}-${buildDateYMD}")
+        println("-> archivesBaseName:  " + archivesBaseName)
+        println("")
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
+        tasks.withType(JavaCompile) {
+            //options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+            //options.compilerArgs << "-Xlint:deprecation"
+        }
+    }
+    if (canSign) {
+        signingConfigs {
+            release {
+                storeFile file(keystoreProperties['key.store'])
+                storePassword keystoreProperties['key.store.password']
+                keyAlias keystoreProperties['key.alias']
+                keyPassword keystoreProperties['key.alias.password']
+                v1SigningEnabled true
+                v2SigningEnabled false
+            }
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (canSign) {
+                signingConfig signingConfigs.release
+            }
+
+            buildConfigField("String", "BUILD_TAG", "\"${defaultConfig.applicationId}\"")
+            resValue("string", "build_tag", "${defaultConfig.applicationId}")
+            println("-> applicationId:  " + defaultConfig.applicationId)
+
+            buildDateTxt = "Version: $defaultConfig.versionName.${minutesSinceEpoch} $name\\nGit version: $gitVersionName\\nBuild date: $buildDateYHM"
+            buildConfigField("String", "BUILD_DATE", "\"$buildDateTxt\"")
+            resValue("string", "build_date", "$buildDateTxt")
+            println("-> buildDateTxt:   " + buildDateTxt + "\n")
+        }
+
+        debug {
+            buildConfigField("String", "BUILD_TAG", "\"${defaultConfig.applicationId}\"")
+            resValue("string", "build_tag", "${defaultConfig.applicationId}")
+            println("-> applicationId:  " + defaultConfig.applicationId)
+
+            buildDateTxt = "Version: $defaultConfig.versionName.${minutesSinceEpoch} $name\\nGit version: $gitVersionName\\nBuild date: $buildDateYHM"
+            buildConfigField("String", "BUILD_DATE", "\"$buildDateTxt\"")
+            resValue("string", "build_date", "$buildDateTxt")
+            println("-> buildDateTxt:   " + buildDateTxt + "\n")
+        }
+
+    }
+
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

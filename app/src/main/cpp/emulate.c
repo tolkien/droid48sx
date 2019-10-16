@@ -694,7 +694,7 @@ decode_group_1()
   }
 }
 
-inline int
+static inline int
 #ifdef __FunctionProto__
 decode_8_thru_f(int op1)
 #else

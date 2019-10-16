@@ -411,11 +411,12 @@ char    *string;
       for (i = len - 1; i >= 0; i--)
         {
           *p = hex[read_nibble(*addr + i)];
-          if (lead)
+          if (lead) {
             if ((i != 0) && (*p == '0'))
               p--;
             else
               lead = 0;
+          }
           p++;
         }
 

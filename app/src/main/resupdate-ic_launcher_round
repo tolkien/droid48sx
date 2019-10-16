@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Filename: resupdate-ic_launcher_round
+# Copyright (C) 2012 Olivier Sirol <czo@free.fr>
+# License: GPL (http://www.gnu.org/copyleft/gpl.html)
+# Started: Sept 2012
+# Last Change: dimanche 19 mai 2019, 15:42
+# Edit Time: 1:34:15
+# Description:
+#
+# $Id:$
+#
+
+ICON=res/mipmap-xxxhdpi/ic_launcher_round.png
+convert $ICON -geometry 48x48   res/mipmap-mdpi/ic_launcher_round.png
+convert $ICON -geometry 72x72   res/mipmap-hdpi/ic_launcher_round.png
+convert $ICON -geometry 96x96   res/mipmap-xhdpi/ic_launcher_round.png
+convert $ICON -geometry 144x144 res/mipmap-xxhdpi/ic_launcher_round.png
+#convert $ICON -geometry 192x192 res/mipmap-xxxhdpi/ic_launcher.png
+
