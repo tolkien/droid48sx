@@ -29,7 +29,7 @@ android {
         minSdkVersion 8
         targetSdkVersion 28
         versionCode minutesSinceEpoch
-        versionName "1.40"
+        versionName "1.42"
 
         def appIdSmall = applicationId.toString().replaceAll(/.*\./,'')
         setProperty("archivesBaseName", "${appIdSmall}-${buildDateYMD}")
