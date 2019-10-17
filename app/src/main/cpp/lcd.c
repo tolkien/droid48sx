@@ -73,7 +73,7 @@
 
 #include "hp48.h"
 #include "hp48_emu.h"
-#include "annunc.h"
+/* #include "annunc.h" */
 #include "device.h"
 
 static int last_annunc_state = -1;
@@ -574,13 +574,12 @@ struct ann_struct {
   unsigned char *bits;
   Pixmap         pixmap;
 } ann_tbl[] = {
-  { ANN_LEFT, 16, 4, ann_left_width, ann_left_height, ann_left_bits },
-  { ANN_RIGHT, 61, 4, ann_right_width, ann_right_height, ann_right_bits },
-  { ANN_ALPHA, 106, 4, ann_alpha_width, ann_alpha_height, ann_alpha_bits },
-  { ANN_BATTERY, 151, 4, ann_battery_width, ann_battery_height,
-                         ann_battery_bits },
-  { ANN_BUSY, 196, 4, ann_busy_width, ann_busy_height, ann_busy_bits },
-  { ANN_IO, 241, 4, ann_io_width, ann_io_height, ann_io_bits },
+  { ANN_LEFT, 16, 4, 0,0, 0 },
+  { ANN_RIGHT, 61, 4, 0,0, 0 },
+  { ANN_ALPHA, 106, 4, 0,0, 0 },
+  { ANN_BATTERY, 151, 4, 0,0, 0 },
+  { ANN_BUSY, 196, 4, 0,0, 0 },
+  { ANN_IO, 241, 4, 0,0, 0 },
   { 0 }
 };
 

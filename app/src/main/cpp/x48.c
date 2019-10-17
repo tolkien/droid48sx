@@ -91,9 +91,9 @@
 
 
 #include "x48.h"
-#include "icon.h"
+/* #include "icon.h" */
 #include "small.h"
-#include "buttons.h"
+/* #include "buttons.h" */
 
 #include "hp48.h"
 #include "device.h"
@@ -233,22 +233,22 @@ typedef struct button_t {
 
 button_t buttons[] = {
   { "A", 0, 0, 0x14,  0, 0, 36, 23, WHITE,
-     0, 0, menu_label_width, menu_label_height, menu_label_bits,
+     0, 0, 0,0,0,
     "A", 0, 0, 0, 0, 0 },
   { "B", 0, 0, 0x84,  50, 0, 36, 23, WHITE,
-     0, 0, menu_label_width, menu_label_height, menu_label_bits,
+     0, 0, 0,0,0,
     "B", 0, 0, 0, 0, 0 },
   { "C", 0, 0, 0x83, 100, 0, 36, 23, WHITE,
-     0, 0, menu_label_width, menu_label_height, menu_label_bits,
+     0, 0, 0,0,0,
     "C", 0, 0, 0, 0, 0 },
   { "D", 0, 0, 0x82, 150, 0, 36, 23, WHITE,
-     0, 0, menu_label_width, menu_label_height, menu_label_bits,
+     0, 0, 0,0,0,
     "D", 0, 0, 0, 0, 0 },
   { "E", 0, 0, 0x81, 200, 0, 36, 23, WHITE,
-     0, 0, menu_label_width, menu_label_height, menu_label_bits,
+     0, 0, 0,0,0,
     "E", 0, 0, 0, 0, 0 },
   { "F", 0, 0, 0x80, 250, 0, 36, 23, WHITE,
-     0, 0, menu_label_width, menu_label_height, menu_label_bits,
+     0, 0, 0,0,0,
     "F", 0, 0, 0, 0, 0 },
 
   { "MTH", 0, 0, 0x24,  0, 50, 36, 26, WHITE, "MTH", 0, 0, 0, 0,
@@ -260,26 +260,26 @@ button_t buttons[] = {
   { "VAR", 0, 0, 0x72, 150, 50, 36, 26, WHITE, "VAR", 0, 0, 0, 0,
     "J", 0, 0, "MEMORY", 0, 0 },
   { "UP", 0, 0, 0x71, 200, 50, 36, 26, WHITE,
-     0, 0, up_width, up_height, up_bits,
+     0, 0, 0,0,0,
     "K", 0, 0, "STACK", 0, 0 },
   { "NXT", 0, 0, 0x70, 250, 50, 36, 26, WHITE, "NXT", 0, 0, 0, 0,
     "L", "PREV", 0, "MENU", 0, 0 },
 
   { "COLON", 0, 0, 0x04,  0, 100, 36, 26, WHITE,
-     0, 0, colon_width, colon_height, colon_bits,
+     0, 0, 0,0,0,
     "M", "UP", 0, "HOME", 0, 0 },
   { "STO", 0, 0, 0x64,  50, 100, 36, 26, WHITE, "STO", 0, 0, 0, 0,
     "N", "DEF", 0, "RCL", 0, 0 },
   { "EVAL", 0, 0, 0x63, 100, 100, 36, 26, WHITE, "EVAL", 0, 0, 0, 0,
     "O", "aNUM", 0, "UNDO", 0, 0 },
   { "LEFT", 0, 0, 0x62, 150, 100, 36, 26, WHITE,
-     0, 0, left_width, left_height, left_bits,
+     0, 0, 0,0,0,
     "P", "PICTURE", 0, 0, 0, 0 },
   { "DOWN", 0, 0, 0x61, 200, 100, 36, 26, WHITE,
-     0, 0, down_width, down_height, down_bits,
+     0, 0, 0,0,0,
     "Q", "VIEW", 0, 0, 0, 0 },
   { "RIGHT", 0, 0, 0x60, 250, 100, 36, 26, WHITE,
-     0, 0, right_width, right_height, right_bits,
+     0, 0, 0,0,0,
     "R", "SWAP", 0, 0, 0, 0 },
 
   { "SIN", 0, 0, 0x34,  0, 150, 36, 26, WHITE, "SIN", 0, 0, 0, 0,
@@ -289,30 +289,30 @@ button_t buttons[] = {
   { "TAN", 0, 0, 0x53,  100, 150, 36, 26, WHITE, "TAN", 0, 0, 0, 0,
     "U", "ATAN", 0, "d", 0, 0 },
   { "SQRT", 0, 0, 0x52,  150, 150, 36, 26, WHITE,
-     0, 0, sqrt_width, sqrt_height, sqrt_bits,
+     0, 0, 0,0,0,
     "V", "n", 0, "o", 0, 0 },
   { "POWER", 0, 0, 0x51,  200, 150, 36, 26, WHITE,
-     0, 0, power_width, power_height, power_bits,
+     0, 0, 0,0,0,
     "W", "p", 0, "LOG", 0, 0 },
   { "INV", 0, 0, 0x50,  250, 150, 36, 26, WHITE,
-     0, 0, inv_width, inv_height, inv_bits,
+     0, 0, 0,0,0,
     "X", "q", 0, "LN", 0, 0 },
 
   { "ENTER", 0, 0, 0x44, 0, 200, 86, 26, WHITE, "ENTER", 2, 0, 0, 0,
      0, "EQUATION", 0, "MATRIX", 0, 0 },
   { "NEG", 0, 0, 0x43, 100, 200, 36, 26, WHITE,
-     0, 0, neg_width, neg_height, neg_bits,
+     0, 0, 0,0,0,
     "Y", "EDIT", 0, "CMD", 0, 0 },
   { "EEX", 0, 0, 0x42, 150, 200, 36, 26, WHITE, "EEX", 0, 0, 0, 0,
     "Z", "PURG", 0, "ARG", 0, 0 },
   { "DEL", 0, 0, 0x41, 200, 200, 36, 26, WHITE, "DEL", 0, 0, 0, 0,
      0, "CLEAR", 0, 0, 0, 0 },
   { "BS", 0, 0, 0x40, 250, 200, 36, 26, WHITE,
-     0, 0, bs_width, bs_height, bs_bits,
+     0, 0, 0,0,0,
      0, "DROP", 0, 0, 0, 0 },
 
   { "ALPHA", 0, 0, 0x35, 0, 250, 36, 26, WHITE,
-     0, 0, alpha_width, alpha_height, alpha_bits,
+     0, 0, 0,0,0,
      0, "USER", 0, "ENTRY", 0, 0 },
   { "7", 0, 0, 0x33, 60, 250, 46, 26, WHITE, "7", 1, 0, 0, 0,
      0, 0, 1, "SOLVE", 0, 0 },
@@ -321,11 +321,11 @@ button_t buttons[] = {
   { "9", 0, 0, 0x31, 180, 250, 46, 26, WHITE, "9", 1, 0, 0, 0,
      0, 0, 1, "SYMBOLIC", 0, 0 },
   { "DIV", 0, 0, 0x30, 240, 250, 46, 26, WHITE,
-     0, 0, div_width, div_height, div_bits,
+     0, 0, 0,0,0,
      0, "r ", 0, "s", 0, 0 },
 
   { "SHL", 0, 0, 0x25, 0, 300, 36, 26, LEFT,
-     0, 0, shl_width, shl_height, shl_bits,
+     0, 0, 0,0,0,
      0, 0, 0, 0, 0, 0 },
   { "4", 0, 0, 0x23, 60, 300, 46, 26, WHITE, "4", 1, 0, 0, 0,
      0, 0, 1, "TIME", 0, 0 },
@@ -334,11 +334,11 @@ button_t buttons[] = {
   { "6", 0, 0, 0x21, 180, 300, 46, 26, WHITE, "6", 1, 0, 0, 0,
      0, 0, 1, "UNITS", 0, 0 },
   { "MUL", 0, 0, 0x20, 240, 300, 46, 26, WHITE,
-     0, 0, mul_width, mul_height, mul_bits,
+     0, 0, 0,0,0,
      0, "t ", 0, "u", 0, 0 },
 
   { "SHR", 0, 0, 0x15, 0, 350, 36, 26, RIGHT,
-     0, 0, shr_width, shr_height, shr_bits,
+     0, 0, 0,0,0,
      0, 0, 1, " ", 0, 0 },
   { "1", 0, 0, 0x13, 60, 350, 46, 26, WHITE, "1", 1, 0, 0, 0,
      0, 0, 1, "I/O", 0, 0 },
@@ -347,7 +347,7 @@ button_t buttons[] = {
   { "3", 0, 0, 0x11, 180, 350, 46, 26, WHITE, "3", 1, 0, 0, 0,
      0, 0, 1, "EQ LIB", 0, 0 },
   { "MINUS", 0, 0, 0x10, 240, 350, 46, 26, WHITE,
-     0, 0, minus_width, minus_height, minus_bits,
+     0, 0, 0,0,0,
      0, "v ", 0, "w", 0, 0 },
 
   { "ON", 0, 0, 0x8000, 0, 400, 36, 26, WHITE, "ON", 0, 0, 0, 0,
@@ -359,7 +359,7 @@ button_t buttons[] = {
   { "SPC", 0, 0, 0x01, 180, 400, 46, 26, WHITE, "SPC", 0, 0, 0, 0,
      0, "\005 ", 0, "z", 0, 0 },
   { "PLUS", 0, 0, 0x00, 240, 400, 46, 26, WHITE,
-     0, 0, plus_width, plus_height, plus_bits,
+     0, 0, 0,0,0,
      0, "x ", 0, "y", 0, 0 },
 
   { 0 }
