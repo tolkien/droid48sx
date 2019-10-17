@@ -54,7 +54,7 @@
 
 #include "resources.h"
 #include "disasm.h"
-#include "errors.h"
+/* #include "errors.h" */
 
 
 int	verbose;
