@@ -170,7 +170,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 
                     if (backBuffer == null) {
 
-                        Log.i("x48", "init iibackBuffer !: " + keybLite);
+                        Log.i("x48", "init backBuffer !: " + keybLite);
                         Log.i("x48", "w: " + c.getWidth() + ", h:" + c.getHeight());
                         backBuffer = Bitmap.createBitmap(c.getWidth(), c.getHeight(), Bitmap.Config.ARGB_8888);
                         Canvas backCanvas = new Canvas(backBuffer);
@@ -215,14 +215,15 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                             menu_key_height = regular_key_height;
 //                            menu_key_height = regular_key_height * 11f / 18f;
                         }
-
+                        Log.i("x48", "icons_coord y: " + (int) (1 * lcd_ratio));
                         icons_coords = new int[][]{
-                                {lcd_pos_x, 10},
-                                {(int) (lcd_pos_x + 21 * lcd_ratio), 10},
-                                {(int) (lcd_pos_x + 45 * lcd_ratio), 10},
-                                {(int) (lcd_pos_x + 67 * lcd_ratio), 10},
-                                {(int) (lcd_pos_x + 91 * lcd_ratio), 10},
-                                {(int) (lcd_pos_x + 112 * lcd_ratio), 10}
+                                {lcd_pos_x,                           (int) (1 * lcd_ratio)},
+                                {(int) (lcd_pos_x + 21 * lcd_ratio),  (int) (1 * lcd_ratio)},
+                                {(int) (lcd_pos_x + 45 * lcd_ratio),  (int) (1 * lcd_ratio)},
+                                {(int) (lcd_pos_x + 67 * lcd_ratio),  (int) (1 * lcd_ratio)},
+                                {(int) (lcd_pos_x + 91 * lcd_ratio),  (int) (1 * lcd_ratio)},
+                                {(int) (lcd_pos_x + 112 * lcd_ratio), (int) (1 * lcd_ratio)
+                                }
                         };
                         /* couleur num central gx, meme que srcColor pour la sx */
                         int central = Color.rgb(57, 57, 56);
@@ -718,7 +719,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
                                int height) {
-        Log.i("x48", "width: " + width + " / height: " + height);
+        Log.i("x48", "surfaceChanged w: " + width + ", h: " + height);
         this.width = width;
         this.height = height;
         if (width < height)

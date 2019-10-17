@@ -2,8 +2,8 @@
 # Author: Olivier Sirol <czo@free.fr>
 # License: GPL-2.0
 # File Created: Jan 2012
-# Last Modified: jeudi 17 octobre 2019, 01:00
-# Edit Time: 4:03:31
+# Last Modified: jeudi 17 octobre 2019, 21:30
+# Edit Time: 4:03:38
 # Description:
 #
 # $Id: $
@@ -17,7 +17,7 @@ release:
 #./resupdate
 #./resupdatedrawable
 
-cp:
+scp:
 	scp ./app/build/outputs/apk/release/droid48sx-`date +%Y%m%d`-release.apk czo@ananas:/tank/data/czo/www/ananas.czo.wf/intranet/download/apk
 
 debug:
