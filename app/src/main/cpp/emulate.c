@@ -1965,7 +1965,7 @@ int op1;
   }
 }
 
-inline int
+int
 #ifdef __FunctionProto__
 step_instruction(void)
 #else
@@ -2216,7 +2216,7 @@ step_instruction()
   return stop;
 }
 
-inline void
+void
 #ifdef __FunctionProto__
 schedule(void)
 #else
