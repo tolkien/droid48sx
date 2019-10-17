@@ -367,7 +367,7 @@ char    *string;
       *addr += 2;
       if (hp48_trans_tbl[c].trans)
         {
-          sprintf(p, hp48_trans_tbl[c].trans);
+          sprintf(p, "%s", hp48_trans_tbl[c].trans);
           p += strlen(p);
         }
       else
@@ -612,7 +612,7 @@ char    *string;
       c = read_nibbles(*addr + 2 * i + 7, 2);
       if (hp48_trans_tbl[c].trans)
         {
-          sprintf(p, hp48_trans_tbl[c].trans);
+          sprintf(p, "%s" ,hp48_trans_tbl[c].trans);
           p += strlen(p);
         }
       else
@@ -768,7 +768,7 @@ char    *string;
       *addr += 2;
       if (hp48_trans_tbl[c].trans)
         {
-          sprintf(p, hp48_trans_tbl[c].trans);
+          sprintf(p, "%s" ,hp48_trans_tbl[c].trans);
           p += strlen(p);
         }
       else
@@ -812,7 +812,7 @@ char    *string;
       *addr += 2;
       if (hp48_trans_tbl[c].trans)
         {
-          sprintf(p, hp48_trans_tbl[c].trans);
+          sprintf(p, "%s" ,hp48_trans_tbl[c].trans);
           p += strlen(p);
         }
       else
@@ -989,7 +989,7 @@ char *string;
                           name_addr += 2;
                           if (hp48_trans_tbl[c].trans)
                             {
-                              sprintf(p, hp48_trans_tbl[c].trans);
+                              sprintf(p, "%s" ,hp48_trans_tbl[c].trans);
                               p += strlen(p);
                             }
                           else
@@ -1182,7 +1182,7 @@ char    *string;
   *p++ = '\'';
   if (hp48_trans_tbl[c].trans)
     {
-      sprintf(p, hp48_trans_tbl[c].trans);
+      sprintf(p, "%s" ,hp48_trans_tbl[c].trans);
       p += strlen(p);
     }
   else

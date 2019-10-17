@@ -88,6 +88,9 @@ static char instr[100];
  */
 #define DSKTOP_SX	0x70579
 #define DSKBOT_SX	0x7057e
+/*
+ * Pointers in the HP48gx ROM
+ */
 #define DSKTOP_GX	0x806f8
 #define DSKBOT_GX	0x806fd
 
@@ -134,9 +137,9 @@ static void do_rstk __ProtoType__ ((int, char **));
 
 struct cmd
   {
-    char *name;
+    const char *name;
     void (*func) __ProtoType__ ((int, char **));
-    char *help;
+    const char *help;
   }
 
 cmd_tbl[] =
@@ -361,7 +364,10 @@ read_str(str, n, fp)
     {
       cc = read(fp, str, n);
       if (cc > 0)
+        {
+	  str[cc] = '\0';
         return str;
+	}
       if (cc == 0)
         return NULL;
 
@@ -1077,7 +1083,7 @@ dump_hst ()
           saturn.SB ? "SB " : "-- ", saturn.XM ? "XM" : "--");
 }
 
-static char *mctl_str_gx[] = {
+static const char *mctl_str_gx[] = {
   "MMIO       ", 
   "SysRAM     ",
   "Bank Switch",
@@ -1086,7 +1092,7 @@ static char *mctl_str_gx[] = {
   "SysROM     "
 };
 
-static char *mctl_str_sx[] = {
+static const char *mctl_str_sx[] = {
   "MMIO  ", 
   "SysRAM",
   "Port 1",

@@ -1040,7 +1040,7 @@ int code;
 }
 
 static inline int
-#ifdef __FuntionProto__
+#ifdef __FunctionProto__
 get_end(int code)
 #else
 get_end(code)

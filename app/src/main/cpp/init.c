@@ -1412,7 +1412,7 @@ read_files()
             }
           else
             {
-			  port2_is_ram = (st.st_mode & S_IWGRP) ? 1 : 0;
+              port2_is_ram = (st.st_mode & S_IWUSR) ? 1 : 0;
               port2_mask = port2_size - 1;
 			  
             }

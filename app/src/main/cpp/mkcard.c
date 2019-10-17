@@ -53,13 +53,13 @@ int size;
 
   if (NULL == (fp = fopen(name, "w")))
     {
-      printf( "can\'t open %s\n", name);
+      fprintf(stderr, "can\'t open %s\n", name);
       return 0;
     }
 
   if (fwrite(mem, 1, (size_t)size, fp) != size)
     {
-      printf( "can\'t write %s\n", name);
+      fprintf(stderr, "can\'t write %s\n", name);
       fclose(fp);
       return 0;
     }
@@ -84,7 +84,7 @@ char **argv;
 
   if (argc < 2)
     {
-      printf( "usage: %s [32K | 128K | 1M | 2M | 4M] file-name\n",
+      fprintf(stderr, "usage: %s [32K | 128K | 1M | 2M | 4M] file-name\n",
               argv[0]);
       exit (1);
     }
@@ -107,21 +107,21 @@ char **argv;
     size = 0x400000;
   else
     {
-      printf(
+      fprintf(stderr,
               "%s: size must be one of 32K, 128K, 256K, 512K, 1M, 2M, or 4M\n",
               argv[0]);
       exit (1);
     }
 
   if ((core = (unsigned char *)malloc(size)) == NULL) {
-    printf( "%s: can\'t malloc %ld bytes\n", argv[0], size);
+    fprintf(stderr, "%s: can\'t malloc %ld bytes\n", argv[0], size);
     exit (1);
   }
   memset(core, 0, size);
 
   if (!write_mem_file(name, core, size))
     {
-      printf( "%s: can\'t write to %s\n", argv[0], name);
+      fprintf(stderr, "%s: can\'t write to %s\n", argv[0], name);
       exit (1);
     }
 

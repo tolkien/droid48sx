@@ -943,9 +943,8 @@ int val;
     {
       disp_draw_nibble(addr, val);
     }
-  if (display.lines == 63) {
+  if (display.lines == 63)
     return;
-  }
   if (addr >= display.menu_start && addr < display.menu_end)
     {
       menu_draw_nibble(addr, val);

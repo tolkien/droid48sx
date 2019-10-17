@@ -70,6 +70,9 @@
 #include <sys/time.h>
 
 #include "mmu.h"
+#ifdef HAVE_STDINT_H 
+# include <stdint.h>
+#endif
 
 #define RAM_SIZE_SX 0x10000
 #define RAM_SIZE_GX 0x40000
@@ -129,7 +132,7 @@ typedef struct display_t {
 } display_t;
 
 typedef struct mem_cntl_t {
-  short unconfigured;
+  unsigned short unconfigured;
   word_20 config[2];
 } mem_cntl_t;
 
@@ -230,7 +233,7 @@ typedef struct saturn_t {
   short		t2_tick;
   long		i_per_s;
 
-  short		bank_switch;
+  word_16	bank_switch;
   mem_cntl_t	mem_cntl[NR_MCTL];
 
   unsigned char *rom;
