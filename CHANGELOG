@@ -5,7 +5,16 @@ Droid48sx CHANGELOG
 https://play.google.com/store/apps/details?id=org.czo.droid48sx
 sources on https://github.com/czodroid/droid48sx
 
-- 30 Jan 2016
+- 18 Oct 2019 (Version 1.42)
+ * Less bugs... It now works on Android 10. 
+ * Intended to work from Android 2.2 to 10 on armeabi-v7a,
+   arm64-v8a, x86 and x86_64 architectures
+ * New skin, A..F are the same size of others key
+ * Portrait mode only
+ * New round icon
+ * New name : 48sx
+
+- 30 Jan 2016 (Version 1.39)
  * Intended to work from android 2.2 to 6.x on armeabi, armeabi-v7a,
    arm64-v8a, mips, mips64, x86 and x86_64 architectures
  * New amazing skin, should be more readable on big screens
