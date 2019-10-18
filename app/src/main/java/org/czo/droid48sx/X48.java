@@ -85,7 +85,7 @@ public class X48 extends Activity {
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             getWindow().setNavigationBarColor(Color.rgb(57, 57, 56));
-            getWindow().setStatusBarColor(Color.rgb(0,0,0));
+            getWindow().setStatusBarColor(Color.rgb(0, 0, 0));
         }
 
         if (android.os.Build.VERSION.SDK_INT < 11) {
@@ -220,8 +220,10 @@ public class X48 extends Activity {
 
 
     public void checkPrefs() {
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         saveonExit = mPrefs.getBoolean("saveOnExit", true);
         if (mainView != null) {
             mainView.setKeybLite(mPrefs.getBoolean("keybLite", false));

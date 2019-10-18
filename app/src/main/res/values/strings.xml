@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">48SX</string>
+    <string name="app_name">48sx</string>
     <string name="load_prog">Put program on stack</string>
     <string name="save_state">Save memory/state</string>
     <string name="rom_legal">This emulator need a ROM to run. HP-ROM files are copyrighted by Hewlett Packard. But since fall 2000 HP ACO allowed the non commercial use of the HP48 ROM\'s even if you\'re not an owner of this calculator type. This download button will download and install the rom from the hpcalc.org site.</string>

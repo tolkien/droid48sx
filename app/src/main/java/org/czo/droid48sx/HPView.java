@@ -163,7 +163,8 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
         try {
             c = mSurfaceHolder.lockCanvas(null);
             synchronized (mSurfaceHolder) {
-                boolean land = currentOrientation == Configuration.ORIENTATION_LANDSCAPE;
+                //boolean land = currentOrientation == Configuration.ORIENTATION_LANDSCAPE;
+                boolean land = false;
 
                 if (c != null) {
 
@@ -722,10 +723,11 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
         Log.i("x48", "surfaceChanged w: " + width + ", h: " + height);
         this.width = width;
         this.height = height;
-        if (width < height)
-            currentOrientation = Configuration.ORIENTATION_PORTRAIT;
-        else
-            currentOrientation = Configuration.ORIENTATION_LANDSCAPE;
+        currentOrientation = Configuration.ORIENTATION_PORTRAIT;
+//        if (width < height)
+//            currentOrientation = Configuration.ORIENTATION_PORTRAIT;
+//        else
+//            currentOrientation = Configuration.ORIENTATION_LANDSCAPE;
         //initGraphicsElements();
         backBuffer = null;
         x48.flipScreen();
