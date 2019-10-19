@@ -21,12 +21,10 @@ sources on https://github.com/czodroid/droid48sx
  * New action bar with icons and menu when touching HP48sx screen
  * New icon
  * Complete fullscreen for android 4.4, 5.x and 6.x
-
-- 24 Aug 2015
  * Corrected port2 settings
  * Haptic feedback disabled by default, but can be re-enabled
 
-- 26 Jan 2014
+- 26 Jan 2014  (Version 1.38)
  * Corrected "put program on stack" bug
  * Corrected FC bug on android 4.3
  * Corrected random freeze on android 4.4
@@ -42,7 +40,7 @@ sources on https://github.com/czodroid/droid48sx
    deactivate ports, if calc is still hung, please
    uninstall/reinstall)
 
-- 7 Nov 2012
+- 7 Nov 2012 (Version 1.36)
  * first release 
 
 --
