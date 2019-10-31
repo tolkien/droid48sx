@@ -1,47 +1,38 @@
 Droid48sx CHANGELOG
 ===================
 
-
 https://play.google.com/store/apps/details?id=org.czo.droid48sx
-sources on https://github.com/czodroid/droid48sx
+sources on https://github.com/czodroid/droid48sx where you can get the old apk
 
-- 18 Oct 2019 (Version 1.42)
- * Less bugs... It now works on Android 10. 
- * Intended to work from Android 2.2 to 10 on armeabi-v7a,
-   arm64-v8a, x86 and x86_64 architectures
- * New skin, A..F are the same size of others key
- * Portrait mode only
- * New round icon
- * New name : 48sx
+* 18 Oct 2019 (Version 1.42)
+ - Bug fixes and performance improvements
+ - Intended to work from Android 2.2 to 10 on armeabi-v7a, arm64-v8a, x86 and x86_64 architectures
+ - New skin, A..F are the same size of others key
+ - Portrait mode only
+ - New round icon
+ - New name : 48sx
 
-- 30 Jan 2016 (Version 1.39)
- * Intended to work from android 2.2 to 6.x on armeabi, armeabi-v7a,
-   arm64-v8a, mips, mips64, x86 and x86_64 architectures
- * New amazing skin, should be more readable on big screens
- * New action bar with icons and menu when touching HP48sx screen
- * New icon
- * Complete fullscreen for android 4.4, 5.x and 6.x
- * Corrected port2 settings
- * Haptic feedback disabled by default, but can be re-enabled
+* 30 Jan 2016 (Version 1.39)
+ - Intended to work from android 2.2 to 6.x on armeabi, armeabi-v7a, arm64-v8a, mips, mips64, x86 and x86_64 architectures
+ - New amazing skin, should be more readable on big screens
+ - New action bar with icons and menu when touching HP48sx screen
+ - New icon
+ - Complete fullscreen for android 4.4, 5.x and 6.x
+ - Corrected port2 settings
+ - Haptic feedback disabled by default, but can be re-enabled
 
-- 26 Jan 2014  (Version 1.38)
- * Corrected "put program on stack" bug
- * Corrected FC bug on android 4.3
- * Corrected random freeze on android 4.4
- * Data files are now stored on
-   /sdcard/Android/data/org.czo.droid48sx/files
-   (please copy your old files from /sdcard/.droid48sx)
- * Menu is displayed when touching HP screen
- * New menu : Save checkpoint (saves a backup copy of 
-   hp48/ram/rom/port1/port2) 
- * New menu : Restore checkpoint (restores the backup
-   copy of hp48/ram/rom/port1/port2) 
- * New menu : Full reset (deletes firmware/ram and 
-   deactivate ports, if calc is still hung, please
-   uninstall/reinstall)
+* 26 Jan 2014  (Version 1.38)
+ - Corrected "put program on stack" bug
+ - Corrected FC bug on android 4.3
+ - Corrected random freeze on android 4.4
+ - Data files are now stored on /sdcard/Android/data/org.czo.droid48sx/files
+ - Menu is displayed when touching HP screen
+ - New menu : Save checkpoint (saves a backup copy of hp48/ram/rom/port1/port2) 
+ - New menu : Restore checkpoint (restores the backup copy of hp48/ram/rom/port1/port2) 
+ - New menu : Full reset (deletes firmware/ram and deactivate ports, if calc is still hung, please uninstall/reinstall)
 
-- 7 Nov 2012 (Version 1.36)
- * first release 
+* 7 Nov 2012 (Version 1.36)
+ - first release 
 
 --
 Olivier Sirol <czodroid@gmail.com>
