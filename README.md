@@ -5,7 +5,7 @@ HP48sx is a vintage RPN calculator. I used this calc 25 years ago ;-) I love thi
 No nag, no Ad, completely FREE!
 
 
-![ScreeShot](store/play/1.42/OnePlus5_2.jpg)
+![ScreeShot](store/play/1.42/OnePlus5_1_small.jpg)
 
 HP48sx emulator for Android, released on the Android Market. The bundled ROM is free for non commercial use.
 
