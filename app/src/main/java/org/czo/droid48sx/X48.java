@@ -1,6 +1,5 @@
 package org.czo.droid48sx;
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
