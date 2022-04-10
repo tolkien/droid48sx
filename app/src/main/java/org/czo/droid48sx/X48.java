@@ -50,12 +50,10 @@ public class X48 extends Activity {
     private static final String ACTION_FULL_RESET = "android.intent.action.FULL_RESET";
     private static final String ACTION_RESTORE_CHECKPOINT = "android.intent.action.RESTORE_CHECKPOINT";
 
-    // http://www.hpcalc.org/hp48/pc/emulators/gxrom-r.zip
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         Log.d("x48", "===================== starting activity");
 
         // /sdcard
@@ -74,6 +72,9 @@ public class X48 extends Activity {
         Log.d("x48", "config_dir java: " + config_dir);
         getExternalPath(config_dir);
 
+        Log.d("x48", "copyAsset");
+        AssetUtil.copyAsset(getResources().getAssets(), false);
+
         Log.d("x48", "================== getIntentAction = " + getIntent().getAction());
         if (ACTION_FULL_RESET.equals(getIntent().getAction())) {
             fullReset();
@@ -82,7 +83,6 @@ public class X48 extends Activity {
             restoreCheckpoint();
         }
 
-        AssetUtil.copyAsset(getResources().getAssets(), false);
         readyToGo();
         if (!AssetUtil.isFilesReady()) {
             showDialog(DIALOG_ROM_KO);
@@ -92,18 +92,11 @@ public class X48 extends Activity {
     public void readyToGo() {
 
         if (Build.VERSION.SDK_INT >= 21) {
-            // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            // getWindow().addFlags(LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            // getWindow().setStatusBarColor(Color.rgb(57, 57, 56));
-            // getActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(57, 57,
-            // 56)));
-
             getWindow().setStatusBarColor(Color.rgb(0, 0, 0));
 
             // getWindow().setNavigationBarColor(Color.rgb(0, 0, 0));
             getWindow().setNavigationBarColor(Color.parseColor("#393938"));
-            // getWindow().setNavigationBarColor(Color.parseColor("#AA252523"));
+            //getWindow().setNavigationBarColor(Color.parseColor("#AA252523"));
 
             getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#AA252523")));
         }
@@ -155,6 +148,7 @@ public class X48 extends Activity {
 
                     getActionBar().hide();
                     if (Build.VERSION.SDK_INT >= 21) {
+                        // getWindow().setNavigationBarColor(Color.parseColor("#393938"));
                         // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
                         // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
                     }
@@ -401,11 +395,14 @@ public class X48 extends Activity {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Editor spe = mPrefs.edit();
 
+        Log.d("x48", "===================== Checkpoint restored...");
+        Toast.makeText(getApplicationContext(), "Checkpoint restored...", Toast.LENGTH_SHORT).show();
+
         try {
-            for (String s : new String[] { "port1", "port2" }) {
+            for (String s : new String[]{"port1", "port2"}) {
                 deleteFile(new File(X48.config_dir + s));
             }
-            for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
+            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
                 copyFile(new File(X48.config_dir + "checkpoint/" + s), new File(X48.config_dir + s));
             }
             File p1 = new File(X48.config_dir + "port1");
@@ -421,8 +418,7 @@ public class X48 extends Activity {
         } catch (IOException e) {
             Log.d("x48", "Error: " + e.getMessage());
         }
-        Log.d("x48", "===================== Checkpoint restored...");
-        Toast.makeText(getApplicationContext(), "Checkpoint restored...", Toast.LENGTH_SHORT).show();
+
         need_to_quit = true;
         saveonExit = false;
         finish();
@@ -432,26 +428,48 @@ public class X48 extends Activity {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Editor spe = mPrefs.edit();
 
-        // AssetUtil.copyAsset(getResources().getAssets(), true);
+        Log.d("x48", "===================== Full reset done...");
+        Toast.makeText(getApplicationContext(), "Full reset done...", Toast.LENGTH_SHORT).show();
 
         try {
             spe.putString("port1", "0");
             spe.putString("port2", "0");
             spe.commit();
-            for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
+            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
                 deleteFile(new File(X48.config_dir + s));
             }
         } catch (IOException e) {
             Log.d("x48", "Error: " + e.getMessage());
-            e.printStackTrace();
         }
-
-        Log.d("x48", "===================== Full reset done...");
-        Toast.makeText(getApplicationContext(), "Full reset done...", Toast.LENGTH_SHORT).show();
 
         need_to_quit = true;
         saveonExit = false;
         finish();
+    }
+
+    protected void saveCheckpoint() {
+
+        Log.d("x48", "===================== Checkpoint saved...");
+        Toast.makeText(getApplicationContext(), "Checkpoint saved...", Toast.LENGTH_SHORT).show();
+
+        saveState();
+
+        File hpDir = new File(X48.config_dir, "checkpoint");
+        if (!hpDir.exists()) {
+            hpDir.mkdir();
+        }
+        try {
+            for (String s : new String[]{"port1", "port2"}) {
+                deleteFile(new File(X48.config_dir + "checkpoint/" + s));
+            }
+            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
+                copyFile(new File(X48.config_dir + s), new File(X48.config_dir + "checkpoint/" + s));
+            }
+        } catch (
+                IOException e) {
+            Log.d("x48", "Error: " + e.getMessage());
+        }
+
     }
 
     /**
@@ -473,42 +491,23 @@ public class X48 extends Activity {
                 fullReset();
                 return true;
 
-            case RESET_ID:
-                AssetUtil.copyAsset(getResources().getAssets(), true);
-                // stopHPEmulator();
+            case SAVE_CHECKPOINT_ID:
+                saveCheckpoint();
+                return true;
 
+            case RESET_ID:
                 Log.d("x48", "===================== Reset done...");
                 Toast.makeText(getApplicationContext(), "Reset done...", Toast.LENGTH_SHORT).show();
-
+                AssetUtil.copyAsset(getResources().getAssets(), true);
                 need_to_quit = true;
                 saveonExit = false;
                 finish();
                 return true;
 
-            case SAVE_CHECKPOINT_ID:
-                saveState();
-                File hpDir = new File(X48.config_dir, "checkpoint");
-                if (!hpDir.exists()) {
-                    hpDir.mkdir();
-                }
-                try {
-                    for (String s : new String[] { "port1", "port2" }) {
-                        deleteFile(new File(X48.config_dir + "checkpoint/" + s));
-                    }
-                    for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
-                        copyFile(new File(X48.config_dir + s), new File(X48.config_dir + "checkpoint/" + s));
-                    }
-                } catch (IOException e) {
-                    Log.d("x48", "Error: " + e.getMessage());
-                }
-                Log.d("x48", "===================== Checkpoint saved...");
-                Toast.makeText(getApplicationContext(), "Checkpoint saved...", Toast.LENGTH_SHORT).show();
-                return true;
-
             case SAVE_ID:
-                saveState();
                 Log.d("x48", "===================== State saved...");
                 Toast.makeText(getApplicationContext(), "State saved...", Toast.LENGTH_SHORT).show();
+                saveState();
                 return true;
 
             case LOAD_ID:

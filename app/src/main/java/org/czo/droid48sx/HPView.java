@@ -14,20 +14,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Shader.TileMode;
-import android.graphics.Typeface;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
@@ -111,8 +107,9 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                     if (sound) {
                         track.play();
                         track.write(audiobuf, 0, x48.fillAudioData(audiobuf));
-                    } else
+                    } else {
                         track.stop();
+                    }
                 }
             }
         };
