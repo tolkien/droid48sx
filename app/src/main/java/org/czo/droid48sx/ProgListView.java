@@ -69,7 +69,6 @@ public class ProgListView extends ListActivity {
         }
     }
 
-
     /**
      * Show the contents of a given directory as a selectable list
      *
@@ -139,7 +138,7 @@ public class ProgListView extends ListActivity {
                 }
             }
             int p = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
-//   imageView.setPadding(p,p,p,p);
+            // imageView.setPadding(p,p,p,p);
 
             // create view for the directory name
             final TextView textView = new TextView(context);
@@ -149,14 +148,14 @@ public class ProgListView extends ListActivity {
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//setMargins (int left, int top, int right, int bottom)
+            // setMargins (int left, int top, int right, int bottom)
             layoutParams.setMargins(p, p, p, p);
 
-//   addView(imageView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            // addView(imageView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+            // LayoutParams.WRAP_CONTENT));
             addView(imageView, layoutParams);
             addView(textView, layoutParams);
         }
     }
-
 
 }

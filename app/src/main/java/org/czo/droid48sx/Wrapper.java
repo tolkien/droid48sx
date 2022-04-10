@@ -21,14 +21,14 @@ public class Wrapper {
     }
 
     public static final int MotionEvent_getPointerId(MotionEvent event,
-                                                     int pointerIndex) {
+            int pointerIndex) {
         if (SDK_INT >= 5)
             return Wrapper5.MotionEvent_getPointerId(event, pointerIndex);
         return 0;
     }
 
     public static final int MotionEvent_findPointerIndex(MotionEvent event,
-                                                         int pointerId) {
+            int pointerId) {
         if (SDK_INT >= 5)
             return Wrapper5.MotionEvent_findPointerIndex(event, pointerId);
         if (pointerId == 0)
@@ -37,21 +37,21 @@ public class Wrapper {
     }
 
     public static final float MotionEvent_getX(MotionEvent event,
-                                               int pointerIndex) {
+            int pointerIndex) {
         if (SDK_INT >= 5)
             return Wrapper5.MotionEvent_getX(event, pointerIndex);
         return event.getX();
     }
 
     public static final float MotionEvent_getY(MotionEvent event,
-                                               int pointerIndex) {
+            int pointerIndex) {
         if (SDK_INT >= 5)
             return Wrapper5.MotionEvent_getY(event, pointerIndex);
         return event.getY();
     }
 
     public static final float MotionEvent_getSize(MotionEvent event,
-                                                  int pointerIndex) {
+            int pointerIndex) {
         if (SDK_INT >= 5)
             return Wrapper5.MotionEvent_getSize(event, pointerIndex);
         return event.getSize();

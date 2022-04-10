@@ -1,0 +1,30 @@
+<shortcuts xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:shortcutId="shortcut_reset"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_delete"
+        android:shortcutShortLabel="@string/full_reset_memory"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.FULL_RESET"
+            android:targetPackage="org.czo.droid48sx"
+            android:targetClass="org.czo.droid48sx.X48"
+            />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="shortcut_restore"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_restore"
+        android:shortcutShortLabel="@string/restore_checkpoint"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.RESTORE_CHECKPOINT"
+            android:targetPackage="org.czo.droid48sx"
+            android:targetClass="org.czo.droid48sx.X48"
+            />
+    </shortcut>
+
+</shortcuts>

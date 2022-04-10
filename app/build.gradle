@@ -23,11 +23,11 @@ println("-> gitVersionName:    " + gitVersionName)
 def buildDateTxt
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
     defaultConfig {
         applicationId "org.czo.droid48sx"
         minSdkVersion 8
-        targetSdkVersion 28
+        targetSdkVersion 31
         versionCode minutesSinceEpoch
         versionName "1.42"
 

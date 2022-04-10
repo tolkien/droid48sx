@@ -30,19 +30,21 @@ public class AssetUtil {
                 boolean ram = assets[i].equals("ram");
                 boolean rom = assets[i].equals("rom");
                 int required = 0;
-                /* 2012/08/04 : Modified by Olivier Sirol <czo@free.fr>
-                 * hp48sx ram:32KB rom:256KB*/
+                /*
+                 * 2012/08/04 : Modified by Olivier Sirol <czo@free.fr>
+                 * hp48sx ram:32KB rom:256KB
+                 */
                 if (ram)
                     required = 32 * 1024;
-                    //required = 131072;
+                // required = 131072;
                 else if (rom)
                     required = 256 * 1024;
-                //required = 524288;
-                //boolean SKUNK = assets[i].equals("SKUNK");
+                // required = 524288;
+                // boolean SKUNK = assets[i].equals("SKUNK");
                 if (hp48 || rom || ram) {
                     File fout = new File(X48.config_dir + assets[i]);
                     if (!fout.exists() || fout.length() == 0 || (required > 0 && fout.length() != required) || force) {
-                        Log.i("x48", "Overwriting " + assets[i]);
+                        Log.d("x48", "Overwriting " + assets[i]);
                         FileOutputStream out = new FileOutputStream(fout);
                         InputStream in = am.open(assets[i]);
                         byte buffer[] = new byte[8192];

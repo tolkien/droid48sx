@@ -39,15 +39,15 @@ public class Settings extends PreferenceActivity {
         hapticPref.setDefaultValue(false);
         inlinePrefCat.addPreference(hapticPref);
 
-//        ListPreference backKeyPref = new ListPreference(this);
-//        backKeyPref.setEntries(R.array.backkey_entries);
-//        backKeyPref.setEntryValues(R.array.backkey_values);
-//        backKeyPref.setDefaultValue("0");
-//        backKeyPref.setDialogTitle(R.string.choose_backkey_value);
-//        backKeyPref.setKey("backkey");
-//        backKeyPref.setTitle(R.string.choose_backkey);
-//        backKeyPref.setSummary(R.string.choose_backkey_value);
-//        inlinePrefCat.addPreference(backKeyPref);
+        // ListPreference backKeyPref = new ListPreference(this);
+        // backKeyPref.setEntries(R.array.backkey_entries);
+        // backKeyPref.setEntryValues(R.array.backkey_values);
+        // backKeyPref.setDefaultValue("0");
+        // backKeyPref.setDialogTitle(R.string.choose_backkey_value);
+        // backKeyPref.setKey("backkey");
+        // backKeyPref.setTitle(R.string.choose_backkey);
+        // backKeyPref.setSummary(R.string.choose_backkey_value);
+        // inlinePrefCat.addPreference(backKeyPref);
 
         PreferenceCategory inlineDispPrefCat = new PreferenceCategory(this);
         inlineDispPrefCat.setTitle(R.string.display_preferences);
@@ -67,19 +67,19 @@ public class Settings extends PreferenceActivity {
         largeLCDPref.setDefaultValue(false);
         inlineDispPrefCat.addPreference(largeLCDPref);
 
-//        CheckBoxPreference keybLitePref = new CheckBoxPreference(this);
-//        keybLitePref.setKey("keybLite");
-//        keybLitePref.setTitle(R.string.show_lite_keyb);
-//        keybLitePref.setSummary(R.string.show_lite_keyb_summary);
-//        keybLitePref.setDefaultValue(false);
-//        inlineDispPrefCat.addPreference(keybLitePref);
+        // CheckBoxPreference keybLitePref = new CheckBoxPreference(this);
+        // keybLitePref.setKey("keybLite");
+        // keybLitePref.setTitle(R.string.show_lite_keyb);
+        // keybLitePref.setSummary(R.string.show_lite_keyb_summary);
+        // keybLitePref.setDefaultValue(false);
+        // inlineDispPrefCat.addPreference(keybLitePref);
 
-        //CheckBoxPreference scaleControlsPref = new CheckBoxPreference(this);
-        //scaleControlsPref.setKey("scale_buttons");
-        //scaleControlsPref.setTitle(R.string.scale_buttons);
-        //scaleControlsPref.setSummary(R.string.scale_buttons_summary);
-        //scaleControlsPref.setDefaultValue(true);
-        //inlineDispPrefCat.addPreference(scaleControlsPref);
+        // CheckBoxPreference scaleControlsPref = new CheckBoxPreference(this);
+        // scaleControlsPref.setKey("scale_buttons");
+        // scaleControlsPref.setTitle(R.string.scale_buttons);
+        // scaleControlsPref.setSummary(R.string.scale_buttons_summary);
+        // scaleControlsPref.setDefaultValue(true);
+        // inlineDispPrefCat.addPreference(scaleControlsPref);
 
         PreferenceCategory portPrefCat = new PreferenceCategory(this);
         portPrefCat.setTitle(R.string.ramcards_preferences);
@@ -108,8 +108,8 @@ public class Settings extends PreferenceActivity {
         root.addPreference(buildPrefCat);
 
         Preference buildPref = new Preference(this);
-        //buildPref.setTitle(R.string.build_tag);
-        //buildPref.setSummary(R.string.build_date);
+        // buildPref.setTitle(R.string.build_tag);
+        // buildPref.setSummary(R.string.build_date);
         buildPref.setTitle(BuildConfig.BUILD_TAG);
         buildPref.setSummary(BuildConfig.BUILD_DATE);
         buildPrefCat.addPreference(buildPref);

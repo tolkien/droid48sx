@@ -7,13 +7,10 @@ import java.io.OutputStream;
 import java.io.InputStream;
 import java.io.IOException;
 
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -44,11 +41,14 @@ public class X48 extends Activity {
     static final private int RESET_ID = Menu.FIRST + 4;
     static final private int SETTINGS_ID = Menu.FIRST + 5;
     static final private int LITEKBD_ID = Menu.FIRST + 6;
-    static final private int SAVE_CHEKPOINT_ID = Menu.FIRST + 7;
-    static final private int RESTORE_CHEKPOINT_ID = Menu.FIRST + 8;
+    static final private int SAVE_CHECKPOINT_ID = Menu.FIRST + 7;
+    static final private int RESTORE_CHECKPOINT_ID = Menu.FIRST + 8;
     static final private int FULL_RESET_ID = Menu.FIRST + 9;
     static final private int ROM_ID = 123;
     private static EmulatorThread thread;
+
+    private static final String ACTION_FULL_RESET = "android.intent.action.FULL_RESET";
+    private static final String ACTION_RESTORE_CHECKPOINT = "android.intent.action.RESTORE_CHECKPOINT";
 
     // http://www.hpcalc.org/hp48/pc/emulators/gxrom-r.zip
 
@@ -56,7 +56,7 @@ public class X48 extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Log.i("x48", "starting activity");
+        Log.d("x48", "===================== starting activity");
 
         // /sdcard
         if (getExternalFilesDir(null) != null) {
@@ -64,15 +64,23 @@ public class X48 extends Activity {
         } else {
             config_dir = getFilesDir().getAbsolutePath() + "/";
         }
-        //config_dir = "/badone" ;
+        // config_dir = "/badone" ;
         File hpDir = new File(config_dir);
         if (!hpDir.exists() || !hpDir.isDirectory()) {
-            Log.i("x48", "ERROR: cannot open " + config_dir);
+            Log.d("x48", "===================== ERROR: cannot open " + config_dir);
             Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_SHORT).show();
         }
 
-        Log.i("x48", "config_dir java: " + config_dir);
+        Log.d("x48", "config_dir java: " + config_dir);
         getExternalPath(config_dir);
+
+        Log.d("x48", "================== getIntentAction = " + getIntent().getAction());
+        if (ACTION_FULL_RESET.equals(getIntent().getAction())) {
+            fullReset();
+        }
+        if (ACTION_RESTORE_CHECKPOINT.equals(getIntent().getAction())) {
+            restoreCheckpoint();
+        }
 
         AssetUtil.copyAsset(getResources().getAssets(), false);
         readyToGo();
@@ -83,22 +91,34 @@ public class X48 extends Activity {
 
     public void readyToGo() {
 
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            getWindow().setNavigationBarColor(Color.rgb(57, 57, 56));
+        if (Build.VERSION.SDK_INT >= 21) {
+            // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            // getWindow().addFlags(LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            // getWindow().setStatusBarColor(Color.rgb(57, 57, 56));
+            // getActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(57, 57,
+            // 56)));
+
             getWindow().setStatusBarColor(Color.rgb(0, 0, 0));
+
+            // getWindow().setNavigationBarColor(Color.rgb(0, 0, 0));
+            getWindow().setNavigationBarColor(Color.parseColor("#393938"));
+            // getWindow().setNavigationBarColor(Color.parseColor("#AA252523"));
+
+            getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#AA252523")));
         }
 
-        if (android.os.Build.VERSION.SDK_INT < 11) {
+        if (Build.VERSION.SDK_INT < 11) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            //        requestWindowFeature(Window.FEATURE_PROGRESS);
+            // requestWindowFeature(Window.FEATURE_PROGRESS);
         }
 
         setContentView(R.layout.main);
         mainView = (HPView) findViewById(R.id.hpview);
 
-//  if (android.os.Build.VERSION.SDK_INT >= 11 ) {
-//   getActionBar().hide();
-//  }
+        // if (Build.VERSION.SDK_INT >= 11 ) {
+        // getActionBar().hide();
+        // }
         checkPrefs();
 
         thread = new EmulatorThread(this);
@@ -109,35 +129,35 @@ public class X48 extends Activity {
     private static boolean hide = true;
 
     public void Menu() {
-        if (android.os.Build.VERSION.SDK_INT < 11) {
+        if (Build.VERSION.SDK_INT < 11) {
             openOptionsMenu();
         } else {
             hide ^= true;
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-            if (android.os.Build.VERSION.SDK_INT < 19) {
+            if (Build.VERSION.SDK_INT < 19) {
                 if (hide) {
                     getActionBar().hide();
                     if (mPrefs.getBoolean("fullScreen", false)) {
                         mainView.setSystemUiVisibility(
                                 HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                        | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        );
+                                        | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                     }
-                } else { //FIXME:
+                } else { // FIXME:
                     getActionBar().show();
                     if (mPrefs.getBoolean("fullScreen", false)) {
                         mainView.setSystemUiVisibility(
                                 HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                        | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        );
+                                        | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                     }
                 }
             } else { // >=19
-                if (hide) {  //hide action bar
+                if (hide) { // hide action bar
 
                     getActionBar().hide();
-//     getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//     getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                        // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                    }
                     if (mPrefs.getBoolean("fullScreen", false)) {
                         mainView.setSystemUiVisibility(
                                 HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -145,21 +165,24 @@ public class X48 extends Activity {
                                         | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                                         | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                                         | HPView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-//        | HPView.SYSTEM_UI_FLAG_IMMERSIVE);
+                                        // | HPView.SYSTEM_UI_FLAG_IMMERSIVE);
                                         | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
                     }
-                } else { //show  action bar
+                } else { // show action bar
                     if (mPrefs.getBoolean("fullScreen", false)) {
                         mainView.setSystemUiVisibility(
                                 HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
                                         | HPView.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                                        | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        );
+                                        | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                     }
-                    //FIXME:
-//       getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#77262626"))); // actionbar was transparent on kitkat...
-//     getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//     getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                    // FIXME:
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        // getActionBar().setBackgroundDrawable(new
+                        // ColorDrawable(Color.parseColor("#77262626"))); // actionbar was transparent
+                        // on kitkat...
+                        // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                        // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                    }
                     getActionBar().show();
                 }
             }
@@ -168,12 +191,12 @@ public class X48 extends Activity {
 
     // This snippet hides the system bars.
     public void hideSystemUI() {
-        if (android.os.Build.VERSION.SDK_INT >= 19) {
+        if (Build.VERSION.SDK_INT >= 19) {
             // Set the IMMERSIVE flag.
             // Set the content to appear under the system bars so that the content
             // doesn't resize when the system bars hide and show.
-//   getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//   getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             if (mainView != null) {
                 mainView.setSystemUiVisibility(
                         HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -181,7 +204,7 @@ public class X48 extends Activity {
                                 | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                                 | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                                 | HPView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-//      | HPView.SYSTEM_UI_FLAG_IMMERSIVE);
+                                // | HPView.SYSTEM_UI_FLAG_IMMERSIVE);
                                 | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
                 getActionBar().hide();
             }
@@ -194,11 +217,10 @@ public class X48 extends Activity {
     // This snippet shows the system bars. It does this by removing all the flags
     // except for the ones that make the content appear under the system bars.
     public void showSystemUI() {
-        if (android.os.Build.VERSION.SDK_INT >= 19) {
+        if (Build.VERSION.SDK_INT >= 19) {
             if (mainView != null) {
                 mainView.setSystemUiVisibility(
-                        HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                );
+                        HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE);
                 getActionBar().hide();
             }
         } else {
@@ -218,9 +240,8 @@ public class X48 extends Activity {
         }
     }
 
-
     public void checkPrefs() {
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -300,11 +321,10 @@ public class X48 extends Activity {
 
     @Override
     protected void onResume() {
+        Log.d("x48", "===================== resume");
         super.onResume();
-        //Log.i("x48", "resume");
         if (mainView != null)
             mainView.resume();
-        //Log.i("x48", "resumed");
     }
 
     /**
@@ -317,32 +337,32 @@ public class X48 extends Activity {
         // We are going to create two menus. Note that we assign them
         // unique integer IDs, labels from our string resources, and
         // given them shortcuts.
-        //menu.add(0, RESET_ID, 0, R.string.reset);
+        // menu.add(0, RESET_ID, 0, R.string.reset);
 
-        //menu.add(0, LITEKBD_ID, 0, R.string.toggle_lite_keyb);
-        //menu.add(0, SAVE_ID, 0, R.string.save_state);
+        // menu.add(0, LITEKBD_ID, 0, R.string.toggle_lite_keyb);
+        // menu.add(0, SAVE_ID, 0, R.string.save_state);
 
         item = menu.add(0, FULL_RESET_ID, 0, R.string.full_reset_memory);
         item.setIcon(R.drawable.ic_delete_white_24dp);
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
+        if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
 
-        item = menu.add(0, RESTORE_CHEKPOINT_ID, 0, R.string.restore_checkpoint);
+        item = menu.add(0, RESTORE_CHECKPOINT_ID, 0, R.string.restore_checkpoint);
         item.setIcon(R.drawable.ic_restore_white_24dp);
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
+        if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
 
-        item = menu.add(0, SAVE_CHEKPOINT_ID, 0, R.string.save_checkpoint);
+        item = menu.add(0, SAVE_CHECKPOINT_ID, 0, R.string.save_checkpoint);
         item.setIcon(R.drawable.ic_archive_white_24dp);
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
+        if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
 
         item = menu.add(0, SETTINGS_ID, 0, R.string.settings);
         item.setIcon(R.drawable.ic_settings_white_24dp);
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
+        if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
 
@@ -377,6 +397,63 @@ public class X48 extends Activity {
         }
     }
 
+    protected void restoreCheckpoint() {
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Editor spe = mPrefs.edit();
+
+        try {
+            for (String s : new String[] { "port1", "port2" }) {
+                deleteFile(new File(X48.config_dir + s));
+            }
+            for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
+                copyFile(new File(X48.config_dir + "checkpoint/" + s), new File(X48.config_dir + s));
+            }
+            File p1 = new File(X48.config_dir + "port1");
+            if (p1.exists()) {
+                spe.putString("port1", "" + p1.length() / 1024);
+            }
+            File p2 = new File(X48.config_dir + "port2");
+            if (p2.exists()) {
+                spe.putString("port2", "" + p2.length() / 1024);
+            }
+            spe.commit();
+
+        } catch (IOException e) {
+            Log.d("x48", "Error: " + e.getMessage());
+        }
+        Log.d("x48", "===================== Checkpoint restored...");
+        Toast.makeText(getApplicationContext(), "Checkpoint restored...", Toast.LENGTH_SHORT).show();
+        need_to_quit = true;
+        saveonExit = false;
+        finish();
+    }
+
+    protected void fullReset() {
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Editor spe = mPrefs.edit();
+
+        // AssetUtil.copyAsset(getResources().getAssets(), true);
+
+        try {
+            spe.putString("port1", "0");
+            spe.putString("port2", "0");
+            spe.commit();
+            for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
+                deleteFile(new File(X48.config_dir + s));
+            }
+        } catch (IOException e) {
+            Log.d("x48", "Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        Log.d("x48", "===================== Full reset done...");
+        Toast.makeText(getApplicationContext(), "Full reset done...", Toast.LENGTH_SHORT).show();
+
+        need_to_quit = true;
+        saveonExit = false;
+        finish();
+    }
+
     /**
      * Called when a menu item is selected.
      */
@@ -387,86 +464,60 @@ public class X48 extends Activity {
         Editor spe = mPrefs.edit();
 
         switch (item.getItemId()) {
-            case FULL_RESET_ID:
-                try {
-                    for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
-                        deleteFile(new File(X48.config_dir + s));
-                    }
-                    spe.putString("port1", "0");
-                    spe.putString("port2", "0");
-                    spe.commit();
-                    deleteFile(new File(X48.config_dir + "port1"));
-                    deleteFile(new File(X48.config_dir + "port2"));
-                } catch (IOException e) {
-                }
 
-                Toast.makeText(getApplicationContext(), "Reset done...", Toast.LENGTH_SHORT).show();
-
-                finish();
-                need_to_quit = true;
-                saveonExit = false; //czo: dont save after reset
+            case RESTORE_CHECKPOINT_ID:
+                restoreCheckpoint();
                 return true;
+
+            case FULL_RESET_ID:
+                fullReset();
+                return true;
+
             case RESET_ID:
                 AssetUtil.copyAsset(getResources().getAssets(), true);
-                //stopHPEmulator();
-                finish();
+                // stopHPEmulator();
+
+                Log.d("x48", "===================== Reset done...");
+                Toast.makeText(getApplicationContext(), "Reset done...", Toast.LENGTH_SHORT).show();
+
                 need_to_quit = true;
-                saveonExit = false; //czo: dont save after reset
+                saveonExit = false;
+                finish();
                 return true;
-            case SAVE_CHEKPOINT_ID:
+
+            case SAVE_CHECKPOINT_ID:
                 saveState();
                 File hpDir = new File(X48.config_dir, "checkpoint");
                 if (!hpDir.exists()) {
                     hpDir.mkdir();
                 }
                 try {
-                    for (String s : new String[]{"port1", "port2"}) {
+                    for (String s : new String[] { "port1", "port2" }) {
                         deleteFile(new File(X48.config_dir + "checkpoint/" + s));
                     }
-                    for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
+                    for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
                         copyFile(new File(X48.config_dir + s), new File(X48.config_dir + "checkpoint/" + s));
                     }
                 } catch (IOException e) {
+                    Log.d("x48", "Error: " + e.getMessage());
                 }
+                Log.d("x48", "===================== Checkpoint saved...");
                 Toast.makeText(getApplicationContext(), "Checkpoint saved...", Toast.LENGTH_SHORT).show();
                 return true;
-            case RESTORE_CHEKPOINT_ID:
-                try {
-                    for (String s : new String[]{"port1", "port2"}) {
-                        deleteFile(new File(X48.config_dir + s));
-                    }
-                    for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
-                        copyFile(new File(X48.config_dir + "checkpoint/" + s), new File(X48.config_dir + s));
-                    }
-                    File p1 = new File(X48.config_dir + "port1");
-                    if (p1.exists()) {
-                        spe.putString("port1", "" + p1.length() / 1024);
-                    }
-                    File p2 = new File(X48.config_dir + "port2");
-                    if (p1.exists()) {
-                        spe.putString("port2", "" + p2.length() / 1024);
-                    }
-                    spe.commit();
 
-                } catch (IOException e) {
-                }
-                Toast.makeText(getApplicationContext(), "Checkpoint restored...", Toast.LENGTH_SHORT).show();
-                finish();
-                need_to_quit = true;
-                saveonExit = false; //czo: dont save after reset
-                return true;
             case SAVE_ID:
                 saveState();
+                Log.d("x48", "===================== State saved...");
                 Toast.makeText(getApplicationContext(), "State saved...", Toast.LENGTH_SHORT).show();
                 return true;
+
             case LOAD_ID:
-                if (android.os.Build.VERSION.SDK_INT >= 23) {
-                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            == PackageManager.PERMISSION_DENIED) {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    if (checkSelfPermission(
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                         requestPermissions(
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                123
-                        );
+                                new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
+                                123);
                     } else {
                         Intent loadFileIntent = new Intent();
                         loadFileIntent.setClass(this, ProgListView.class);
@@ -478,18 +529,20 @@ public class X48 extends Activity {
                     startActivityForResult(loadFileIntent, LOAD_ID);
                 }
 
-
                 break;
+
             case LITEKBD_ID:
                 changeKeybLite();
                 break;
+
             case SETTINGS_ID:
                 Intent settingsIntent = new Intent();
                 settingsIntent.setClass(this, Settings.class);
                 startActivityForResult(settingsIntent, SETTINGS_ID);
                 break;
+
             case QUIT_ID:
-                //stopHPEmulator();
+                // stopHPEmulator();
                 // mainView.stop();
                 finish();
                 return true;
@@ -550,7 +603,6 @@ public class X48 extends Activity {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
 
-
                             }
                         })
                         .create();
@@ -562,7 +614,6 @@ public class X48 extends Activity {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
 
-
                             }
                         })
                         .create();
@@ -572,19 +623,21 @@ public class X48 extends Activity {
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent extras) {
-        Log.i("x48", "requestCode: " + requestCode + " / " + resultCode);
+        Log.d("x48", "requestCode: " + requestCode + " / " + resultCode);
         super.onActivityResult(requestCode, resultCode, extras);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case ROM_ID: {
-                    /*if (true || isRomReady()) {
-                      Log.i("x48", "Rom Ready... starting emulator");
-                      readyToGo();
-                      } else {
-                      Log.i("x48", "Rom not Ready... quitting");
-                      onDestroy();
-                      finish();
-                      }*/
+                    /*
+                     * if (true || isRomReady()) {
+                     * Log.d("x48", "Rom Ready... starting emulator");
+                     * readyToGo();
+                     * } else {
+                     * Log.d("x48", "Rom not Ready... quitting");
+                     * onDestroy();
+                     * finish();
+                     * }
+                     */
                     break;
                 }
                 case LOAD_ID: {
@@ -627,20 +680,23 @@ public class X48 extends Activity {
         if (f != null) {
             boolean change = false;
             File port = new File(f, "port" + number);
-   /*if (port.exists()) {
-     port.renameTo(new File(f, "bkp.port" + number));
-     }*/
+            /*
+             * if (port.exists()) {
+             * port.renameTo(new File(f, "bkp.port" + number));
+             * }
+             */
             if (size == 0) {
                 if (port.exists()) {
                     port.delete();
-                    Log.i("x48", "Deleting port" + number + " file.");
+                    Log.d("x48", "===================== Deleting port" + number + " file.");
                     change = true;
                 }
             } else {
-                if (port.exists() && port.length() == 1024 * size) {
+                if (port.exists() && (port.length() == 1024 * size)) {
 
                 } else {
-                    Log.i("x48", "Port" + number + " file does not exists or is incomplete. Writing a blank file.");
+                    Log.d("x48", "===================== Port" + number
+                            + " file does not exists or is incomplete. Writing a blank file.");
                     byte data[] = new byte[1024];
                     for (int i = 0; i < data.length; i++)
                         data[i] = 0;
@@ -650,6 +706,7 @@ public class X48 extends Activity {
                             fout.write(data);
                         fout.close();
                     } catch (IOException e) {
+                        Log.d("x48", "Error: " + e.getMessage());
                         e.printStackTrace();
                     }
                     change = true;
@@ -664,28 +721,27 @@ public class X48 extends Activity {
 
     @Override
     protected void onStop() {
+        Log.d("x48", "===================== stop");
         super.onStop();
-        //Log.i("x48", "stop");
     }
 
     @Override
     protected void onStart() {
+        Log.d("x48", "===================== start");
         super.onStart();
-        //Log.i("x48", "start");
     }
 
     @Override
     protected void onPause() {
+        Log.d("x48", "===================== pause");
         super.onPause();
-        //Log.i("x48", "pause");
         if (mainView != null)
             mainView.pause();
-        //Log.i("x48", "paused");
     }
 
     @Override
     protected void onDestroy() {
-        //Log.i("x48", "onDestroy");
+        Log.d("x48", "===================== onDestroy");
         super.onDestroy();
         if (saveonExit)
             saveState();
