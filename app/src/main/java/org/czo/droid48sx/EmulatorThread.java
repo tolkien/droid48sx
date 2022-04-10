@@ -1,6 +1,5 @@
 package org.czo.droid48sx;
 
-
 import android.content.Context;
 
 public class EmulatorThread extends Thread {

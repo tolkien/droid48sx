@@ -1,6 +1,5 @@
 package org.czo.droid48sx;
 
-
 import android.content.Context;
 import android.os.Build;
 import android.view.MotionEvent;

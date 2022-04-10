@@ -1,6 +1,5 @@
 package org.czo.droid48sx;
 
-
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;

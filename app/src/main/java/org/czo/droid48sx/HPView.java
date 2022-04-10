@@ -1,6 +1,5 @@
 package org.czo.droid48sx;
 
-
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
 import java.util.List;
