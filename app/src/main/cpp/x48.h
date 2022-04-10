@@ -84,11 +84,11 @@
 
 #include <android/log.h> 
 #include <jni.h>
-#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, "x48",  __VA_ARGS__) 
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , "x48",  __VA_ARGS__) 
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO   , "x48",  __VA_ARGS__) 
-#define LOGW(...) __android_log_print(ANDROID_LOG_WARN   , "x48",  __VA_ARGS__) 
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , "x48",  __VA_ARGS__) 
+#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, "x48c",  __VA_ARGS__)
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , "x48c",  __VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO   , "x48c",  __VA_ARGS__)
+#define LOGW(...) __android_log_print(ANDROID_LOG_WARN   , "x48c",  __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , "x48c",  __VA_ARGS__)
 
 /* TODO */
 typedef struct XColor {

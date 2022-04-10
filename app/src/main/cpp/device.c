@@ -211,7 +211,7 @@ Java_org_czo_droid48sx_X48_fillAudioData( JNIEnv*  env, jobject  this, jshortArr
 
 			float freq = count/deltaT;
 			int delta = 44100 / freq;
-			//LOGI("freq: %f count: %d delta: %d deltaT: %f numSamples: %d", freq, count, delta, deltaT, numSamples);
+			//LOGD("freq: %f count: %d delta: %d deltaT: %f numSamples: %d", freq, count, delta, deltaT, numSamples);
 			device.speaker_counter = 0;
 			for(i=0; i<numSamples; i++) {
 				freq_counter--;

@@ -1169,7 +1169,7 @@ read_files()
  //strcpy(path, "/sdcard/.droid48sx/");
 
  //get_home_directory(path);
- LOGI("path: %s", path); 
+ LOGD("path: %s", path); 
  
   saturn.rom = (word_4 *)NULL;
 
@@ -1278,7 +1278,7 @@ read_files()
               {
                 copy_0_3_0_saturn(&saturn_0_3_0, &saturn);
                 if (verbose)
-                  LOGI("%s: read %s\n", progname, fnam);
+                  LOGD("%s: read %s\n", progname, fnam);
               }
           }
         else if (v1 <= v2) {
@@ -1293,7 +1293,7 @@ read_files()
             }
           else if (verbose)
             {
-              LOGI("%s: read %s\n", progname, fnam);
+              LOGD("%s: read %s\n", progname, fnam);
             }
         } else {
           /*
@@ -1307,7 +1307,7 @@ read_files()
             }
           else if (verbose)
             {
-              LOGI("%s: read %s\n", progname, fnam);
+              LOGD("%s: read %s\n", progname, fnam);
             }
         }
       }
@@ -1675,7 +1675,7 @@ write_files()
   strcpy(fnam, path);
   strcat(fnam, "hp48");
 
-LOGI("trying to save: %s", fnam);
+LOGD("trying to save: %s", fnam);
 
   if ((fp = fopen(fnam, "w")) == NULL) {
     if (!quiet)

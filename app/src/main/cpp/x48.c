@@ -564,7 +564,7 @@ int height;
 int boo;
 #endif
 {
-	//LOGI("ClearArea: %d %d %d %d\n", x, y, width, height);
+	//LOGD("ClearArea: %d %d %d %d\n", x, y, width, height);
 	return;
 }
 
@@ -586,7 +586,7 @@ int y;
 int boo;
 #endif
 {
-	//LOGI("CopyArea: %d %d %d %d %s\n", x, y, width, height, map.data);
+	//LOGD("CopyArea: %d %d %d %d %s\n", x, y, width, height, map.data);
 	return;
 }
 
@@ -599,7 +599,7 @@ Display *dpy;
 Window win;
 #endif
 {
-	LOGI("XClearWindow");
+	LOGD("XClearWindow");
 	return;
 }
 
@@ -610,7 +610,7 @@ refresh_display(void)
 refresh_display()
 #endif
 {
-	LOGI("refresh_display");
+	LOGD("refresh_display");
 	return;
 }
 
@@ -630,7 +630,7 @@ GetEvent()
 	
 	int code = (*android_env)->CallIntMethod(android_env, android_callback, waitEvent);
 
-//LOGI("code: %d", code);
+//LOGD("code: %d", code);
 	if (code < 0)
 	{
 		code = -code;
@@ -648,7 +648,7 @@ GetEvent()
 		key_event(code - 1, 1);
 	}
 
-//	LOGI("wake: %d", wake);
+//	LOGD("wake: %d", wake);
 
 	return wake;
 }

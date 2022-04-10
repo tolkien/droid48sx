@@ -123,7 +123,7 @@ decode_group_80()
   unsigned char *REG;
   long addr;
   op3 = read_nibble(saturn.PC + 2);
-//LOGI("-------%d", op3);
+//LOGD("-------%d", op3);
   switch (op3) {
     case 0:	/* OUT=CS */
       saturn.PC += 3;
@@ -705,7 +705,7 @@ int op1;
   int op2, op3, op4, op5, op6;
 
   op2 = read_nibble(saturn.PC + 1);
- // LOGI("----- %d", op2);
+ // LOGD("----- %d", op2);
   switch (op1) {
     case 8:
       switch (op2) {
@@ -1978,7 +1978,7 @@ step_instruction()
   jumpaddr = 0;
 
   op0 = read_nibble(saturn.PC);
- // LOGI("----- %d", op0);
+ // LOGD("----- %d", op0);
   switch (op0) {
     case 0:
       op1 = read_nibble(saturn.PC + 1);
@@ -2208,7 +2208,7 @@ step_instruction()
       stop = decode_8_thru_f(op0);
       break;
   }
-//  LOGI("-----2");
+//  LOGD("-----2");
   instructions++;
   if (stop) {
     enter_debugger |= ILLEGAL_INSTRUCTION;

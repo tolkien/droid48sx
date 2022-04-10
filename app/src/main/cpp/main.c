@@ -250,21 +250,21 @@ char    config_dir   [1024];
 void
 Java_org_czo_droid48sx_X48_registerClass( JNIEnv* env, jobject caller, jobject callback )
 {
-	LOGI("--registerClass--");
+	LOGD("--registerClass--");
 	android_env = env;
 	android_callback = (*android_env)->NewGlobalRef(env, callback);
     jclass x48 = (*android_env)->GetObjectClass(env, android_callback);
-	LOGI("--x48 registered--");
+	LOGD("--x48 registered--");
 	waitEvent = (*android_env)->GetMethodID(android_env, x48, "waitEvent", "()I");
 	pauseEvent = (*android_env)->GetMethodID(android_env, x48, "pauseEvent", "()V");
-	LOGI("--methods registered--");
+	LOGD("--methods registered--");
 }
 
 void
 Java_org_czo_droid48sx_X48_stopHPEmulator( JNIEnv* env, jobject thiz )
 {
 	//exit (0);
-	LOGI("exit_state = 0");
+	LOGD("exit_state = 0");
 	exit_state = 0;
 	
 }
@@ -272,7 +272,7 @@ Java_org_czo_droid48sx_X48_stopHPEmulator( JNIEnv* env, jobject thiz )
 void
 Java_org_czo_droid48sx_X48_saveState( JNIEnv* env, jobject thiz )
 {
-	LOGI("save_state");
+	LOGD("save_state");
 	write_files();
 }
 
@@ -287,7 +287,7 @@ void
 Java_org_czo_droid48sx_X48_startHPEmulator( JNIEnv* env, jobject thiz )
 {
 
-	LOGI("init_emulator");
+	LOGD("init_emulator");
 exit_state = 1;
 sigset_t set;
   struct sigaction sa;
@@ -295,7 +295,7 @@ sigset_t set;
   struct itimerval it;
 
   init_emulator();
-  LOGI("init_active_stuff");
+  LOGD("init_active_stuff");
 
    init_active_stuff();
 
@@ -343,7 +343,7 @@ sigset_t set;
   flags &= ~O_NONBLOCK;
   fcntl(STDIN_FILENO, F_SETFL, flags);
 
- LOGI("emulate loop");
+ LOGD("emulate loop");
 
 //(*android_env)->CallVoidMethod(android_env, android_callback, emulatorReady);
   
@@ -357,7 +357,7 @@ sigset_t set;
 	 debug();
 
   } while (exit_state);
-  LOGI("exit loop");
+  LOGD("exit loop");
 
     
 }
@@ -396,7 +396,7 @@ Java_org_czo_droid48sx_X48_getExternalPath( JNIEnv*  env,
  const char * fp = (*env)->GetStringUTFChars(env, path, NULL);
 	strcpy(config_dir, fp);
 	(*env)->ReleaseStringUTFChars(env, path, fp);
-  LOGI("config_dir C: %s", config_dir);
+  LOGD("config_dir C: %s", config_dir);
 
 
 }

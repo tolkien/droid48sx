@@ -95,7 +95,7 @@ int *size;
     }
   else if (four[0])
     {
-      LOGI("%lld\n", st.st_size);
+      LOGD("%lld\n", st.st_size);
       *size = st.st_size;
     }
   else
@@ -237,7 +237,7 @@ int *size;
     }
 
   if (verbose)
-    LOGI("%s: read %s\n", progname, name);
+    LOGD("%s: read %s\n", progname, name);
 
   return 1;
 }

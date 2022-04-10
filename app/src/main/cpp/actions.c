@@ -640,9 +640,9 @@ do_shutdown()
  // android_refresh_screen();
 
  /* do {
-LOGI("---");
+LOGD("---");
     pause();
-LOGI("---");
+LOGD("---");
     if (got_alarm) {
       got_alarm = 0;
 
@@ -675,9 +675,9 @@ LOGI("---");
 
 	// android_refresh_screen();
 	// usleep(50000);
-	//LOGI("enter pauseEvent");
+	//LOGD("enter pauseEvent");
 	 (*android_env)->CallVoidMethod(android_env, android_callback, pauseEvent);
-	// LOGI("exit pauseEvent");
+	// LOGD("exit pauseEvent");
 
 	  if (GetEvent()) {
         if (interrupt_called)

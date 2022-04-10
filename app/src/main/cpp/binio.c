@@ -210,7 +210,7 @@ read_bin_file(char *filename)
   int         bBinary;
   long        dwAddress;
   long        i;
-LOGI("Loading filename: %s", filename);
+LOGD("Loading filename: %s", filename);
   if (NULL == (fp = fopen(filename, "r")))
   {
     return 0;
@@ -273,7 +273,7 @@ LOGI("Loading filename: %s", filename);
   }
 
   RPL_Push(dwAddress);
-LOGI("Done loading filename: %s", filename);
+LOGD("Done loading filename: %s", filename);
 
   return 1;
 }
