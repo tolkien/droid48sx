@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.IOException;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -89,8 +90,12 @@ public class X48 extends Activity {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void readyToGo() {
 
+        if (Build.VERSION.SDK_INT == 19 ) {
+            getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+        }
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.rgb(0, 0, 0));
             getWindow().setNavigationBarColor(Color.parseColor("#393938"));
@@ -118,12 +123,14 @@ public class X48 extends Activity {
     }
 
     private static boolean hide = false;
+    private static boolean hidekey = false;
 
     public void Menu() {
         if (Build.VERSION.SDK_INT < 11) {
             openOptionsMenu();
         } else {
             hide ^= true;
+            hidekey = true;
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
             if (Build.VERSION.SDK_INT < 19) {
                 if (hide) {
@@ -179,13 +186,6 @@ public class X48 extends Activity {
         }
     }
 
-    public void hideActionBar() {
-        if (Build.VERSION.SDK_INT >= 19) {
-            hide = true;
-            getActionBar().hide();
-        }
-    }
-
     // This snippet hides the system bars.
     public void hideSystemUI() {
         hide = true;
@@ -197,6 +197,7 @@ public class X48 extends Activity {
             // Set the IMMERSIVE flag.
             // Set the content to appear under the system bars so that the content
             // doesn't resize when the system bars hide and show.
+            // | HPView.SYSTEM_UI_FLAG_IMMERSIVE);
             // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
             // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             if (mainView != null) {
@@ -206,7 +207,6 @@ public class X48 extends Activity {
                                 | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                                 | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                                 | HPView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                                // | HPView.SYSTEM_UI_FLAG_IMMERSIVE);
                                 | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
                 getActionBar().hide();
             }
@@ -216,8 +216,7 @@ public class X48 extends Activity {
         }
     }
 
-    // This snippet shows the system bars. It does this by removing all the flags
-    // except for the ones that make the content appear under the system bars.
+    // This snippet shows the system bars.
     public void showSystemUI() {
         hide = true;
         if (Build.VERSION.SDK_INT >= 21) {
@@ -236,7 +235,15 @@ public class X48 extends Activity {
         }
     }
 
+    public void hideActionBar() {
+        if (hidekey) {
+            checkfullscreen();
+            hidekey = false;
+        }
+    }
+
     public void checkfullscreen() {
+        Log.d("x48", "===================== checkfullscreen");
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (mPrefs.getBoolean("fullScreen", false)) {
             hideSystemUI();
@@ -331,6 +338,7 @@ public class X48 extends Activity {
         if (mainView != null) {
             mainView.resume();
             checkfullscreen();
+            hidekey = false;
             mainView.requestLayout();
         }
     }
