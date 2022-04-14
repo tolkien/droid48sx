@@ -93,11 +93,9 @@ public class X48 extends Activity {
 
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.rgb(0, 0, 0));
-
-            // getWindow().setNavigationBarColor(Color.rgb(0, 0, 0));
             getWindow().setNavigationBarColor(Color.parseColor("#393938"));
-            //getWindow().setNavigationBarColor(Color.parseColor("#AA252523"));
-
+            // getWindow().setStatusBarColor(Color.parseColor("#AA252523"));
+            // getWindow().setNavigationBarColor(Color.parseColor("#AA252523"));
             getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#AA252523")));
         }
 
@@ -119,7 +117,7 @@ public class X48 extends Activity {
         mainView.resume();
     }
 
-    private static boolean hide = true;
+    private static boolean hide = false;
 
     public void Menu() {
         if (Build.VERSION.SDK_INT < 11) {
@@ -171,9 +169,7 @@ public class X48 extends Activity {
                     }
                     // FIXME:
                     if (Build.VERSION.SDK_INT >= 21) {
-                        // getActionBar().setBackgroundDrawable(new
-                        // ColorDrawable(Color.parseColor("#77262626"))); // actionbar was transparent
-                        // on kitkat...
+                        // actionbar was transparent on kitkat...
                         // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
                         // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
                     }
@@ -183,8 +179,20 @@ public class X48 extends Activity {
         }
     }
 
+    public void hideActionBar() {
+        if (Build.VERSION.SDK_INT >= 19) {
+            hide = true;
+            getActionBar().hide();
+        }
+    }
+
     // This snippet hides the system bars.
     public void hideSystemUI() {
+        hide = true;
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.parseColor("#AA252523"));
+            getWindow().setNavigationBarColor(Color.parseColor("#AA252523"));
+        }
         if (Build.VERSION.SDK_INT >= 19) {
             // Set the IMMERSIVE flag.
             // Set the content to appear under the system bars so that the content
@@ -211,6 +219,11 @@ public class X48 extends Activity {
     // This snippet shows the system bars. It does this by removing all the flags
     // except for the ones that make the content appear under the system bars.
     public void showSystemUI() {
+            hide = true;
+            if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.rgb(0, 0, 0));
+            getWindow().setNavigationBarColor(Color.parseColor("#393938"));
+        }
         if (Build.VERSION.SDK_INT >= 19) {
             if (mainView != null) {
                 mainView.setSystemUiVisibility(
@@ -226,10 +239,8 @@ public class X48 extends Activity {
     public void checkfullscreen() {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (mPrefs.getBoolean("fullScreen", false)) {
-            hide = false;
             hideSystemUI();
         } else {
-            hide = true;
             showSystemUI();
         }
     }
@@ -317,8 +328,11 @@ public class X48 extends Activity {
     protected void onResume() {
         Log.d("x48", "===================== resume");
         super.onResume();
-        if (mainView != null)
+        if (mainView != null) {
             mainView.resume();
+            checkfullscreen();
+            mainView.requestLayout();
+        }
     }
 
     /**
@@ -362,9 +376,15 @@ public class X48 extends Activity {
 
         item = menu.add(0, LOAD_ID, 0, R.string.load_prog);
         item.setIcon(R.drawable.ic_playlist_add_white_24dp);
+        if (Build.VERSION.SDK_INT >= 11) {
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
 
         item = menu.add(0, QUIT_ID, 0, R.string.button_quit);
         item.setIcon(R.drawable.ic_power_settings_new_white_24dp);
+        if (Build.VERSION.SDK_INT >= 11) {
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
 
         return true;
     }
