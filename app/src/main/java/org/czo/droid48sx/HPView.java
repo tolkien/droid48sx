@@ -100,21 +100,21 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
         screenPaint = null;
         screenPaint = new Paint();
 
-//        audioTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//                if (pause && track.getState() == AudioTrack.STATE_INITIALIZED) {
-//                    if (sound) {
-//                        track.play();
-//                        track.write(audiobuf, 0, x48.fillAudioData(audiobuf));
-//                    } else {
-//                        track.stop();
-//                    }
-//                }
-//            }
-//        };
-//        audioTimer = new Timer();
-//        audioTimer.schedule(audioTask, 0, 100);
+        // audioTask = new TimerTask() {
+        // @Override
+        // public void run() {
+        // if (pause && track.getState() == AudioTrack.STATE_INITIALIZED) {
+        // if (sound) {
+        // track.play();
+        // track.write(audiobuf, 0, x48.fillAudioData(audiobuf));
+        // } else {
+        // track.stop();
+        // }
+        // }
+        // }
+        // };
+        // audioTimer = new Timer();
+        // audioTimer.schedule(audioTask, 0, 100);
     }
 
     public void updateContrast() {
@@ -685,7 +685,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                         }
                     }
                 }
-                Log.d("x48", "key up code: " + code );
+                Log.d("x48", "key up code: " + code);
                 // FIXME
                 // x48.hideActionBar();
             }

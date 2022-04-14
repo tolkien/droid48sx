@@ -219,8 +219,8 @@ public class X48 extends Activity {
     // This snippet shows the system bars. It does this by removing all the flags
     // except for the ones that make the content appear under the system bars.
     public void showSystemUI() {
-            hide = true;
-            if (Build.VERSION.SDK_INT >= 21) {
+        hide = true;
+        if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.rgb(0, 0, 0));
             getWindow().setNavigationBarColor(Color.parseColor("#393938"));
         }
@@ -419,10 +419,10 @@ public class X48 extends Activity {
         Toast.makeText(getApplicationContext(), "Checkpoint restored...", Toast.LENGTH_SHORT).show();
 
         try {
-            for (String s : new String[]{"port1", "port2"}) {
+            for (String s : new String[] { "port1", "port2" }) {
                 deleteFile(new File(X48.config_dir + s));
             }
-            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
+            for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
                 copyFile(new File(X48.config_dir + "checkpoint/" + s), new File(X48.config_dir + s));
             }
             File p1 = new File(X48.config_dir + "port1");
@@ -455,7 +455,7 @@ public class X48 extends Activity {
             spe.putString("port1", "0");
             spe.putString("port2", "0");
             spe.commit();
-            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
+            for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
                 deleteFile(new File(X48.config_dir + s));
             }
         } catch (IOException e) {
@@ -479,14 +479,13 @@ public class X48 extends Activity {
             hpDir.mkdir();
         }
         try {
-            for (String s : new String[]{"port1", "port2"}) {
+            for (String s : new String[] { "port1", "port2" }) {
                 deleteFile(new File(X48.config_dir + "checkpoint/" + s));
             }
-            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
+            for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
                 copyFile(new File(X48.config_dir + s), new File(X48.config_dir + "checkpoint/" + s));
             }
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
             Log.d("x48", "Error: " + e.getMessage());
         }
 
