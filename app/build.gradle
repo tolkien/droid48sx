@@ -1,10 +1,10 @@
 // Filename: build.gradle
 // Author: Olivier Sirol <czo@free.fr>
 // License: GPL-2.0 (http://www.gnu.org/copyleft)
-// File Created: avril 2022
+// File Created: avril 2012
 // Last Modified: vendredi 15 avril 2022, 18:26
-// Edit Time: 0:19:07
-// Description:
+// Edit Time: 1:19:07
+// Description: 48sx's build.gradle
 
 apply plugin: 'com.android.application'
 
@@ -31,11 +31,11 @@ println("-> gitVersionName:    " + gitVersionName)
 def buildDateTxt
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     defaultConfig {
         applicationId "org.czo.droid48sx"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode minutesSinceEpoch
         versionName "1.52"
 
@@ -46,7 +46,6 @@ android {
 
         tasks.withType(JavaCompile) {
             //options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
-            //options.compilerArgs << "-Xlint:unchecked"
             //options.compilerArgs << "-Xlint:deprecation"
         }
     }
