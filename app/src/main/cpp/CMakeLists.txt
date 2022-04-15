@@ -5,12 +5,8 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-format -DCCCCCCCZZZZZZZZZZZo -O0 "  )
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wformat -Wno-error=format-security -DCCCCCCCZZZZZZZZZZZo -O0 "  )
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-missing-braces -Wno-unused-variable")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
-
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -Wno-format -Wno-implicit-function-declaration -Wno-pointer-sign -Wno-return-type -Wno-user-defined-warnings")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0")
 add_compile_options(-O0)
 
 # Creates and names a library, sets it as either STATIC
@@ -18,32 +14,30 @@ add_compile_options(-O0)
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
-add_library( # Sets the name of the library.
+add_library(
+        # Sets the name of the library.
         droid48sx
-
         # Sets the library as a shared library.
         SHARED
-
         # Provides a relative path to your source file(s).
-#src/main/cpp/native-lib.cpp
-actions.c
-binio.c
-debugger.c
-device.c
-disasm.c
-emulate.c
-init.c
-lcd.c
-main.c 
-memory.c
-options.c 
-register.c
-resources.c
-romio.c 
-rpl.c 
-serial.c 
-timer.c 
-x48.c
+        actions.c
+        binio.c
+        debugger.c
+        device.c
+        disasm.c
+        emulate.c
+        init.c
+        lcd.c
+        main.c
+        memory.c
+        options.c
+        register.c
+        resources.c
+        romio.c
+        rpl.c
+        serial.c
+        timer.c
+        x48.c
         )
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -52,9 +46,9 @@ x48.c
 # you want to add. CMake verifies that the library exists before
 # completing its build.
 
-find_library( # Sets the name of the path variable.
+find_library(
+        # Sets the name of the path variable.
         log-lib
-
         # Specifies the name of the NDK library that
         # you want CMake to locate.
         log)
@@ -63,9 +57,9 @@ find_library( # Sets the name of the path variable.
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 
-target_link_libraries( # Specifies the target library.
+target_link_libraries(
+        # Specifies the target library.
         droid48sx
-
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})

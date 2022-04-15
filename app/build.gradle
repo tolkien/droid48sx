@@ -1,3 +1,11 @@
+// Filename: build.gradle
+// Author: Olivier Sirol <czo@free.fr>
+// License: GPL-2.0 (http://www.gnu.org/copyleft)
+// File Created: avril 2022
+// Last Modified: vendredi 15 avril 2022, 18:26
+// Edit Time: 0:19:07
+// Description:
+
 apply plugin: 'com.android.application'
 
 println("")
@@ -26,25 +34,19 @@ android {
     compileSdkVersion 31
     defaultConfig {
         applicationId "org.czo.droid48sx"
-        minSdkVersion 8
+        minSdkVersion 19
         targetSdkVersion 31
         versionCode minutesSinceEpoch
-        versionName "1.42"
+        versionName "1.52"
 
         def appIdSmall = applicationId.toString().replaceAll(/.*\./,'')
         setProperty("archivesBaseName", "${appIdSmall}-${buildDateYMD}")
         println("-> archivesBaseName:  " + archivesBaseName)
         println("")
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        externalNativeBuild {
-            cmake {
-                cppFlags ""
-                //arguments "-DANDROID_PLATFORM=android-16"
-            }
-        }
         tasks.withType(JavaCompile) {
             //options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+            //options.compilerArgs << "-Xlint:unchecked"
             //options.compilerArgs << "-Xlint:deprecation"
         }
     }
