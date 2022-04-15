@@ -183,6 +183,7 @@ public class X48 extends Activity {
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.parseColor("#AA252523"));
             getWindow().setNavigationBarColor(Color.parseColor("#AA252523"));
+            getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#AA252523")));
         }
         if (Build.VERSION.SDK_INT >= 19) {
             if (mainView != null) {
