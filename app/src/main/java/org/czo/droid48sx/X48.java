@@ -90,12 +90,12 @@ public class X48 extends Activity {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void readyToGo() {
 
-        if (Build.VERSION.SDK_INT == 19 ) {
+        if (Build.VERSION.SDK_INT >= 11) {
             getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
         }
+
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.rgb(0, 0, 0));
             getWindow().setNavigationBarColor(Color.parseColor("#393938"));
@@ -150,13 +150,7 @@ public class X48 extends Activity {
                 }
             } else { // >=19
                 if (hide) { // hide action bar
-
                     getActionBar().hide();
-                    if (Build.VERSION.SDK_INT >= 21) {
-                        // getWindow().setNavigationBarColor(Color.parseColor("#393938"));
-                        // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                        // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                    }
                     if (mPrefs.getBoolean("fullScreen", false)) {
                         mainView.setSystemUiVisibility(
                                 HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -174,12 +168,6 @@ public class X48 extends Activity {
                                         | HPView.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                                         | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                     }
-                    // FIXME:
-                    if (Build.VERSION.SDK_INT >= 21) {
-                        // actionbar was transparent on kitkat...
-                        // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                        // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                    }
                     getActionBar().show();
                 }
             }
@@ -189,17 +177,14 @@ public class X48 extends Activity {
     // This snippet hides the system bars.
     public void hideSystemUI() {
         hide = true;
+        if (Build.VERSION.SDK_INT >= 11) {
+            getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+        }
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(Color.parseColor("#AA252523"));
             getWindow().setNavigationBarColor(Color.parseColor("#AA252523"));
         }
         if (Build.VERSION.SDK_INT >= 19) {
-            // Set the IMMERSIVE flag.
-            // Set the content to appear under the system bars so that the content
-            // doesn't resize when the system bars hide and show.
-            // | HPView.SYSTEM_UI_FLAG_IMMERSIVE);
-            // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            // getWindow().addFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             if (mainView != null) {
                 mainView.setSystemUiVisibility(
                         HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
