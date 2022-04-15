@@ -4,6 +4,7 @@
 # Sets the minimum version of CMake required to build the native library.
 
 cmake_minimum_required(VERSION 3.4.1)
+project(48sx)
 
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -Wno-format -Wno-implicit-function-declaration -Wno-pointer-sign -Wno-return-type -Wno-user-defined-warnings")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0")

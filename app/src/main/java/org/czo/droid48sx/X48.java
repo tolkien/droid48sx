@@ -106,15 +106,11 @@ public class X48 extends Activity {
 
         if (Build.VERSION.SDK_INT < 11) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            // requestWindowFeature(Window.FEATURE_PROGRESS);
         }
 
         setContentView(R.layout.main);
         mainView = (HPView) findViewById(R.id.hpview);
 
-        // if (Build.VERSION.SDK_INT >= 11 ) {
-        // getActionBar().hide();
-        // }
         checkPrefs();
 
         thread = new EmulatorThread(this);
