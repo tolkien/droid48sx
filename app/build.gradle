@@ -2,8 +2,8 @@
 // Author: Olivier Sirol <czo@free.fr>
 // License: GPL-2.0 (http://www.gnu.org/copyleft)
 // File Created: avril 2012
-// Last Modified: vendredi 15 avril 2022, 18:26
-// Edit Time: 1:19:07
+// Last Modified: samedi 16 avril 2022, 16:25
+// Edit Time: 1:20:59
 // Description: 48sx's build.gradle
 
 apply plugin: 'com.android.application'
@@ -43,12 +43,8 @@ android {
         setProperty("archivesBaseName", "${appIdSmall}-${buildDateYMD}")
         println("-> archivesBaseName:  " + archivesBaseName)
         println("")
-
-        tasks.withType(JavaCompile) {
-            //options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
-            //options.compilerArgs << "-Xlint:deprecation"
-        }
     }
+
     if (canSign) {
         signingConfigs {
             release {
@@ -90,6 +86,11 @@ android {
             buildConfigField("String", "BUILD_DATE", "\"$buildDateTxt\"")
             resValue("string", "build_date", "$buildDateTxt")
             println("-> buildDateTxt:   " + buildDateTxt + "\n")
+
+            tasks.withType(JavaCompile) {
+                options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+                //options.compilerArgs << "-Xlint:deprecation"
+            }
         }
 
     }
