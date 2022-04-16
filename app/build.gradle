@@ -2,8 +2,8 @@
 // Author: Olivier Sirol <czo@free.fr>
 // License: GPL-2.0 (http://www.gnu.org/copyleft)
 // File Created: avril 2012
-// Last Modified: samedi 16 avril 2022, 16:25
-// Edit Time: 1:20:59
+// Last Modified: samedi 16 avril 2022, 16:30
+// Edit Time: 1:21:51
 // Description: 48sx's build.gradle
 
 apply plugin: 'com.android.application'
@@ -37,7 +37,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 32
         versionCode minutesSinceEpoch
-        versionName "1.52"
+        versionName "2.42"
 
         def appIdSmall = applicationId.toString().replaceAll(/.*\./,'')
         setProperty("archivesBaseName", "${appIdSmall}-${buildDateYMD}")
