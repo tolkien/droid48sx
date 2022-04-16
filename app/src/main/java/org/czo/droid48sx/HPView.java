@@ -168,14 +168,18 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                 if (c != null) {
 
                     if (backBuffer == null) {
-
                         Log.d("x48", "init backBuffer !: " + keybLite);
-                        Log.d("x48", "w: " + c.getWidth() + ", h:" + c.getHeight());
                         backBuffer = Bitmap.createBitmap(c.getWidth(), c.getHeight(), Bitmap.Config.ARGB_8888);
                         Canvas backCanvas = new Canvas(backBuffer);
 
                         int w = backBuffer.getWidth();
                         int h = backBuffer.getHeight();
+
+                        Log.d("x48", "w: " + w + ", h:" + h);
+                        if (w != 0 ) {
+                            Log.d("x48", "h/w: " + (float)h / w );
+                        }
+
                         Paint p = new Paint();
                         /* couleur fond bouttons (landscape enter) */
                         int srcColor = Color.rgb(57, 57, 56);

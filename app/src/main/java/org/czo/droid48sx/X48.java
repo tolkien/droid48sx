@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.IOException;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
