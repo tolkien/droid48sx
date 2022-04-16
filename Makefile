@@ -2,8 +2,8 @@
 # Author: Olivier Sirol <czo@free.fr>
 # License: GPL-2.0 (http://www.gnu.org/copyleft)
 # File Created: Jan 2012
-# Last Modified: samedi 16 avril 2022, 16:02
-# Edit Time: 4:07:40
+# Last Modified: samedi 16 avril 2022, 16:22
+# Edit Time: 4:07:58
 # Description:
 #
 # $Id: $
@@ -18,7 +18,7 @@ release:
 #./resupdatedrawable
 
 debug:
-	./gradlew assembleDebug
+	./gradlew assembleDebug --warning-mode all
 	@echo "<- debug done!"
 
 scp:
