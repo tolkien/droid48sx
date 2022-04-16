@@ -11,7 +11,9 @@
 # $Id:$
 #
 
-ICON=store/img/icon9.png
+exit 42
+
+ICON=../../../store/img/icon_48sx.png
 convert $ICON -geometry 48x48   res/mipmap-mdpi/ic_launcher.png
 convert $ICON -geometry 72x72   res/mipmap-hdpi/ic_launcher.png
 convert $ICON -geometry 96x96   res/mipmap-xhdpi/ic_launcher.png

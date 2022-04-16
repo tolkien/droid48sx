@@ -10,6 +10,6 @@ No nag, no Ad, completely FREE!
 
 https://play.google.com/store/apps/details?id=org.czo.droid48sx
 
-Droid48sx is a modified version of droid48 but for HP48 SX, credit goes to Arnaud Brochard (author of droid48 for Android)
-and of course Eddie C. Dost (author of x48 for UNIX). If you came from Windows, and like Emu48 (written by Sebastien Carlier
-and Christoph Gießelink), you can also get Emu48 for Android (written by Regis Cosnier)
+48sx is a modified version of droid48 but for the HP48 SX, the credit goes to Arnaud Brochard (author of droid48 for Android), 
+and of course Eddie C. Dost (author of x48 for UNIX) who created an emulator of the Saturn processor in 1990.
+

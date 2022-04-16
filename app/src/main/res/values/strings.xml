@@ -3,7 +3,7 @@
     <string name="app_name">48sx</string>
     <string name="load_prog">Put program on stack</string>
     <string name="save_state">Save memory/state</string>
-    <string name="rom_legal">This emulator need a ROM to run. HP-ROM files are copyrighted by Hewlett Packard. But since fall 2000 HP ACO allowed the non commercial use of the HP48 ROM\'s even if you\'re not an owner of this calculator type. This download button will download and install the rom from the hpcalc.org site.</string>
+    <string name="rom_legal">This emulator need a ROM to run. HP-ROM files are copyrighted by Hewlett Packard. But since fall 2000 HP ACO allowed the non commercial use of the HP48 ROM\'s even if you\'re not an owner of this calculator type.</string>
     <string name="button_download">Download and install ROM from HPcalc.org</string>
     <string name="button_quit">Quit</string>
     <string name="reset_memory">Reset memory and quit</string>
@@ -27,7 +27,7 @@
     <string name="port2_install">Port2 setting</string>
     <string name="ram_install">Choose an installation option</string>
     <string name="ram_install_error">The ram cards cannot be install on internal memory</string>
-    <string name="ram_install_warning">You need to quit this program to enable your ram cards.\nWARNING: you will experience an HP shutdown on the first restart ! Don\'t panic, it\'s normal, just press the "ON" button on the HP interface.\nYou might want to save a checkpoint after this.</string>
+    <string name="ram_install_warning">You need to quit this program by the menu to enable your ram cards.\nWARNING: you will experience an HP shutdown on the first restart ! Don\'t panic, it\'s normal, just press the "ON" button on the HP interface.\nYou might want to save a checkpoint after this.</string>
     <string-array name="port_1_values">
         <item>0</item>
         <item>128</item>

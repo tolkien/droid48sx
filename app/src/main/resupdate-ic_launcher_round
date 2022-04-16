@@ -11,10 +11,12 @@
 # $Id:$
 #
 
-ICON=res/mipmap-xxxhdpi/ic_launcher_round.png
+exit 42
+
+ICON=../../../store/img/icon_48sx_round.png
 convert $ICON -geometry 48x48   res/mipmap-mdpi/ic_launcher_round.png
 convert $ICON -geometry 72x72   res/mipmap-hdpi/ic_launcher_round.png
 convert $ICON -geometry 96x96   res/mipmap-xhdpi/ic_launcher_round.png
 convert $ICON -geometry 144x144 res/mipmap-xxhdpi/ic_launcher_round.png
-#convert $ICON -geometry 192x192 res/mipmap-xxxhdpi/ic_launcher.png
+convert $ICON -geometry 192x192 res/mipmap-xxxhdpi/ic_launcher_round.png
 
