@@ -689,10 +689,8 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                         }
                     }
                 }
-                Log.d("x48", "key up code: " + code);
-                // FIXME
+                // Log.d("x48", "key up code: " + code);
                 x48.hideActionBar();
-                // x48.checkfullscreen();
             }
             x48.flipScreen();
             this.notify();

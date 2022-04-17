@@ -36,7 +36,7 @@ public class Settings extends PreferenceActivity {
         hapticPref.setKey("haptic");
         hapticPref.setTitle(R.string.haptic_feedback);
         hapticPref.setSummary(R.string.haptic_feedback_summary);
-        hapticPref.setDefaultValue(false);
+        hapticPref.setDefaultValue(true);
         inlinePrefCat.addPreference(hapticPref);
 
         // ListPreference backKeyPref = new ListPreference(this);

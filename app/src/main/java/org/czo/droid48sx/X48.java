@@ -241,7 +241,7 @@ public class X48 extends Activity {
         saveonExit = mPrefs.getBoolean("saveOnExit", true);
         if (mainView != null) {
             mainView.setKeybLite(mPrefs.getBoolean("keybLite", false));
-            mainView.setHapticFeedbackEnabled(mPrefs.getBoolean("haptic", false));
+            mainView.setHapticFeedbackEnabled(mPrefs.getBoolean("haptic", true));
             mainView.setSound(mPrefs.getBoolean("sound", false));
             mainView.setFullWidth(mPrefs.getBoolean("large_width", false));
             mainView.setScaleControls(mPrefs.getBoolean("scale_buttons", true));
