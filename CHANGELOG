@@ -1,6 +1,14 @@
 48sx CHANGELOG
 ==============
 
+* 17 Apr 2022 (Version 2.42)
+ - Bug fixes and performance improvements
+ - Intended to work from Android 4.4 to 13 on armeabi-v7a, arm64-v8a, x86 and x86_64 architectures
+ - New shortcuts, one for full reset, and another to restore from a checkpoint when the emulator is stuck
+ - Haptic feedback enabled by default, but can be disabled on settings
+ - When ActionBar is on, pressing an hp48's key make it disabled
+
+
 * 18 Oct 2019 (Version 1.42)
  - Bug fixes and performance improvements
  - Intended to work from Android 2.2 to 10 on armeabi-v7a, arm64-v8a, x86 and x86_64 architectures
