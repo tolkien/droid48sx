@@ -69,7 +69,7 @@
     <string name="numpad_explain">You can also tap the LCD screen, more convenient !</string>
     <string name="saveonexit_msgbox_value">Save memory and stack on exit</string>
     <string name="haptic_feedback">Haptic feedback</string>
-    <string name="haptic_feedback_summary">Activate touch vibration on hp48\'s keys</string>
+    <string name="haptic_feedback_summary">Enable touch vibration on the hp48 buttons</string>
     <string name="large_width">Large LCD screen</string>
     <string name="large_width_summary">Screen is bigger in some situations</string>
     <string name="toggle_lite_keyb">Toggle minimal controls</string>
