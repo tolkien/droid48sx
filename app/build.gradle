@@ -2,8 +2,8 @@
 // Author: Olivier Sirol <czo@free.fr>
 // License: GPL-2.0 (http://www.gnu.org/copyleft)
 // File Created: avril 2012
-// Last Modified: samedi 16 avril 2022, 16:35
-// Edit Time: 1:23:40
+// Last Modified: lundi 18 avril 2022, 11:18
+// Edit Time: 1:34:13
 // Description: 48sx's build.gradle
 
 apply plugin: 'com.android.application'
@@ -53,11 +53,14 @@ android {
                 keyAlias keystoreProperties['key.alias']
                 keyPassword keystoreProperties['key.alias.password']
                 v1SigningEnabled true
-                v2SigningEnabled false
+                v2SigningEnabled true
             }
         }
     }
 
+    tasks.withType(JavaCompile) {
+        //options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    }
 
     buildTypes {
         release {
@@ -67,30 +70,29 @@ android {
                 signingConfig signingConfigs.release
             }
 
+            println("-> Buildtype: release")
             buildConfigField("String", "BUILD_TAG", "\"${defaultConfig.applicationId}\"")
             resValue("string", "build_tag", "${defaultConfig.applicationId}")
-            println("-> applicationId:  " + defaultConfig.applicationId)
+            println(" -> applicationId:  " + defaultConfig.applicationId)
 
             buildDateTxt = "Version: $defaultConfig.versionName.${minutesSinceEpoch} $name\\nGit version: $gitVersionName\\nBuild date: $buildDateYHM"
             buildConfigField("String", "BUILD_DATE", "\"$buildDateTxt\"")
             resValue("string", "build_date", "$buildDateTxt")
-            println("-> buildDateTxt:   " + buildDateTxt + "\n")
+            println(" -> buildDateTxt:   " + buildDateTxt + "\n")
+
         }
 
         debug {
+            println("-> Buildtype: debug")
             buildConfigField("String", "BUILD_TAG", "\"${defaultConfig.applicationId}\"")
             resValue("string", "build_tag", "${defaultConfig.applicationId}")
-            println("-> applicationId:  " + defaultConfig.applicationId)
+            println(" -> applicationId:  " + defaultConfig.applicationId)
 
             buildDateTxt = "Version: $defaultConfig.versionName.${minutesSinceEpoch} $name\\nGit version: $gitVersionName\\nBuild date: $buildDateYHM"
             buildConfigField("String", "BUILD_DATE", "\"$buildDateTxt\"")
             resValue("string", "build_date", "$buildDateTxt")
-            println("-> buildDateTxt:   " + buildDateTxt + "\n")
+            println(" -> buildDateTxt:   " + buildDateTxt + "\n")
 
-            tasks.withType(JavaCompile) {
-                //options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
-                //options.compilerArgs << "-Xlint:deprecation"
-            }
         }
 
     }
