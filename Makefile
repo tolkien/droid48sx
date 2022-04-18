@@ -2,8 +2,8 @@
 # Author: Olivier Sirol <czo@free.fr>
 # License: GPL-2.0 (http://www.gnu.org/copyleft)
 # File Created: Jan 2012
-# Last Modified: samedi 16 avril 2022, 16:22
-# Edit Time: 4:07:58
+# Last Modified: lundi 18 avril 2022, 19:26
+# Edit Time: 4:08:12
 # Description:
 #
 # $Id: $
@@ -22,7 +22,7 @@ debug:
 	@echo "<- debug done!"
 
 scp:
-	scp ./app/build/outputs/apk/release/droid48sx-`date +%Y%m%d`-release.apk czo@ananas:/tank/data/czo/www/ananas.czo.wf/intranet/download/apk
+	scp ./app/build/outputs/apk/release/org.czo.droid48sx-`date +%Y%m%d`-release.apk czo@ananas:/tank/data/czo/www/ananas.czo.wf/intranet/download/apk
 
 re: clean debug
 	@echo "<- rebuild done!"
