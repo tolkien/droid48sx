@@ -1,11 +1,11 @@
 #!/bin/sh
 #
 # Filename: docrop
-# Copyright (C) 2015 Olivier Sirol <czo@free.fr>
-# License: GPL (http://www.gnu.org/copyleft/gpl.html)
-# Started: Jan 2015
-# Last Change: samedi 03 octobre 2015, 18:42
-# Edit Time: 1:17:03
+# Author: Olivier Sirol <czo@free.fr>
+# License: GPL-2.0 (http://www.gnu.org/copyleft)
+# File Created: Jan 2015
+# Last Modified: mardi 19 avril 2022, 18:41
+# Edit Time: 1:17:54
 # Description:
 #  
 # HP48SX png : 1200x1782
@@ -16,7 +16,7 @@
 # $Id: $
 #
 
-cd /home/czo/CzoDoc/i48/czo48sx/droid48sx/store/img/hp48crop || exit 4
+cd /tank/data/czo/AndroidStudioProjects/droid48sx/store/img/hp48crop || exit 4
 
 if [ $# -ne 1 ] ; then
      echo "Error: arg needed"
