@@ -72,20 +72,7 @@ public class X48 extends Activity {
         Log.d("x48", "config_dir java: " + config_dir);
         getExternalPath(config_dir);
 
-        Log.d("x48", "copyAsset");
-        AssetUtil.copyAsset(getResources().getAssets(), false);
-        saveFirstCheckpoint();
-
-
-        Log.d("x48", "==");
         Log.d("x48", "===================== getIntentAction = " + getIntent().getAction() + " =====================");
-        Log.d("x48", "==");
-
-        setContentView(R.layout.main);
-        mainView = (HPView) findViewById(R.id.hpview);
-        checkPrefs();
-
-        verifyNoFileZero();
 
         if (ACTION_FULL_RESET.equals(getIntent().getAction())) {
             fullReset();
@@ -94,6 +81,10 @@ public class X48 extends Activity {
             restoreCheckpoint();
         }
 
+        Log.d("x48", "copyAsset...");
+        AssetUtil.copyAsset(getResources().getAssets(), false);
+        saveFirstCheckpoint();
+        verifyNoFileZero();
         readyToGo();
 
         if (!AssetUtil.isFilesReady()) {
@@ -109,10 +100,10 @@ public class X48 extends Activity {
         }
 
         if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(Color.rgb(0, 0, 0));
-            getWindow().setNavigationBarColor(Color.parseColor("#393938"));
             // getWindow().setStatusBarColor(Color.parseColor("#AA252523"));
             // getWindow().setNavigationBarColor(Color.parseColor("#AA252523"));
+            getWindow().setStatusBarColor(Color.rgb(0, 0, 0));
+            getWindow().setNavigationBarColor(Color.parseColor("#393938"));
             getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#AA252523")));
         }
 
@@ -120,6 +111,9 @@ public class X48 extends Activity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
 
+        setContentView(R.layout.main);
+        mainView = (HPView) findViewById(R.id.hpview);
+        checkPrefs();
 
         thread = new EmulatorThread(this);
         thread.start();
@@ -491,7 +485,7 @@ public class X48 extends Activity {
 
     protected void saveFirstCheckpoint() {
 
-        Log.d("x48", "FirstCheckpoint saved...");
+        Log.d("x48", "saveFirstCheckpoint...");
 
         File hpDir = new File(X48.config_dir, "checkpoint");
         if (!hpDir.exists()) {

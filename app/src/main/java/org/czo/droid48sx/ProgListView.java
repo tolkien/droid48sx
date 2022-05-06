@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -43,7 +45,12 @@ public class ProgListView extends ListActivity {
 
         // go to the root directory
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        String last_dir = sp.getString("last_dir", "/sdcard");
+        //String last_dir = sp.getString("last_dir", "/sdcard");
+        //String last_dir = sp.getString("last_dir", "/storage/emulated/0/Download");
+        String last_dir = sp.getString("last_dir", Environment.getExternalStorageDirectory().getPath());
+
+
+        Log.d("x48", "===================== ProgListView: " + last_dir);
         showDirectory(last_dir);
     }
 

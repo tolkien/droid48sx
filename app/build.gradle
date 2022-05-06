@@ -91,16 +91,10 @@ android {
 
     }
 
-    tasks.whenTaskAdded { task ->
-        if (task.name.contains("assembleDebug")) {
-            task.getDependsOn().add({
-                tasks.withType(JavaCompile) {
-                    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
-                }
-            })
-        }
-    }
+    //tasks.withType(JavaCompile) { options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" }
 
+    // NDK (Side by side) 21.4.7075529
+    // warning: implicit declaration of function 'do_reset' is invalid in C99 [-Wimplicit-function-declaration]
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
