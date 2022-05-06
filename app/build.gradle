@@ -30,11 +30,11 @@ println("-> gitVersionName:    " + gitVersionName)
 def buildDateTxt
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 31
     defaultConfig {
         applicationId "org.czo.droid48sx"
         minSdkVersion 19
-        targetSdkVersion 32
+        targetSdkVersion 31
         versionCode minutesSinceEpoch
         versionName "2.42"
 
@@ -91,9 +91,14 @@ android {
 
     }
 
-
-    tasks.withType(JavaCompile) {
-        //options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    tasks.whenTaskAdded { task ->
+        if (task.name.contains("assembleDebug")) {
+            task.getDependsOn().add({
+                tasks.withType(JavaCompile) {
+                    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+                }
+            })
+        }
     }
 
     externalNativeBuild {

@@ -74,8 +74,19 @@ public class X48 extends Activity {
 
         Log.d("x48", "copyAsset");
         AssetUtil.copyAsset(getResources().getAssets(), false);
+        saveFirstCheckpoint();
 
-        Log.d("x48", "================== getIntentAction = " + getIntent().getAction());
+
+        Log.d("x48", "==");
+        Log.d("x48", "===================== getIntentAction = " + getIntent().getAction() + " =====================");
+        Log.d("x48", "==");
+
+        setContentView(R.layout.main);
+        mainView = (HPView) findViewById(R.id.hpview);
+        checkPrefs();
+
+        verifyNoFileZero();
+
         if (ACTION_FULL_RESET.equals(getIntent().getAction())) {
             fullReset();
         }
@@ -84,9 +95,11 @@ public class X48 extends Activity {
         }
 
         readyToGo();
+
         if (!AssetUtil.isFilesReady()) {
             showDialog(DIALOG_ROM_KO);
         }
+
     }
 
     public void readyToGo() {
@@ -107,10 +120,6 @@ public class X48 extends Activity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
 
-        setContentView(R.layout.main);
-        mainView = (HPView) findViewById(R.id.hpview);
-
-        checkPrefs();
 
         thread = new EmulatorThread(this);
         thread.start();
@@ -408,10 +417,10 @@ public class X48 extends Activity {
         Toast.makeText(getApplicationContext(), "Checkpoint restored...", Toast.LENGTH_SHORT).show();
 
         try {
-            for (String s : new String[] { "port1", "port2" }) {
+            for (String s : new String[]{"port1", "port2"}) {
                 deleteFile(new File(X48.config_dir + s));
             }
-            for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
+            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
                 copyFile(new File(X48.config_dir + "checkpoint/" + s), new File(X48.config_dir + s));
             }
             File p1 = new File(X48.config_dir + "port1");
@@ -444,7 +453,7 @@ public class X48 extends Activity {
             spe.putString("port1", "0");
             spe.putString("port2", "0");
             spe.commit();
-            for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
+            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
                 deleteFile(new File(X48.config_dir + s));
             }
         } catch (IOException e) {
@@ -468,16 +477,54 @@ public class X48 extends Activity {
             hpDir.mkdir();
         }
         try {
-            for (String s : new String[] { "port1", "port2" }) {
+            for (String s : new String[]{"port1", "port2"}) {
                 deleteFile(new File(X48.config_dir + "checkpoint/" + s));
             }
-            for (String s : new String[] { "hp48", "ram", "rom", "port1", "port2" }) {
+            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
                 copyFile(new File(X48.config_dir + s), new File(X48.config_dir + "checkpoint/" + s));
             }
         } catch (IOException e) {
             Log.d("x48", "Error: " + e.getMessage());
         }
 
+    }
+
+    protected void saveFirstCheckpoint() {
+
+        Log.d("x48", "FirstCheckpoint saved...");
+
+        File hpDir = new File(X48.config_dir, "checkpoint");
+        if (!hpDir.exists()) {
+            hpDir.mkdir();
+            try {
+                for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
+                    copyFile(new File(X48.config_dir + s), new File(X48.config_dir + "checkpoint/" + s));
+                }
+            } catch (IOException e) {
+                Log.d("x48", "Error: " + e.getMessage());
+            }
+        }
+    }
+
+    protected void verifyNoFileZero() {
+        Log.d("x48", "verifyNoFileZero...");
+        boolean ResetIt = false;
+        try {
+            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
+                File T = new File(X48.config_dir + s);
+
+                if (T.exists() && T.length() == 0) {
+                    Log.d("x48", s + " = " + T.length());
+                    ResetIt = true;
+                }
+            }
+        } catch (Throwable e) {
+            Log.d("x48", "Error: " + e.getMessage());
+        }
+
+        if (ResetIt) {
+            restoreCheckpoint();
+        }
     }
 
     /**
@@ -523,7 +570,7 @@ public class X48 extends Activity {
                     if (checkSelfPermission(
                             Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                         requestPermissions(
-                                new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                 123);
                     } else {
                         Intent loadFileIntent = new Intent();
@@ -635,16 +682,6 @@ public class X48 extends Activity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case ROM_ID: {
-                    /*
-                     * if (true || isRomReady()) {
-                     * Log.d("x48", "Rom Ready... starting emulator");
-                     * readyToGo();
-                     * } else {
-                     * Log.d("x48", "Rom not Ready... quitting");
-                     * onDestroy();
-                     * finish();
-                     * }
-                     */
                     break;
                 }
                 case LOAD_ID: {
