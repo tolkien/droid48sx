@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -532,16 +533,6 @@ public class X48 extends Activity {
         }
     }
 
-    private void openGalley() {
-        try {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("*/*");
-                startActivityForResult(Intent.createChooser(intent, "Select File"), LOAD_ID);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     /**
      * Called when a menu item is selected.
      */
@@ -588,10 +579,10 @@ public class X48 extends Activity {
                                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                 123);
                     } else {
-                        // openGalley();
-                        Intent loadFileIntent = new Intent();
-                        loadFileIntent.setClass(this, ProgListView.class);
-                        startActivityForResult(loadFileIntent, LOAD_ID);
+                        openDocument();
+//                        Intent loadFileIntent = new Intent();
+//                        loadFileIntent.setClass(this, ProgListView.class);
+//                        startActivityForResult(loadFileIntent, LOAD_ID);
                     }
                 } else {
                     Intent loadFileIntent = new Intent();
@@ -689,6 +680,15 @@ public class X48 extends Activity {
         return null;
     }
 
+    private void openDocument() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_TITLE, "currentFile");
+        startActivityForResult(Intent.createChooser(intent, "Select File"), LOAD_ID);
+        //startActivityForResult(intent, LOAD_ID);
+    }
+
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent extras) {
         Log.d("x48", "requestCode: " + requestCode + " / " + resultCode);
@@ -699,8 +699,23 @@ public class X48 extends Activity {
                     break;
                 }
                 case LOAD_ID: {
-                    final String filename = extras.getStringExtra("currentFile");
+                    //final String filename = extras.getStringExtra("currentFile");
+                    String filename = null;
+                    if(extras != null) {
+                        Uri uri = extras.getData();
+                        String url = null;
+                        if (uri != null)
+                            url = uri.toString();
+                        if (url != null) {
+                            Log.d("x48", "===================== URL = " + url);
+                            filename = url;
+                        }
+                        }
+
+
+                    
                     if (filename != null) {
+                        Log.d("x48", "===================== LoadObjet = " + filename);
                         int retCode = loadProg(filename);
                         if (retCode == 1) {
                             flipScreen();
