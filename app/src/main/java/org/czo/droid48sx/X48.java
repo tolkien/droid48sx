@@ -713,7 +713,7 @@ public class X48 extends Activity {
                         }
 
 
-                    
+
                     if (filename != null) {
                         Log.d("x48", "===================== LoadObjet = " + filename);
                         int retCode = loadProg(filename);
