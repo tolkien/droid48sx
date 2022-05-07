@@ -579,12 +579,13 @@ public class X48 extends Activity {
                                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                 123);
                     } else {
-                        openDocument();
-//                        Intent loadFileIntent = new Intent();
-//                        loadFileIntent.setClass(this, ProgListView.class);
-//                        startActivityForResult(loadFileIntent, LOAD_ID);
+                        //openDocument();
+                        Intent loadFileIntent = new Intent();
+                        loadFileIntent.setClass(this, ProgListView.class);
+                        startActivityForResult(loadFileIntent, LOAD_ID);
                     }
                 } else {
+                    //openDocument();
                     Intent loadFileIntent = new Intent();
                     loadFileIntent.setClass(this, ProgListView.class);
                     startActivityForResult(loadFileIntent, LOAD_ID);
@@ -699,20 +700,19 @@ public class X48 extends Activity {
                     break;
                 }
                 case LOAD_ID: {
-                    //final String filename = extras.getStringExtra("currentFile");
-                    String filename = null;
-                    if(extras != null) {
-                        Uri uri = extras.getData();
-                        String url = null;
-                        if (uri != null)
-                            url = uri.toString();
-                        if (url != null) {
-                            Log.d("x48", "===================== URL = " + url);
-                            filename = url;
-                        }
-                        }
+                    final String filename = extras.getStringExtra("currentFile");
 
-
+//                    String filename = null;
+//                    if (extras != null) {
+//                        Uri uri = extras.getData();
+//                        String url = null;
+//                        if (uri != null)
+//                            url = uri.toString();
+//                        if (url != null) {
+//                            Log.d("x48", "===================== URL = " + url);
+//                            filename = url;
+//                        }
+//                    }
 
                     if (filename != null) {
                         Log.d("x48", "===================== LoadObjet = " + filename);
