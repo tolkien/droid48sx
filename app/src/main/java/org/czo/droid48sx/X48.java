@@ -23,6 +23,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -62,11 +63,12 @@ public class X48 extends Activity {
         } else {
             config_dir = getFilesDir().getAbsolutePath() + "/";
         }
-        // config_dir = "/badone" ;
+        //config_dir = "/badone" ;
         File hpDir = new File(config_dir);
         if (!hpDir.exists() || !hpDir.isDirectory()) {
             Log.d("x48", "===================== ERROR: cannot open " + config_dir);
             Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_SHORT).show();
+            finish();
         }
 
         Log.d("x48", "config_dir java: " + config_dir);
@@ -81,10 +83,17 @@ public class X48 extends Activity {
             restoreCheckpoint();
         }
 
+
         Log.d("x48", "copyAsset...");
         AssetUtil.copyAsset(getResources().getAssets(), false);
         saveFirstCheckpoint();
         verifyNoFileZero();
+
+        Log.d("x48", "mainView and getPrefs...");
+        setContentView(R.layout.main);
+        mainView = (HPView) findViewById(R.id.hpview);
+        getPrefs();
+
         readyToGo();
 
         if (!AssetUtil.isFilesReady()) {
@@ -111,8 +120,8 @@ public class X48 extends Activity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
 
-        setContentView(R.layout.main);
-        mainView = (HPView) findViewById(R.id.hpview);
+//        setContentView(R.layout.main);
+//        mainView = (HPView) findViewById(R.id.hpview);
         checkPrefs();
 
         thread = new EmulatorThread(this);
@@ -236,10 +245,7 @@ public class X48 extends Activity {
         }
     }
 
-    public void checkPrefs() {
-        // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+    public void getPrefs() {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         saveonExit = mPrefs.getBoolean("saveOnExit", true);
         if (mainView != null) {
@@ -249,6 +255,11 @@ public class X48 extends Activity {
             mainView.setFullWidth(mPrefs.getBoolean("large_width", false));
             mainView.setScaleControls(mPrefs.getBoolean("scale_buttons", true));
         }
+    }
+
+    public void checkPrefs() {
+        getPrefs();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         checkfullscreen();
         mainView.requestLayout();
     }
@@ -521,6 +532,16 @@ public class X48 extends Activity {
         }
     }
 
+    private void openGalley() {
+        try {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("*/*");
+                startActivityForResult(Intent.createChooser(intent, "Select File"), LOAD_ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Called when a menu item is selected.
      */
@@ -567,6 +588,7 @@ public class X48 extends Activity {
                                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                 123);
                     } else {
+                        // openGalley();
                         Intent loadFileIntent = new Intent();
                         loadFileIntent.setClass(this, ProgListView.class);
                         startActivityForResult(loadFileIntent, LOAD_ID);
@@ -590,8 +612,6 @@ public class X48 extends Activity {
                 break;
 
             case QUIT_ID:
-                // stopHPEmulator();
-                // mainView.stop();
                 finish();
                 return true;
         }
