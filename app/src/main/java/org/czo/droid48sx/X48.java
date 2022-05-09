@@ -492,6 +492,7 @@ public class X48 extends Activity {
         } catch (IOException e) {
             Log.d("x48", "Error: " + e.getMessage());
         }
+        checkPrefs();
 
     }
 
@@ -726,6 +727,7 @@ public class X48 extends Activity {
                         } else {
                             showDialog(DIALOG_PROG_KO);
                         }
+                        checkPrefs();
                     }
                     break;
                 }
