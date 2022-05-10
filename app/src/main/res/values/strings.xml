@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">48sx</string>
-    <string name="load_prog">Put program on stack</string>
+    <string name="load_prog">Put object on stack</string>
     <string name="save_state">Save memory/state</string>
     <string name="rom_legal">This emulator need a ROM to run. HP-ROM files are copyrighted by Hewlett Packard. But since fall 2000 HP ACO allowed the non commercial use of the HP48 ROM\'s even if you\'re not an owner of this calculator type.</string>
     <string name="button_download">Download and install ROM from HPcalc.org</string>
@@ -10,8 +10,8 @@
     <string name="full_reset_memory">Full reset</string>
     <string name="help">Help</string>
     <string name="ok">OK</string>
-    <string name="prog_ok">The program/object has been put on the stack.\nNow, some HP knowledge is necessary:\n\n- if this is a library, push 0, then STO and shut down (right shift + on) / restart (on) the calculator: the program will be available in the Library (shift right + 2) menu.\n\n- If this is a regular object (dir, external, etc.), push a name between quotes on the stack (for example, \'prog\'), then push STO: the prog will be available in the VAR menu</string>
-    <string name="prog_ko">This program cannot be loaded.\nMake sure it\'s a valid one and you have enough memory to load it</string>
+    <string name="prog_ok">The object has been put on the stack. Now, some HP knowledge is necessary:\n\n- PRESS ON\n\n- if this is a library, push 0, then STO and shut down (right shift + on) / restart (on) the calculator: the program will be available in the Library (shift right + 2) menu.\n\n- If this is a regular object (dir, external, etc.), push a name between quotes on the stack (for example, \'prog\'), then push STO: the prog will be available in the VAR menu</string>
+    <string name="prog_ko">This object cannot be loaded.\nMake sure it\'s a valid one and you have enough memory to load it</string>
     <string name="rom_ko">Rom files not found! This shouldn\'t happen :\\. Quitting now!</string>
     <string name="general_preferences">General settings</string>
     <string name="display_preferences">Display settings</string>
@@ -27,7 +27,7 @@
     <string name="port2_install">Port2 setting</string>
     <string name="ram_install">Choose an installation option</string>
     <string name="ram_install_error">The ram cards cannot be install on internal memory</string>
-    <string name="ram_install_warning">You need to quit this program by the menu to enable your ram cards.\nWARNING: you will experience an HP shutdown on the first restart ! Don\'t panic, it\'s normal, just press the "ON" button on the HP interface.\nYou might want to save a checkpoint after this.</string>
+    <string name="ram_install_warning">You need to quit this app by the menu to enable your ram cards.\nWARNING: you will experience an HP shutdown on the first restart ! Don\'t panic, it\'s normal, just press the "ON" button on the HP interface.\nYou might want to save a checkpoint after this.</string>
     <string-array name="port_1_values">
         <item>0</item>
         <item>128</item>
@@ -60,7 +60,7 @@
         <item>2</item>
     </string-array>
     <string-array name="backkey_entries">
-        <item>Quit program</item>
+        <item>Quit this app</item>
         <item>Drop button</item>
         <item>ON button (cancel)</item>
     </string-array>

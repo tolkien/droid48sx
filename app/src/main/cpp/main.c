@@ -368,7 +368,7 @@ jint
 Java_org_czo_droid48sx_X48_buttonPressed( JNIEnv*  env,
                                       jobject  this,
                                       jint     x) {
-	button_pressed(x);
+	return button_pressed(x);
 
 }
 
@@ -377,7 +377,7 @@ jint
 Java_org_czo_droid48sx_X48_buttonReleased( JNIEnv*  env,
                                       jobject  this,
                                       jint     x) {
-	button_released(x);
+    return button_released(x);
 
 }
 

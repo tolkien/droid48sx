@@ -176,4 +176,7 @@ extern void XCopyPlane __ProtoType__((Display *dpy, Pixmap map, Window win, GC g
 
 extern void XClearWindow __ProtoType__((Display *dpy, Window win));
 
+extern int button_released __ProtoType__((int b));
+extern int button_pressed __ProtoType__((int b));
+
 #endif
