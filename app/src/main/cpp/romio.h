@@ -38,6 +38,6 @@ extern unsigned int rom_size;
 
 extern int read_rom_file __ProtoType__((char *name,
                                         unsigned char **mem,
-                                        int *size));
+                                        unsigned int *size));
 
 #endif /* !_ROMIO_H */

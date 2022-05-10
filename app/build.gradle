@@ -2,8 +2,8 @@
 // Author: Olivier Sirol <czo@free.fr>
 // License: GPL-2.0 (http://www.gnu.org/copyleft)
 // File Created: avril 2012
-// Last Modified: lundi 18 avril 2022, 19:27
-// Edit Time: 1:36:17
+// Last Modified: mardi 10 mai 2022, 20:11
+// Edit Time: 1:42:42
 // Description: 48sx's build.gradle
 
 apply plugin: 'com.android.application'
@@ -94,7 +94,7 @@ android {
     //tasks.withType(JavaCompile) { options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" }
 
     // NDK (Side by side) 21.4.7075529
-    // warning: implicit declaration of function 'do_reset' is invalid in C99 [-Wimplicit-function-declaration]
+    // ndkVersion "22.1.7171670"
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"

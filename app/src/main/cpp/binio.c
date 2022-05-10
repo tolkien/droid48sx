@@ -210,7 +210,8 @@ read_bin_file(char *filename)
   int         bBinary;
   long        dwAddress;
   long        i;
-LOGD("Loading filename: %s", filename);
+
+  LOGD("Loading filename: %s", filename);
   if (NULL == (fp = fopen(filename, "r")))
   {
     return 0;

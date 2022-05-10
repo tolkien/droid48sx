@@ -1004,7 +1004,7 @@ int size;
         {
           if (!quiet)
             LOGE( "%s: strange size %s, expected %d, found %lld\n",
-                    progname, name, size / 2, st.st_size);
+                    progname, name, size / 2, (long long)st.st_size);
           fclose(fp);
           return 0;
         }

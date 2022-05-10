@@ -41,12 +41,12 @@ unsigned int rom_size = 0;
 
 int
 #ifdef __FunctionProto__
-read_rom_file(char *name, unsigned char **mem, int *size)
+read_rom_file(char *name, unsigned char **mem, unsigned int *size)
 #else
 read_rom_file(name, mem, size)
 char *name;
 unsigned char **mem;
-int *size;
+unsigned int *size;
 #endif
 {
   struct stat st;
@@ -95,7 +95,7 @@ int *size;
     }
   else if (four[0])
     {
-      LOGD("%lld\n", st.st_size);
+      LOGD("%lld\n", (long long)st.st_size);
       *size = st.st_size;
     }
   else
@@ -139,7 +139,7 @@ int *size;
       if (st.st_size != *size / 2)
         {
         LOGE( "strange size %s, expected %d, found %lld\n",
-                  name, *size / 2, st.st_size);
+                  name, *size / 2, (long long)st.st_size);
           free(*mem);
           *mem = NULL;
           *size = 0;
