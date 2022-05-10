@@ -119,9 +119,7 @@ typedef struct device_t {
 
 extern device_t device;
 extern void	check_devices      __ProtoType__((void));
-#if 0
 extern void	check_out_register __ProtoType__((void));
-#endif
 
 extern void     update_display     __ProtoType__((void));
 extern void     redraw_display     __ProtoType__((void));

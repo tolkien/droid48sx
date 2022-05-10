@@ -58,6 +58,8 @@
  * $Id: x48_x11.h,v 1.11 1995/01/11 18:20:01 ecd Exp ecd $
  */
 
+#ifndef _X48_H
+#define _X48_H 1
 
 #include "global.h"
 
@@ -173,3 +175,5 @@ extern void XClearArea __ProtoType__((Display *dpy, Window win, int x, int y, in
 extern void XCopyPlane __ProtoType__((Display *dpy, Pixmap map, Window win, GC gc, int a, int b, int x, int y, int width, int height, int boo));
 
 extern void XClearWindow __ProtoType__((Display *dpy, Window win));
+
+#endif

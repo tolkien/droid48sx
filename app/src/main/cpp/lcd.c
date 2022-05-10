@@ -202,8 +202,8 @@ Java_org_czo_droid48sx_X48_fillScreenData( JNIEnv*  env,
 	if (flipable == 1)
 	{
 		
-		(*env)->SetShortArrayRegion(env, array, 0, ANDROID_BUF_HEADER_LENGTH, disp_buf_header_short);
-		(*env)->SetShortArrayRegion(env, array, ANDROID_BUF_HEADER_LENGTH, ANDROID_BUF_LENGTH, disp_buf_short);
+		(*env)->SetShortArrayRegion(env, array, 0, ANDROID_BUF_HEADER_LENGTH, (const short *)disp_buf_header_short);
+		(*env)->SetShortArrayRegion(env, array, ANDROID_BUF_HEADER_LENGTH, ANDROID_BUF_LENGTH, (const short *)disp_buf_short);
 		
 		(*env)->SetBooleanArrayRegion(env, ann_array, 0, 6, ann_boolean);
 		

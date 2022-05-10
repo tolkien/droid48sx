@@ -1,6 +1,9 @@
 /* config.h.  Generated from config.h.in by configure.  */
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
+#ifndef _CONFIG_H
+#define _CONFIG_H 1
+
 /* Name of person that compiled this program */
 #define COMPILE_BY "G. Allen Morris III"
 
@@ -179,3 +182,5 @@
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 /* #undef size_t */
+
+#endif 

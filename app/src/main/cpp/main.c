@@ -72,7 +72,9 @@
 
 #include "x48.h"
 #include "hp48.h"
+#include "binio.h"
 #include "debugger.h"
+#include "hp48_emu.h"
 
 #include <locale.h>
 
@@ -384,7 +386,7 @@ Java_org_czo_droid48sx_X48_loadProg( JNIEnv*  env,
                                       jobject  this,
                                       jstring     desc) {
 	const char* cDesc = (*env)->GetStringUTFChars(env, desc, 0);
-	int c = read_bin_file(cDesc);
+	int c = read_bin_file((char *)cDesc);
 	(*env)->ReleaseStringUTFChars(env, desc, cDesc);
 	return c;
 }
