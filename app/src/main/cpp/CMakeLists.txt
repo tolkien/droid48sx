@@ -7,8 +7,17 @@ cmake_minimum_required(VERSION 3.4.1)
 project(48sx)
 
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -Wno-format -Wno-implicit-function-declaration -Wno-pointer-sign -Wno-return-type -Wno-user-defined-warnings")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -Wno-user-defined-warnings")
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+        message(" DEBUG BUILD (" ${CMAKE_BUILD_TYPE} ")")
+        add_compile_options(-DDEBUG)
+else()
+        message(" RELEASE BUILD (" ${CMAKE_BUILD_TYPE} ")")
+        add_compile_options("-Wno-user-defined-warnings")
+        # add_compile_options("-g0")
+endif()
+
 add_compile_options(-O0)
 
 # Creates and names a library, sets it as either STATIC

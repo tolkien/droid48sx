@@ -87,13 +87,13 @@
 #include <android/log.h> 
 #include <jni.h>
 
-#define DEBUG 0
-
-#define LOGV(...) if (DEBUG) { __android_log_print(ANDROID_LOG_VERBOSE, "x48c",  __VA_ARGS__); }
-#define LOGD(...) if (DEBUG) { __android_log_print(ANDROID_LOG_DEBUG  , "x48c",  __VA_ARGS__); }
-#define LOGI(...) if (DEBUG) { __android_log_print(ANDROID_LOG_INFO   , "x48c",  __VA_ARGS__); }
-#define LOGW(...) if (DEBUG) { __android_log_print(ANDROID_LOG_WARN   , "x48c",  __VA_ARGS__); }
-#define LOGE(...) if (DEBUG) { __android_log_print(ANDROID_LOG_ERROR  , "x48c",  __VA_ARGS__); }
+#ifdef DEBUG
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG  , "x48c",  __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , "x48c",  __VA_ARGS__)
+#else
+#define LOGD(...)
+#define LOGE(...)
+#endif
 
 /* TODO */
 typedef struct XColor {
