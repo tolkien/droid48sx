@@ -24,7 +24,6 @@ import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -168,16 +167,16 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                 if (c != null) {
 
                     if (backBuffer == null) {
-                        Log.d("x48", "init backBuffer !: " + keybLite);
+                        Dlog.d("init backBuffer !: " + keybLite);
                         backBuffer = Bitmap.createBitmap(c.getWidth(), c.getHeight(), Bitmap.Config.ARGB_8888);
                         Canvas backCanvas = new Canvas(backBuffer);
 
                         int w = backBuffer.getWidth();
                         int h = backBuffer.getHeight();
 
-                        Log.d("x48", "w: " + w + ", h:" + h);
+                        Dlog.d("w: " + w + ", h:" + h);
                         if (w != 0 ) {
-                            Log.d("x48", "h/w: " + (float)h / w );
+                            Dlog.d("h/w: " + (float)h / w );
                         }
 
                         Paint p = new Paint();
@@ -192,7 +191,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                             screenPaint.setFilterBitmap(true);
                             lcd_ratio = ((land ? (float) h : (float) w) + 0f) / 133f;
                         }
-                        Log.d("x48", "lcd ratio: " + lcd_ratio);
+                        Dlog.d("lcd ratio: " + lcd_ratio);
                         int start_w = (int) (131 * lcd_ratio);
                         int start_h = (int) (72 * lcd_ratio); // was 71
                         float usable_w = w;
@@ -218,7 +217,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                             menu_key_height = regular_key_height;
                             // menu_key_height = regular_key_height * 11f / 18f;
                         }
-                        Log.d("x48", "icons_coord y: " + (int) (1 * lcd_ratio));
+                        Dlog.d("icons_coord y: " + (int) (1 * lcd_ratio));
                         icons_coords = new int[][] {
                                 { lcd_pos_x, (int) (1 * lcd_ratio) },
                                 { (int) (lcd_pos_x + 21 * lcd_ratio), (int) (1 * lcd_ratio) },
@@ -531,7 +530,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                     }
 
                 } else {
-                    // Log.d("x48", "null canvas !");
+                    // Dlog.d("null canvas !");
                 }
             }
         } finally {
@@ -542,7 +541,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                 mSurfaceHolder.unlockCanvasAndPost(c);
             }
         }
-        // Log.d("x48", "data: " + data.length);
+        // Dlog.d("data: " + data.length);
     }
 
     @Override
@@ -656,7 +655,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                 if (!multiTouch) {
                     for (int i = 0; i < MAX_TOUCHES; i++) {
                         if (touches[i] != 0) {
-                            Log.d("x48", "no multitouch !, force up of " + i);
+                            Dlog.d("no multitouch !, force up of " + i);
                             queuedCodes.add(i + 100);
                             touches[i] = 0;
                             break;
@@ -670,7 +669,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                     performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,
                             HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
                 } else {
-                    Log.d("x48", "rejected down");
+                    Dlog.d("rejected down");
                 }
             } else {
                 Integer cI = code + 100;
@@ -678,18 +677,18 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                     queuedCodes.add(cI);
                     touches[code] = 0;
                 } else {
-                    Log.d("x48", "rejected up");
+                    Dlog.d("rejected up");
                     if (!multiTouch) {
                         for (int i = 0; i < MAX_TOUCHES; i++) {
                             if (touches[i] != 0) {
-                                Log.d("x48", "forced up of " + i);
+                                Dlog.d("forced up of " + i);
                                 queuedCodes.add(i + 100);
                                 touches[i] = 0;
                             }
                         }
                     }
                 }
-                // Log.d("x48", "key up code: " + code);
+                // Dlog.d("key up code: " + code);
                 x48.hideActionBar();
             }
             x48.flipScreen();
@@ -698,17 +697,17 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
     }
 
     public synchronized void pauseEvent() {
-        // Log.d("x48", "pauseEvent begin");
+        // Dlog.d("pauseEvent begin");
         try {
             this.wait();
         } catch (InterruptedException e) {
-            // Log.d("x48", "pauseEvent: " + e.getMessage());
+            // Dlog.d("pauseEvent: " + e.getMessage());
         }
-        // Log.d("x48", "pauseEvent end");
+        // Dlog.d("pauseEvent end");
     }
 
     public synchronized void unpauseEvent() {
-        // Log.d("x48", "unpauseEvent");
+        // Dlog.d("unpauseEvent");
         this.notify();
     }
 
@@ -727,7 +726,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
             int height) {
-        Log.d("x48", "surfaceChanged w: " + width + ", h: " + height);
+        Dlog.d("surfaceChanged w: " + width + ", h: " + height);
         this.width = width;
         this.height = height;
         currentOrientation = Configuration.ORIENTATION_PORTRAIT;
@@ -746,7 +745,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        // Log.d("x48", "Surface created");
+        // Dlog.d("Surface created");
 
         surfaceValid = true;
         drawThread = new Thread(this);
@@ -756,7 +755,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        // Log.d("x48", "Surface destroyed");
+        // Dlog.d("Surface destroyed");
         surfaceValid = false;
     }
 
@@ -784,7 +783,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 
     @Override
     public void run() {
-        // Log.d("x48", "drawing thread started");
+        // Dlog.d("drawing thread started");
         x48.flipScreen();
         while (surfaceValid) {
             if (needFlip || x48.fillScreenData(buf, ann) == 1) {
@@ -799,18 +798,18 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                 }
             } while (pause && surfaceValid);
         }
-        // Log.d("x48", "drawing thread stopped");
+        // Dlog.d("drawing thread stopped");
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // Log.d("x48", "-->"+keyCode);
+        // Dlog.d("-->"+keyCode);
         return actionKey(true, keyCode);
     }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        // Log.d("x48", "--<"+keyCode);
+        // Dlog.d("--<"+keyCode);
         return actionKey(false, keyCode);
 
     }

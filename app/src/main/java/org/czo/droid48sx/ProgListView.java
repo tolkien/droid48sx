@@ -1,16 +1,18 @@
 package org.czo.droid48sx;
 
-import android.Manifest;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -19,12 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.util.TypedValue;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class ProgListView extends ListActivity {
 
@@ -50,7 +46,7 @@ public class ProgListView extends ListActivity {
         //String last_dir = sp.getString("last_dir", "/storage/emulated/0/Download");
         String last_dir = sp.getString("last_dir", "/sdcard");
 
-        Log.d("x48", "===================== ProgListView: " + last_dir);
+        Dlog.d("===================== ProgListView: " + last_dir);
         showDirectory(last_dir);
     }
 

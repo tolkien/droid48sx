@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.res.AssetManager;
-import android.util.Log;
 
 public class AssetUtil {
 
@@ -44,7 +43,7 @@ public class AssetUtil {
                 if (hp48 || rom || ram) {
                     File fout = new File(X48.config_dir + assets[i]);
                     if (!fout.exists() || fout.length() == 0 || (required > 0 && fout.length() != required) || force) {
-                        Log.d("x48", "Overwriting " + assets[i]);
+                        Dlog.d("Overwriting " + assets[i]);
                         FileOutputStream out = new FileOutputStream(fout);
                         InputStream in = am.open(assets[i]);
                         byte buffer[] = new byte[8192];

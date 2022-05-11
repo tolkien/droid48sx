@@ -20,12 +20,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -56,7 +53,7 @@ public class X48 extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d("x48", "===================== starting activity");
+        Dlog.d("===================== starting activity");
 
         // /sdcard
         if (getExternalFilesDir(null) != null) {
@@ -67,15 +64,15 @@ public class X48 extends Activity {
         //config_dir = "/badone" ;
         File hpDir = new File(config_dir);
         if (!hpDir.exists() || !hpDir.isDirectory()) {
-            Log.d("x48", "===================== ERROR: cannot open " + config_dir);
+            Dlog.d("===================== ERROR: cannot open " + config_dir);
             Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_SHORT).show();
             finish();
         }
 
-        Log.d("x48", "config_dir java: " + config_dir);
+        Dlog.d("config_dir java: " + config_dir);
         getExternalPath(config_dir);
 
-        Log.d("x48", "===================== getIntentAction = " + getIntent().getAction() + " =====================");
+        Dlog.d("===================== getIntentAction = " + getIntent().getAction() + " =====================");
 
         if (ACTION_FULL_RESET.equals(getIntent().getAction())) {
             fullReset();
@@ -85,12 +82,12 @@ public class X48 extends Activity {
         }
 
 
-        Log.d("x48", "copyAsset...");
+        Dlog.d("copyAsset...");
         AssetUtil.copyAsset(getResources().getAssets(), false);
         saveFirstCheckpoint();
         verifyNoFileZero();
 
-        Log.d("x48", "mainView and getPrefs...");
+        Dlog.d("mainView and getPrefs...");
         setContentView(R.layout.main);
         mainView = (HPView) findViewById(R.id.hpview);
         getPrefs();
@@ -237,7 +234,7 @@ public class X48 extends Activity {
     }
 
     public void checkfullscreen() {
-        Log.d("x48", "===================== checkfullscreen");
+        Dlog.d("===================== checkfullscreen");
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (mPrefs.getBoolean("fullScreen", false)) {
             hideSystemUI();
@@ -329,7 +326,7 @@ public class X48 extends Activity {
 
     @Override
     protected void onResume() {
-        Log.d("x48", "===================== resume");
+        Dlog.d("===================== resume");
         super.onResume();
         if (mainView != null) {
             mainView.resume();
@@ -419,7 +416,7 @@ public class X48 extends Activity {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Editor spe = mPrefs.edit();
 
-        Log.d("x48", "===================== Checkpoint restored...");
+        Dlog.d("===================== Checkpoint restored...");
         Toast.makeText(getApplicationContext(), "Checkpoint restored...", Toast.LENGTH_SHORT).show();
 
         try {
@@ -440,7 +437,7 @@ public class X48 extends Activity {
             spe.commit();
 
         } catch (IOException e) {
-            Log.d("x48", "Error: " + e.getMessage());
+            Dlog.d("Error: " + e.getMessage());
         }
 
         need_to_quit = true;
@@ -452,7 +449,7 @@ public class X48 extends Activity {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Editor spe = mPrefs.edit();
 
-        Log.d("x48", "===================== Full reset done...");
+        Dlog.d("===================== Full reset done...");
         Toast.makeText(getApplicationContext(), "Full reset done...", Toast.LENGTH_SHORT).show();
 
         try {
@@ -463,7 +460,7 @@ public class X48 extends Activity {
                 deleteFile(new File(X48.config_dir + s));
             }
         } catch (IOException e) {
-            Log.d("x48", "Error: " + e.getMessage());
+            Dlog.d("Error: " + e.getMessage());
         }
 
         need_to_quit = true;
@@ -473,7 +470,7 @@ public class X48 extends Activity {
 
     protected void saveCheckpoint() {
 
-        Log.d("x48", "===================== Checkpoint saved...");
+        Dlog.d("===================== Checkpoint saved...");
         Toast.makeText(getApplicationContext(), "Checkpoint saved...", Toast.LENGTH_SHORT).show();
 
         saveState();
@@ -490,7 +487,7 @@ public class X48 extends Activity {
                 copyFile(new File(X48.config_dir + s), new File(X48.config_dir + "checkpoint/" + s));
             }
         } catch (IOException e) {
-            Log.d("x48", "Error: " + e.getMessage());
+            Dlog.d("Error: " + e.getMessage());
         }
         checkPrefs();
 
@@ -498,7 +495,7 @@ public class X48 extends Activity {
 
     protected void saveFirstCheckpoint() {
 
-        Log.d("x48", "saveFirstCheckpoint...");
+        Dlog.d("saveFirstCheckpoint...");
 
         File hpDir = new File(X48.config_dir, "checkpoint");
         if (!hpDir.exists()) {
@@ -508,25 +505,25 @@ public class X48 extends Activity {
                     copyFile(new File(X48.config_dir + s), new File(X48.config_dir + "checkpoint/" + s));
                 }
             } catch (IOException e) {
-                Log.d("x48", "Error: " + e.getMessage());
+                Dlog.d("Error: " + e.getMessage());
             }
         }
     }
 
     protected void verifyNoFileZero() {
-        Log.d("x48", "verifyNoFileZero...");
+        Dlog.d("verifyNoFileZero...");
         boolean ResetIt = false;
         try {
             for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
                 File T = new File(X48.config_dir + s);
 
                 if (T.exists() && T.length() == 0) {
-                    Log.d("x48", s + " = " + T.length());
+                    Dlog.d(s + " = " + T.length());
                     ResetIt = true;
                 }
             }
         } catch (Throwable e) {
-            Log.d("x48", "Error: " + e.getMessage());
+            Dlog.d("Error: " + e.getMessage());
         }
 
         if (ResetIt) {
@@ -558,7 +555,7 @@ public class X48 extends Activity {
                 return true;
 
             case RESET_ID:
-                Log.d("x48", "===================== Reset done...");
+                Dlog.d("===================== Reset done...");
                 Toast.makeText(getApplicationContext(), "Reset done...", Toast.LENGTH_SHORT).show();
                 AssetUtil.copyAsset(getResources().getAssets(), true);
                 need_to_quit = true;
@@ -567,7 +564,7 @@ public class X48 extends Activity {
                 return true;
 
             case SAVE_ID:
-                Log.d("x48", "===================== State saved...");
+                Dlog.d("===================== State saved...");
                 Toast.makeText(getApplicationContext(), "State saved...", Toast.LENGTH_SHORT).show();
                 saveState();
                 return true;
@@ -693,7 +690,7 @@ public class X48 extends Activity {
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent extras) {
-        Log.d("x48", "requestCode: " + requestCode + " / " + resultCode);
+        Dlog.d("requestCode: " + requestCode + " / " + resultCode);
         super.onActivityResult(requestCode, resultCode, extras);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
@@ -710,13 +707,13 @@ public class X48 extends Activity {
 //                        if (uri != null)
 //                            url = uri.toString();
 //                        if (url != null) {
-//                            Log.d("x48", "===================== URL = " + url);
+//                            Dlog.d("===================== URL = " + url);
 //                            filename = url;
 //                        }
 //                    }
 
                     if (filename != null) {
-                        Log.d("x48", "===================== LoadObjet = " + filename);
+                        Dlog.d("===================== LoadObjet = " + filename);
                         int retCode = loadProg(filename);
                         if (retCode == 1) {
                             flipScreen();
@@ -763,14 +760,14 @@ public class X48 extends Activity {
             if (size == 0) {
                 if (port.exists()) {
                     port.delete();
-                    Log.d("x48", "===================== Deleting port" + number + " file.");
+                    Dlog.d("===================== Deleting port" + number + " file.");
                     change = true;
                 }
             } else {
                 if (port.exists() && (port.length() == 1024 * size)) {
 
                 } else {
-                    Log.d("x48", "===================== Port" + number
+                    Dlog.d("===================== Port" + number
                             + " file does not exists or is incomplete. Writing a blank file.");
                     byte data[] = new byte[1024];
                     for (int i = 0; i < data.length; i++)
@@ -781,7 +778,7 @@ public class X48 extends Activity {
                             fout.write(data);
                         fout.close();
                     } catch (IOException e) {
-                        Log.d("x48", "Error: " + e.getMessage());
+                        Dlog.d("Error: " + e.getMessage());
                         e.printStackTrace();
                     }
                     change = true;
@@ -796,19 +793,19 @@ public class X48 extends Activity {
 
     @Override
     protected void onStop() {
-        Log.d("x48", "===================== stop");
+        Dlog.d("===================== stop");
         super.onStop();
     }
 
     @Override
     protected void onStart() {
-        Log.d("x48", "===================== start");
+        Dlog.d("===================== start");
         super.onStart();
     }
 
     @Override
     protected void onPause() {
-        Log.d("x48", "===================== pause");
+        Dlog.d("===================== pause");
         super.onPause();
         if (mainView != null)
             mainView.pause();
@@ -816,7 +813,7 @@ public class X48 extends Activity {
 
     @Override
     protected void onDestroy() {
-        Log.d("x48", "===================== onDestroy");
+        Dlog.d("===================== onDestroy");
         super.onDestroy();
         if (saveonExit)
             saveState();
