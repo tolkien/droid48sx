@@ -95,7 +95,7 @@ public class X48 extends Activity {
         readyToGo();
 
         if (!AssetUtil.isFilesReady()) {
-            showDialog(DIALOG_ROM_KO);
+            finish();
         }
 
     }
@@ -634,7 +634,7 @@ public class X48 extends Activity {
                         .setMessage(R.string.prog_ok)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-
+                                checkPrefs();
                             }
                         })
                         .create();
@@ -645,8 +645,7 @@ public class X48 extends Activity {
                         .setMessage(R.string.prog_ko)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-
-                                /* User clicked OK so do some stuff */
+                                checkPrefs();
                             }
                         })
                         .create();
@@ -657,7 +656,6 @@ public class X48 extends Activity {
                         .setMessage(R.string.rom_ko)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-
                                 onDestroy();
                             }
                         })
@@ -669,7 +667,7 @@ public class X48 extends Activity {
                         .setMessage(R.string.ram_install_error)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-
+                                checkPrefs();
                             }
                         })
                         .create();
@@ -680,7 +678,7 @@ public class X48 extends Activity {
                         .setMessage(R.string.ram_install_warning)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-
+                                checkPrefs();
                             }
                         })
                         .create();
@@ -734,7 +732,6 @@ public class X48 extends Activity {
                         } else {
                             showDialog(DIALOG_PROG_KO);
                         }
-                        checkPrefs();
                     }
                     break;
                 }
@@ -747,7 +744,6 @@ public class X48 extends Activity {
                     managePort(1, port1);
                     String port2 = mPrefs.getString("port2", "0");
                     managePort(2, port2);
-                    checkPrefs();
                 }
             }
         }
