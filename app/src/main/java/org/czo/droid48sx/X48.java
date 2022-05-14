@@ -155,7 +155,6 @@ public class X48 extends Activity {
                 }
             } else { // >=19
                 if (hide) { // hide action bar
-                    getActionBar().hide();
                     if (mPrefs.getBoolean("fullScreen", false)) {
                         mainView.setSystemUiVisibility(
                                 HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -163,9 +162,11 @@ public class X48 extends Activity {
                                         | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                                         | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                                         | HPView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                                        // | HPView.SYSTEM_UI_FLAG_IMMERSIVE);
-                                        | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                                        // | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                                        | HPView.SYSTEM_UI_FLAG_IMMERSIVE
+                        );
                     }
+                    getActionBar().hide();
                 } else { // show action bar
                     if (mPrefs.getBoolean("fullScreen", false)) {
                         mainView.setSystemUiVisibility(
@@ -198,7 +199,9 @@ public class X48 extends Activity {
                                 | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                                 | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                                 | HPView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                                | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                                // | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                                | HPView.SYSTEM_UI_FLAG_IMMERSIVE
+                        );
                 getActionBar().hide();
             }
         } else {
@@ -719,8 +722,9 @@ public class X48 extends Activity {
                             flipScreen();
                             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
                             boolean msgbox = mPrefs.getBoolean("no_loadprog_msgbox", false);
-                            if (!msgbox)
+                            if (!msgbox) {
                                 showDialog(DIALOG_PROG_OK);
+                            }
                         } else {
                             showDialog(DIALOG_PROG_KO);
                         }
@@ -738,7 +742,6 @@ public class X48 extends Activity {
                     String port2 = mPrefs.getString("port2", "0");
                     managePort(2, port2);
                     checkPrefs();
-
                 }
             }
         }

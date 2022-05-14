@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">48sx</string>
-    <string name="load_prog">Put object on stack</string>
+    <string name="load_prog">Load object on stack</string>
     <string name="save_state">Save memory/state</string>
     <string name="rom_legal">This emulator need a ROM to run. HP-ROM files are copyrighted by Hewlett Packard. But since fall 2000 HP ACO allowed the non commercial use of the HP48 ROM\'s even if you\'re not an owner of this calculator type.</string>
     <string name="button_download">Download and install ROM from HPcalc.org</string>
@@ -10,7 +10,7 @@
     <string name="full_reset_memory">Full reset</string>
     <string name="help">Help</string>
     <string name="ok">OK</string>
-    <string name="prog_ok">The object has been put on the stack. Now, some HP knowledge is necessary:\n\n- PRESS ON\n\n- if this is a library, push 0, then STO and shut down (right shift + on) / restart (on) the calculator: the program will be available in the Library (shift right + 2) menu.\n\n- If this is a regular object (dir, external, etc.), push a name between quotes on the stack (for example, \'prog\'), then push STO: the prog will be available in the VAR menu</string>
+    <string name="prog_ok">The object has been loaded on the stack. Now, some HP knowledge is necessary:\n\n- PRESS ON\n\n- if this is a library, push 0, then STO and shut down (right shift + on) / restart (on) the calculator: the program will be available in the Library (shift right + 2) menu.\n\n- If this is a regular object (dir, external, etc.), push a name between quotes on the stack (for example, \'prog\'), then push STO: the prog will be available in the VAR menu</string>
     <string name="prog_ko">This object cannot be loaded.\nMake sure it\'s a valid one and you have enough memory to load it</string>
     <string name="rom_ko">Rom files not found! This shouldn\'t happen :\\. Quitting now!</string>
     <string name="general_preferences">General settings</string>
