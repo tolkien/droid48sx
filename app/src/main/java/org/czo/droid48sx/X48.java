@@ -158,7 +158,7 @@ public class X48 extends Activity {
                     if (mPrefs.getBoolean("fullScreen", false)) {
                         if (mainView != null) {
                             mainView.setSystemUiVisibility(
-                                              HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                    HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
                                             | HPView.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                                             | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                                             | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
@@ -173,7 +173,7 @@ public class X48 extends Activity {
                     if (mPrefs.getBoolean("fullScreen", false)) {
                         if (mainView != null) {
                             mainView.setSystemUiVisibility(
-                                              HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                    HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
                                             | HPView.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                                             | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                         }
@@ -198,14 +198,14 @@ public class X48 extends Activity {
         if (Build.VERSION.SDK_INT >= 19) {
             if (mainView != null) {
                 mainView.setSystemUiVisibility(
-                                  HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        HPView.SYSTEM_UI_FLAG_LAYOUT_STABLE
                                 | HPView.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                                 | HPView.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                                 | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                                 | HPView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                                 // | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                                 | HPView.SYSTEM_UI_FLAG_IMMERSIVE
-                        );
+                );
                 getActionBar().hide();
             }
         } else {
@@ -727,7 +727,8 @@ public class X48 extends Activity {
                             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
                             boolean msgbox = mPrefs.getBoolean("no_loadprog_msgbox", false);
                             if (!msgbox) {
-                                mainView.pressON();
+                                if (mainView != null)
+                                    mainView.pressON();
                                 showDialog(DIALOG_PROG_OK);
                             }
                         } else {
