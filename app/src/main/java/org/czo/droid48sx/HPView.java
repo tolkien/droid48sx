@@ -814,6 +814,16 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
 
     }
 
+    public void pressON() {
+        key(44, true);
+        try {
+            Thread.sleep(40);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        key(44, false);
+    }
+
     private boolean actionKey(boolean d, int code) {
         switch (code) {
             case KeyEvent.KEYCODE_BACK: {

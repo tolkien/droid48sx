@@ -727,6 +727,7 @@ public class X48 extends Activity {
                             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
                             boolean msgbox = mPrefs.getBoolean("no_loadprog_msgbox", false);
                             if (!msgbox) {
+                                mainView.pressON();
                                 showDialog(DIALOG_PROG_OK);
                             }
                         } else {
