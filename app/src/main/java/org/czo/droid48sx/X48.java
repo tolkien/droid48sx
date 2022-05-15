@@ -746,6 +746,7 @@ public class X48 extends Activity {
                     managePort(1, port1);
                     String port2 = mPrefs.getString("port2", "0");
                     managePort(2, port2);
+                    checkPrefs();
                 }
             }
         }
