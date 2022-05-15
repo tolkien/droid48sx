@@ -185,7 +185,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                         p.setColor(srcColor);
                         backCanvas.drawRect(0, 0, w, h, p);
                         /* presque fullscreen */
-                        float lcd_ratio = (land ? h : w) / 131;
+                        float lcd_ratio = (land ? h : w) / 135f; // was 131
                         screenPaint.setFilterBitmap(false);
                         if (!land && fullWidth) {
                             screenPaint.setFilterBitmap(true);
