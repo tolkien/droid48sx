@@ -189,7 +189,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                         screenPaint.setFilterBitmap(false);
                         if (!land && fullWidth) {
                             screenPaint.setFilterBitmap(true);
-                            lcd_ratio = ((land ? (float) h : (float) w) + 0f) / 133f;
+                            lcd_ratio = ((land ? (float) h : (float) w) + 0f) / 135f; // was 133
                         }
                         Dlog.d("lcd ratio: " + lcd_ratio);
                         int start_w = (int) (131 * lcd_ratio);
