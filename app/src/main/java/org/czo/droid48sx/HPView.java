@@ -193,7 +193,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                         }
                         Dlog.d("lcd ratio: " + lcd_ratio);
                         int start_w = (int) (131 * lcd_ratio);
-                        int start_h = (int) (72 * lcd_ratio); // was 71
+                        int start_h = (int) (73 * lcd_ratio); // was 71
                         float usable_w = w;
                         float remaning_w = 0;
                         float usable_h = h - start_h;
