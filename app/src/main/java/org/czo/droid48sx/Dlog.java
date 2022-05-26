@@ -9,6 +9,9 @@ public class Dlog {
     public static final void d(String message) {
         if (BuildConfig.DEBUG && BuildConfig.BUILD_TYPE.equals("debug")) Log.d(TAG, message);
     }
+    public static final void e(String message) {
+        if (BuildConfig.DEBUG && BuildConfig.BUILD_TYPE.equals("debug")) Log.e(TAG, message);
+    }
 
 }
 
