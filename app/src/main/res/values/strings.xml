@@ -84,4 +84,6 @@
     <string name="save_checkpoint">Save checkpoint</string>
     <string name="restore_checkpoint">Restore checkpoint</string>
     <string name="build_preferences">Build info</string>
+    <string name="restore_zip">Open ZIP checkpoint\.\.\.</string>
+    <string name="save_zip">Save ZIP checkpoint As\.\.\.</string>
 </resources>

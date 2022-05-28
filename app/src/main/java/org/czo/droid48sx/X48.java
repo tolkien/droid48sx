@@ -6,6 +6,12 @@ import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.io.InputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 import android.Manifest;
 import android.app.Activity;
@@ -20,6 +26,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -43,6 +50,9 @@ public class X48 extends Activity {
     static final private int SAVE_CHECKPOINT_ID = Menu.FIRST + 7;
     static final private int RESTORE_CHECKPOINT_ID = Menu.FIRST + 8;
     static final private int FULL_RESET_ID = Menu.FIRST + 9;
+    static final private int SAVE_ZIP_ID = Menu.FIRST + 10;
+    static final private int RESTORE_ZIP_ID = Menu.FIRST + 11;
+
     static final private int ROM_ID = 123;
     private static EmulatorThread thread;
 
@@ -65,7 +75,7 @@ public class X48 extends Activity {
         File hpDir = new File(config_dir);
         if (!hpDir.exists() || !hpDir.isDirectory()) {
             Dlog.d("===================== ERROR: cannot open " + config_dir);
-            Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_LONG).show();
             finish();
         }
 
@@ -118,6 +128,7 @@ public class X48 extends Activity {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
 
+        getPrefs();
         checkPrefs();
 
         thread = new EmulatorThread(this);
@@ -162,7 +173,7 @@ public class X48 extends Activity {
                                             | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                                             | HPView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                                             | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                                            // | HPView.SYSTEM_UI_FLAG_IMMERSIVE
+                                    // | HPView.SYSTEM_UI_FLAG_IMMERSIVE
                             );
                         }
                     }
@@ -203,7 +214,7 @@ public class X48 extends Activity {
                                 | HPView.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                                 | HPView.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                                 | HPView.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                                //| HPView.SYSTEM_UI_FLAG_IMMERSIVE
+                        //| HPView.SYSTEM_UI_FLAG_IMMERSIVE
                 );
                 getActionBar().hide();
             }
@@ -263,7 +274,7 @@ public class X48 extends Activity {
     }
 
     public void checkPrefs() {
-        getPrefs();
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         checkfullscreen();
         if (mainView != null) {
@@ -352,13 +363,6 @@ public class X48 extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuItem item;
         super.onCreateOptionsMenu(menu);
-        // We are going to create two menus. Note that we assign them
-        // unique integer IDs, labels from our string resources, and
-        // given them shortcuts.
-        // menu.add(0, RESET_ID, 0, R.string.reset);
-
-        // menu.add(0, LITEKBD_ID, 0, R.string.toggle_lite_keyb);
-        // menu.add(0, SAVE_ID, 0, R.string.save_state);
 
         item = menu.add(0, FULL_RESET_ID, 0, R.string.full_reset_memory);
         item.setIcon(R.drawable.ic_delete_white_24dp);
@@ -385,7 +389,19 @@ public class X48 extends Activity {
         }
 
         item = menu.add(0, LOAD_ID, 0, R.string.load_prog);
-        item.setIcon(R.drawable.ic_playlist_add_white_24dp);
+        item.setIcon(R.drawable.ic_settings_white_24dp);
+        if (Build.VERSION.SDK_INT >= 11) {
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
+
+        item = menu.add(0, SAVE_ZIP_ID, 0, R.string.save_zip);
+        item.setIcon(R.drawable.ic_settings_white_24dp);
+        if (Build.VERSION.SDK_INT >= 11) {
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
+
+        item = menu.add(0, RESTORE_ZIP_ID, 0, R.string.restore_zip);
+        item.setIcon(R.drawable.ic_settings_white_24dp);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
@@ -405,6 +421,16 @@ public class X48 extends Activity {
         }
     }
 
+    private boolean deleteDirectory(File directoryToBeDeleted) throws IOException {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+        return directoryToBeDeleted.delete();
+    }
+
     public void copyFile(File src, File dst) throws IOException {
         if (src.exists()) {
             InputStream in = new FileInputStream(src);
@@ -422,11 +448,11 @@ public class X48 extends Activity {
     }
 
     protected void restoreCheckpoint() {
+        Dlog.d("===================== Checkpoint restored...");
+
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Editor spe = mPrefs.edit();
-
-        Dlog.d("===================== Checkpoint restored...");
-        Toast.makeText(getApplicationContext(), "Checkpoint restored...", Toast.LENGTH_SHORT).show();
+        boolean ResultOK = true;
 
         try {
             for (String s : new String[]{"port1", "port2"}) {
@@ -445,9 +471,17 @@ public class X48 extends Activity {
             }
             spe.commit();
 
-        } catch (IOException e) {
+//            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+//            boolean msgbox = mPrefs.getBoolean("no_loadprog_msgbox", false);
+
+
+        } catch (Throwable e) {
             Dlog.d("Error: " + e.getMessage());
+            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            ResultOK = false;
         }
+        if (ResultOK)
+            Toast.makeText(getApplicationContext(), "Checkpoint restored. Please re-run the app!", Toast.LENGTH_LONG).show();
 
         need_to_quit = true;
         saveonExit = false;
@@ -459,7 +493,7 @@ public class X48 extends Activity {
         Editor spe = mPrefs.edit();
 
         Dlog.d("===================== Full reset done...");
-        Toast.makeText(getApplicationContext(), "Full reset done...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Full reset done...", Toast.LENGTH_LONG).show();
 
         try {
             spe.putString("port1", "0");
@@ -480,14 +514,14 @@ public class X48 extends Activity {
     protected void saveCheckpoint() {
 
         Dlog.d("===================== Checkpoint saved...");
-        Toast.makeText(getApplicationContext(), "Checkpoint saved...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Checkpoint saved...", Toast.LENGTH_LONG).show();
 
         saveState();
 
         File hpDir = new File(X48.config_dir, "checkpoint");
-        if (!hpDir.exists()) {
+        if (!hpDir.exists())
             hpDir.mkdir();
-        }
+
         try {
             for (String s : new String[]{"port1", "port2"}) {
                 deleteFile(new File(X48.config_dir + "checkpoint/" + s));
@@ -540,6 +574,263 @@ public class X48 extends Activity {
         }
     }
 
+    public void restoreZIP(String outfile) {
+        Dlog.d("===================== restoreZIP...");
+
+        boolean ResultOK = false;
+        File restoredDir = new File(X48.config_dir, "restored");
+        Dlog.e("zip infile: " + outfile);
+
+
+        try {
+            String fileZip = outfile;
+
+            if (restoredDir.exists())
+                deleteDirectory(restoredDir);
+
+            if (!restoredDir.exists())
+                restoredDir.mkdir();
+
+            byte[] buffer = new byte[1024];
+            ZipInputStream zis = new ZipInputStream(new FileInputStream(fileZip));
+            ZipEntry zipEntry = zis.getNextEntry();
+            while (zipEntry != null) {
+                String FileName = zipEntry.getName();
+                File newFile = new File(restoredDir, FileName);
+                if (FileName.equals("hp48") ||
+                        FileName.equals("rom") ||
+                        FileName.equals("ram") ||
+                        FileName.equals("port1") ||
+                        FileName.equals("port2")) {
+                    Dlog.d("new name: " + FileName);
+                    // write file content
+                    FileOutputStream fos = new FileOutputStream(newFile);
+                    int len;
+                    while ((len = zis.read(buffer)) > 0) {
+                        fos.write(buffer, 0, len);
+                    }
+                    fos.close();
+                }
+                zipEntry = zis.getNextEntry();
+            }
+            zis.closeEntry();
+            zis.close();
+        } catch (Throwable e) {
+            Dlog.e("Error: " + e.getMessage());
+            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+
+        try {
+
+            for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
+                File T = new File(X48.config_dir + "restored/" + s);
+                if (T.exists()) {
+                    ResultOK = true;
+                }
+            }
+
+            if (ResultOK) {
+
+                File checkpointDir = new File(X48.config_dir, "checkpoint");
+
+                if (checkpointDir.exists())
+                    deleteDirectory(checkpointDir);
+
+                if (!checkpointDir.exists())
+                    checkpointDir.mkdir();
+
+                for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
+                    copyFile(new File(X48.config_dir + "restored/" + s), new File(X48.config_dir + "checkpoint/" + s));
+                }
+            }
+            if (restoredDir.exists()) {
+                deleteDirectory(restoredDir);
+            }
+        } catch (Throwable e) {
+            Dlog.d("Error: " + e.getMessage());
+            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+        if (ResultOK)
+            restoreCheckpoint();
+        else
+            Toast.makeText(getApplicationContext(), "ERROR: WRONG ZIP! This zip file must contain the files 'hp48', 'rom', 'ram' and maybe 'port1' or 'port2'.", Toast.LENGTH_LONG).show();
+
+        checkPrefs();
+    }
+
+    private void saveZip() {
+        Dlog.d("===================== saveZIP...");
+
+        boolean ResultOK = true;
+        File checkpointDir = new File(X48.config_dir, "checkpoint");
+        String date = new SimpleDateFormat("yyyy-MM-dd_HH'h'mm").format(new Date(System.currentTimeMillis()));
+        String outfile = "/sdcard/checkpoint_" + date + ".zip";
+        Dlog.e("zip outfile: " + outfile);
+
+        if (checkpointDir.exists()) {
+            try {
+                ArrayList<String> files = new ArrayList<String>();
+
+                for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
+                    File T = new File(X48.config_dir + "checkpoint/" + s);
+                    if (T.exists()) {
+                        files.add(X48.config_dir + "checkpoint/" + s);
+                    }
+                }
+
+                FileOutputStream fos = new FileOutputStream(outfile);
+                ZipOutputStream zipOut = new ZipOutputStream(fos);
+                for (String srcFile : files) {
+                    File fileToZip = new File(srcFile);
+                    FileInputStream fis = new FileInputStream(fileToZip);
+                    ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+                    zipOut.putNextEntry(zipEntry);
+
+                    byte[] bytes = new byte[1024];
+                    int length;
+                    while ((length = fis.read(bytes)) >= 0) {
+                        zipOut.write(bytes, 0, length);
+                    }
+                    fis.close();
+                }
+                zipOut.close();
+                fos.close();
+            } catch (Throwable e) {
+                Dlog.e("Error: " + e.getMessage());
+                Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                ResultOK = false;
+            }
+            if (ResultOK) {
+                Toast.makeText(getApplicationContext(), outfile + " saved...", Toast.LENGTH_LONG).show();
+            }
+        }
+        checkPrefs();
+    }
+
+    private void storageEnabledSaveZip() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                requestPermissions(
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        123);
+            } else saveZip();
+        } else saveZip();
+    }
+
+    private void storageEnabledRestoreZip() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                requestPermissions(
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        123);
+            } else openZip();
+        } else openZip();
+    }
+
+    private void storageEnabledOpenLoad() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                requestPermissions(
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        123);
+            } else openDocument();
+        } else openDocument();
+    }
+
+    private void openDocument() {
+        Intent loadFileIntent = new Intent();
+        loadFileIntent.setClass(this, ProgListView.class);
+        startActivityForResult(loadFileIntent, LOAD_ID);
+    }
+
+    private void openZip() {
+        Intent loadFileIntent = new Intent();
+        loadFileIntent.setClass(this, ProgListView.class);
+        startActivityForResult(loadFileIntent, RESTORE_ZIP_ID);
+    }
+
+    private void openDocument2() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_TITLE, "currentFile");
+        //startActivityForResult(Intent.createChooser(intent, "Select File"), LOAD_ID);
+        startActivityForResult(intent, LOAD_ID);
+    }
+
+    private void loadObject(final int requestCode, final int resultCode, final Intent extras) {
+
+        final String filename = extras.getStringExtra("currentFile");
+
+        if (filename != null) {
+            Dlog.d("===================== LoadObjet = " + filename);
+            int retCode = loadProg(filename);
+            if (retCode == 1) {
+                flipScreen();
+                SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+                boolean msgbox = mPrefs.getBoolean("no_loadprog_msgbox", false);
+                if (!msgbox) {
+                    if (mainView != null)
+                        mainView.pressON();
+                    // showDialog(DIALOG_PROG_OK);
+                    Toast.makeText(getApplicationContext(), filename + " loaded...", Toast.LENGTH_LONG).show();
+
+                }
+            } else {
+                showDialog(DIALOG_PROG_KO);
+            }
+        }
+    }
+
+    private void loadZip(final int requestCode, final int resultCode, final Intent extras) {
+
+        final String filename = extras.getStringExtra("currentFile");
+
+        if (filename != null) {
+            Dlog.d("===================== LoadZIP = " + filename);
+            restoreZIP(filename);
+        }
+    }
+
+    private void loadObject2(final int requestCode, final int resultCode, final Intent extras) {
+
+        String filename = null;
+
+        if (extras != null) {
+            Uri uri = extras.getData();
+            String url = null;
+            if (uri != null)
+                url = uri.toString();
+            if (url != null) {
+                Dlog.d("===================== URL = " + url);
+                filename = url;
+            }
+        }
+
+        if (filename != null) {
+            Dlog.e("===================== LoadObjet = " + filename);
+            int retCode = loadProg(filename);
+            if (retCode == 1) {
+                flipScreen();
+                SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+                boolean msgbox = mPrefs.getBoolean("no_loadprog_msgbox", false);
+                if (!msgbox) {
+                    if (mainView != null)
+                        mainView.pressON();
+                   // showDialog(DIALOG_PROG_OK);
+                }
+            } else {
+                showDialog(DIALOG_PROG_KO);
+            }
+        }
+    }
+
+
     /**
      * Called when a menu item is selected.
      */
@@ -551,12 +842,24 @@ public class X48 extends Activity {
 
         switch (item.getItemId()) {
 
-            case RESTORE_CHECKPOINT_ID:
-                restoreCheckpoint();
+            case LOAD_ID:
+                storageEnabledOpenLoad();
+                break;
+
+            case SAVE_ZIP_ID:
+                storageEnabledSaveZip();
+                return true;
+
+            case RESTORE_ZIP_ID:
+                storageEnabledRestoreZip();
                 return true;
 
             case FULL_RESET_ID:
                 fullReset();
+                return true;
+
+            case RESTORE_CHECKPOINT_ID:
+                restoreCheckpoint();
                 return true;
 
             case SAVE_CHECKPOINT_ID:
@@ -565,7 +868,7 @@ public class X48 extends Activity {
 
             case RESET_ID:
                 Dlog.d("===================== Reset done...");
-                Toast.makeText(getApplicationContext(), "Reset done...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Reset done...", Toast.LENGTH_LONG).show();
                 AssetUtil.copyAsset(getResources().getAssets(), true);
                 need_to_quit = true;
                 saveonExit = false;
@@ -574,35 +877,9 @@ public class X48 extends Activity {
 
             case SAVE_ID:
                 Dlog.d("===================== State saved...");
-                Toast.makeText(getApplicationContext(), "State saved...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "State saved...", Toast.LENGTH_LONG).show();
                 saveState();
                 return true;
-
-            case LOAD_ID:
-                if (Build.VERSION.SDK_INT >= 23) {
-                    if (checkSelfPermission(
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                        requestPermissions(
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                123);
-                    } else {
-                        //openDocument();
-                        Intent loadFileIntent = new Intent();
-                        loadFileIntent.setClass(this, ProgListView.class);
-                        startActivityForResult(loadFileIntent, LOAD_ID);
-                    }
-                } else {
-                    //openDocument();
-                    Intent loadFileIntent = new Intent();
-                    loadFileIntent.setClass(this, ProgListView.class);
-                    startActivityForResult(loadFileIntent, LOAD_ID);
-                }
-
-                break;
-
-            case LITEKBD_ID:
-                changeKeybLite();
-                break;
 
             case SETTINGS_ID:
                 Intent settingsIntent = new Intent();
@@ -686,61 +963,25 @@ public class X48 extends Activity {
         return null;
     }
 
-    private void openDocument() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_TITLE, "currentFile");
-        startActivityForResult(Intent.createChooser(intent, "Select File"), LOAD_ID);
-        //startActivityForResult(intent, LOAD_ID);
-    }
-
     @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent extras) {
+    protected void onActivityResult(final int requestCode, final int resultCode,
+                                    final Intent extras) {
         Dlog.d("requestCode: " + requestCode + " / " + resultCode);
         super.onActivityResult(requestCode, resultCode, extras);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case ROM_ID: {
-                    break;
-                }
+
                 case LOAD_ID: {
-                    final String filename = extras.getStringExtra("currentFile");
-
-//                    String filename = null;
-//                    if (extras != null) {
-//                        Uri uri = extras.getData();
-//                        String url = null;
-//                        if (uri != null)
-//                            url = uri.toString();
-//                        if (url != null) {
-//                            Dlog.d("===================== URL = " + url);
-//                            filename = url;
-//                        }
-//                    }
-
-                    if (filename != null) {
-                        Dlog.d("===================== LoadObjet = " + filename);
-                        int retCode = loadProg(filename);
-                        if (retCode == 1) {
-                            flipScreen();
-                            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-                            boolean msgbox = mPrefs.getBoolean("no_loadprog_msgbox", false);
-                            if (!msgbox) {
-                                if (mainView != null)
-                                    mainView.pressON();
-                                showDialog(DIALOG_PROG_OK);
-                            }
-                        } else {
-                            showDialog(DIALOG_PROG_KO);
-                        }
-                    }
+                    loadObject(requestCode, resultCode, extras);
                     break;
                 }
-                case SETTINGS_ID: {
-                    if (mainView != null)
-                        mainView.updateContrast();
 
+                case RESTORE_ZIP_ID: {
+                    loadZip(requestCode, resultCode, extras);
+                    break;
+                }
+
+                case SETTINGS_ID: {
                     SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
                     String port1 = mPrefs.getString("port1", "0");
                     managePort(1, port1);
@@ -828,8 +1069,8 @@ public class X48 extends Activity {
         stopHPEmulator();
         if (mainView != null)
             mainView.unpauseEvent();
-        if (need_to_quit)
-            System.exit(0);
+        // if (need_to_quit)
+        //     System.exit(0);
     }
 
     @Override
