@@ -395,13 +395,13 @@ public class X48 extends Activity {
         }
 
         item = menu.add(0, SAVE_ZIP_ID, 0, R.string.save_zip);
-        item.setIcon(R.drawable.ic_settings_white_24dp);
+        item.setIcon(R.drawable.ic_archive_white_24dp);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
 
         item = menu.add(0, RESTORE_ZIP_ID, 0, R.string.restore_zip);
-        item.setIcon(R.drawable.ic_settings_white_24dp);
+        item.setIcon(R.drawable.ic_restore_white_24dp);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
