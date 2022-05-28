@@ -129,14 +129,14 @@ public class ProgListView extends ListActivity {
             final File file = new File(path);
 
             if (position == 0 && PARENT_DIR.equals(path)) {
-                imageView.setImageResource(R.drawable.ic_folder_black_24dp);
+                imageView.setImageResource(R.drawable.ic_action_folder);
                 imageView.setColorFilter(0x77ffffff);
             } else {
                 if (file.isDirectory()) {
-                    imageView.setImageResource(R.drawable.ic_folder_black_24dp);
+                    imageView.setImageResource(R.drawable.ic_action_folder);
                     imageView.setColorFilter(0x77ffffff);
                 } else {
-                    imageView.setImageResource(R.drawable.ic_insert_drive_file_black_24dp);
+                    imageView.setImageResource(R.drawable.ic_action_file);
                     imageView.setColorFilter(0x77ffffff);
                 }
             }

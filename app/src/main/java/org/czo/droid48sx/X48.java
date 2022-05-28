@@ -365,49 +365,49 @@ public class X48 extends Activity {
         super.onCreateOptionsMenu(menu);
 
         item = menu.add(0, FULL_RESET_ID, 0, R.string.full_reset_memory);
-        item.setIcon(R.drawable.ic_delete_white_24dp);
+        item.setIcon(R.drawable.ic_action_reset);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
 
         item = menu.add(0, RESTORE_CHECKPOINT_ID, 0, R.string.restore_checkpoint);
-        item.setIcon(R.drawable.ic_restore_white_24dp);
+        item.setIcon(R.drawable.ic_action_restore);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
 
         item = menu.add(0, SAVE_CHECKPOINT_ID, 0, R.string.save_checkpoint);
-        item.setIcon(R.drawable.ic_archive_white_24dp);
+        item.setIcon(R.drawable.ic_action_archive);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
 
         item = menu.add(0, SETTINGS_ID, 0, R.string.settings);
-        item.setIcon(R.drawable.ic_settings_white_24dp);
+        item.setIcon(R.drawable.ic_action_settings);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
 
         item = menu.add(0, LOAD_ID, 0, R.string.load_prog);
-        item.setIcon(R.drawable.ic_settings_white_24dp);
+        item.setIcon(R.drawable.ic_action_load_object);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
 
         item = menu.add(0, SAVE_ZIP_ID, 0, R.string.save_zip);
-        item.setIcon(R.drawable.ic_archive_white_24dp);
+        item.setIcon(R.drawable.ic_action_save_zip);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
 
         item = menu.add(0, RESTORE_ZIP_ID, 0, R.string.restore_zip);
-        item.setIcon(R.drawable.ic_restore_white_24dp);
+        item.setIcon(R.drawable.ic_action_restore_zip);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
 
         item = menu.add(0, QUIT_ID, 0, R.string.button_quit);
-        item.setIcon(R.drawable.ic_power_settings_new_white_24dp);
+        item.setIcon(R.drawable.ic_action_power);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
@@ -906,7 +906,7 @@ public class X48 extends Activity {
         switch (id) {
             case DIALOG_PROG_OK:
                 return new AlertDialog.Builder(X48.this)
-                        .setIcon(R.drawable.ic_warning_black_24dp)
+                        .setIcon(R.drawable.ic_warning)
                         .setTitle(R.string.help)
                         .setMessage(R.string.prog_ok)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -917,7 +917,7 @@ public class X48 extends Activity {
                         .create();
             case DIALOG_PROG_KO:
                 return new AlertDialog.Builder(X48.this)
-                        .setIcon(R.drawable.ic_warning_black_24dp)
+                        .setIcon(R.drawable.ic_warning)
                         .setTitle(R.string.help)
                         .setMessage(R.string.prog_ko)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -928,7 +928,7 @@ public class X48 extends Activity {
                         .create();
             case DIALOG_ROM_KO:
                 return new AlertDialog.Builder(X48.this)
-                        .setIcon(R.drawable.ic_warning_black_24dp)
+                        .setIcon(R.drawable.ic_warning)
                         .setTitle(R.string.help)
                         .setMessage(R.string.rom_ko)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -939,7 +939,7 @@ public class X48 extends Activity {
                         .create();
             case DIALOG_RAM_KO:
                 return new AlertDialog.Builder(X48.this)
-                        .setIcon(R.drawable.ic_warning_black_24dp)
+                        .setIcon(R.drawable.ic_warning)
                         .setTitle(R.string.help)
                         .setMessage(R.string.ram_install_error)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -950,7 +950,7 @@ public class X48 extends Activity {
                         .create();
             case DIALOG_RAM_OK:
                 return new AlertDialog.Builder(X48.this)
-                        .setIcon(R.drawable.ic_warning_black_24dp)
+                        .setIcon(R.drawable.ic_warning)
                         .setTitle(R.string.help)
                         .setMessage(R.string.ram_install_warning)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {

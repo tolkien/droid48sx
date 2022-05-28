@@ -8,7 +8,7 @@
     <string name="button_quit">Quit</string>
     <string name="reset_memory">Reset memory and quit</string>
     <string name="full_reset_memory">Full reset</string>
-    <string name="help">Help</string>
+    <string name="help">Warning</string>
     <string name="ok">OK</string>
     <string name="prog_ok">The object has been loaded on the stack. Now, some HP knowledge is necessary:\n\n- If this is a library, push 0, then STO and shut down (right shift + on) then restart (on) the calculator: the program will be available in the LIBRARY menu.\n\n- If this is a regular object (dir, external, etc.), push a name between quotes on the stack (for example, \'FOO\'), then push STO: the object will be available in the VAR menu</string>
     <string name="prog_ko">This object cannot be loaded.\nMake sure it\'s a valid one and you have enough memory to load it</string>
