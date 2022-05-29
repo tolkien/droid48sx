@@ -29,6 +29,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ public class X48 extends Activity {
     private HPView mainView;
     private boolean need_to_quit;
     public static String config_dir;
+    public static String sdcard_dir;
     static final private int LOAD_ID = Menu.FIRST + 1;
     static final private int SAVE_ID = Menu.FIRST + 2;
     static final private int QUIT_ID = Menu.FIRST + 3;
@@ -64,13 +66,14 @@ public class X48 extends Activity {
         super.onCreate(savedInstanceState);
 
         Dlog.d("===================== starting activity");
-
-        // /sdcard
+//try
+        // /sdcard/Android/data/org.czo.droid48sx/files/
         if (getExternalFilesDir(null) != null) {
             config_dir = getExternalFilesDir(null).getAbsolutePath() + "/";
         } else {
             config_dir = getFilesDir().getAbsolutePath() + "/";
         }
+
         //config_dir = "/badone" ;
         File hpDir = new File(config_dir);
         if (!hpDir.exists() || !hpDir.isDirectory()) {
@@ -78,9 +81,16 @@ public class X48 extends Activity {
             Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_LONG).show();
             finish();
         }
+        Dlog.e("config_dir java: " + config_dir);
 
-        Dlog.d("config_dir java: " + config_dir);
         getExternalPath(config_dir);
+
+        // /sdcard/
+        // sdcard_dir = "/sdcard";
+        // sdcard_dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        sdcard_dir = Environment.getExternalStorageDirectory().getAbsolutePath();
+        Dlog.e("sdcard_dir: " + sdcard_dir);
+
 
         Dlog.d("===================== getIntentAction = " + getIntent().getAction() + " =====================");
 
@@ -666,7 +676,7 @@ public class X48 extends Activity {
         boolean ResultOK = true;
         File checkpointDir = new File(X48.config_dir, "checkpoint");
         String date = new SimpleDateFormat("yyyy-MM-dd_HH'h'mm").format(new Date(System.currentTimeMillis()));
-        String outfile = "/sdcard/checkpoint_" + date + ".zip";
+        String outfile = sdcard_dir + "/checkpoint_" + date + ".zip";
         Dlog.e("zip outfile: " + outfile);
 
         if (checkpointDir.exists()) {
@@ -822,7 +832,7 @@ public class X48 extends Activity {
                 if (!msgbox) {
                     if (mainView != null)
                         mainView.pressON();
-                   // showDialog(DIALOG_PROG_OK);
+                    // showDialog(DIALOG_PROG_OK);
                 }
             } else {
                 showDialog(DIALOG_PROG_KO);

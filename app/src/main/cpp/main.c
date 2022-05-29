@@ -398,7 +398,7 @@ Java_org_czo_droid48sx_X48_getExternalPath( JNIEnv*  env,
  const char * fp = (*env)->GetStringUTFChars(env, path, NULL);
 	strcpy(config_dir, fp);
 	(*env)->ReleaseStringUTFChars(env, path, fp);
-  LOGD("config_dir C: %s", config_dir);
+  LOGE("config_dir C: %s", config_dir);
 
 
 }

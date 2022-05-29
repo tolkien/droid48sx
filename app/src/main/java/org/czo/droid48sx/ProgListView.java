@@ -1,5 +1,7 @@
 package org.czo.droid48sx;
 
+import static org.czo.droid48sx.X48.sdcard_dir;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +45,12 @@ public class ProgListView extends ListActivity {
 
         // go to the root directory
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        //String last_dir = sp.getString("last_dir", "/storage/emulated/0/Download");
-        String last_dir = sp.getString("last_dir", "/sdcard");
 
-        Dlog.d("===================== ProgListView: " + last_dir);
+        //String last_dir = sp.getString("last_dir", "/storage/emulated/0/Download");
+        //String last_dir = sp.getString("last_dir", "/sdcard");
+        String last_dir = sp.getString("last_dir", sdcard_dir);
+
+        Dlog.e("===================== ProgListView: " + last_dir);
         showDirectory(last_dir);
     }
 
