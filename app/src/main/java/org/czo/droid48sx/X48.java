@@ -77,12 +77,11 @@ public class X48 extends Activity {
         //config_dir = "/badone" ;
         File hpDir = new File(config_dir);
         if (!hpDir.exists() || !hpDir.isDirectory()) {
-            Dlog.d("===================== ERROR: cannot open " + config_dir);
+            Dlog.e("ERROR: cannot open " + config_dir);
             Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_LONG).show();
             finish();
         }
         Dlog.e("config_dir java: " + config_dir);
-
         getExternalPath(config_dir);
 
         // /sdcard/
