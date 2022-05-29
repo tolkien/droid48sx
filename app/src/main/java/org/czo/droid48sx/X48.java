@@ -65,30 +65,38 @@ public class X48 extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Dlog.d("===================== starting activity");
+        try {
+
+            Dlog.d("===================== starting activity");
 //try
-        // /sdcard/Android/data/org.czo.droid48sx/files/
-        if (getExternalFilesDir(null) != null) {
-            config_dir = getExternalFilesDir(null).getAbsolutePath() + "/";
-        } else {
-            config_dir = getFilesDir().getAbsolutePath() + "/";
-        }
+            // /sdcard/Android/data/org.czo.droid48sx/files/
+            if (getExternalFilesDir(null) != null) {
+                config_dir = getExternalFilesDir(null).getAbsolutePath() + "/";
+            } else {
+                config_dir = getFilesDir().getAbsolutePath() + "/";
+            }
 
-        //config_dir = "/badone" ;
-        File hpDir = new File(config_dir);
-        if (!hpDir.exists() || !hpDir.isDirectory()) {
-            Dlog.e("ERROR: cannot open " + config_dir);
-            Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_LONG).show();
-            finish();
-        }
-        Dlog.e("config_dir java: " + config_dir);
-        getExternalPath(config_dir);
+            //config_dir = "/badone" ;
+            File hpDir = new File(config_dir);
+            if (!hpDir.exists() || !hpDir.isDirectory()) {
+                Dlog.e("ERROR: cannot open " + config_dir);
+                Toast.makeText(getApplicationContext(), "ERROR: cannot open " + config_dir, Toast.LENGTH_LONG).show();
+                finish();
+            }
+            Dlog.e("config_dir java: " + config_dir);
+            getExternalPath(config_dir);
 
-        // /sdcard/
-        // sdcard_dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-        sdcard_dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Environment.DIRECTORY_DOWNLOADS;
-        // sdcard_dir = "/sdcard";
-        Dlog.e("sdcard_dir: " + sdcard_dir);
+            // /sdcard/
+            sdcard_dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Environment.DIRECTORY_DOWNLOADS;
+            File sdcardDir = new File(sdcard_dir);
+            if (!sdcardDir.exists() || !sdcardDir.isDirectory()) {
+                sdcard_dir = "/sdcard";
+            }
+            Dlog.e("sdcard_dir: " + sdcard_dir);
+            Toast.makeText(getApplicationContext(), "SDCARD: " + sdcard_dir, Toast.LENGTH_LONG).show();
+        } catch (Throwable e) {
+            Dlog.d("Error: " + e.getMessage());
+        }
 
 
         Dlog.d("===================== getIntentAction = " + getIntent().getAction() + " =====================");
@@ -114,6 +122,8 @@ public class X48 extends Activity {
         readyToGo();
 
         if (!AssetUtil.isFilesReady()) {
+            Dlog.e("ERROR: cannot open hp48sx");
+            Toast.makeText(getApplicationContext(), "ERROR: cannot open hp48sx", Toast.LENGTH_LONG).show();
             finish();
         }
 
