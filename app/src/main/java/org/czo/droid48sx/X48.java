@@ -86,9 +86,9 @@ public class X48 extends Activity {
         getExternalPath(config_dir);
 
         // /sdcard/
-        // sdcard_dir = "/sdcard";
         // sdcard_dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-        sdcard_dir = Environment.getExternalStorageDirectory().getAbsolutePath();
+        sdcard_dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Environment.DIRECTORY_DOWNLOADS;
+        // sdcard_dir = "/sdcard";
         Dlog.e("sdcard_dir: " + sdcard_dir);
 
 
