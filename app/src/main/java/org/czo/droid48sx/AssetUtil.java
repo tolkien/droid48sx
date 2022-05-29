@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.res.AssetManager;
+import android.widget.Toast;
 
 public class AssetUtil {
 
@@ -56,8 +57,8 @@ public class AssetUtil {
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Throwable e) {
+            Dlog.e("Error: " + e.getMessage());
         }
     }
 

@@ -701,7 +701,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
         try {
             this.wait();
         } catch (InterruptedException e) {
-            // Dlog.d("pauseEvent: " + e.getMessage());
+            Dlog.e("pauseEvent: " + e.getMessage());
         }
         // Dlog.d("pauseEvent end");
     }
@@ -794,7 +794,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
                 try {
                     Thread.sleep(40);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Dlog.e("run: " + e.getMessage());
                 }
             } while (pause && surfaceValid);
         }
@@ -819,7 +819,7 @@ public class HPView extends SurfaceView implements SurfaceHolder.Callback, Runna
         try {
             Thread.sleep(40);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Dlog.e("pressON: " + e.getMessage());
         }
         key(44, false);
     }

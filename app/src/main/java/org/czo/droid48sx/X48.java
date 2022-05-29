@@ -93,7 +93,7 @@ public class X48 extends Activity {
                 sdcard_dir = "/sdcard";
             }
             Dlog.e("sdcard_dir: " + sdcard_dir);
-            Toast.makeText(getApplicationContext(), "SDCARD: " + sdcard_dir, Toast.LENGTH_LONG).show();
+
         } catch (Throwable e) {
             Dlog.d("Error: " + e.getMessage());
         }
@@ -490,9 +490,9 @@ public class X48 extends Activity {
             }
             spe.commit();
 
-//            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-//            boolean msgbox = mPrefs.getBoolean("no_loadprog_msgbox", false);
-
+            // todo for 128
+            // SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+            // boolean msgbox = mPrefs.getBoolean("no_loadprog_msgbox", false);
 
         } catch (Throwable e) {
             Dlog.d("Error: " + e.getMessage());
@@ -521,7 +521,7 @@ public class X48 extends Activity {
             for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
                 deleteFile(new File(X48.config_dir + s));
             }
-        } catch (IOException e) {
+        } catch (Throwable e) {
             Dlog.d("Error: " + e.getMessage());
         }
 
@@ -548,7 +548,7 @@ public class X48 extends Activity {
             for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
                 copyFile(new File(X48.config_dir + s), new File(X48.config_dir + "checkpoint/" + s));
             }
-        } catch (IOException e) {
+        } catch (Throwable e) {
             Dlog.d("Error: " + e.getMessage());
         }
         checkPrefs();
@@ -566,7 +566,7 @@ public class X48 extends Activity {
                 for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
                     copyFile(new File(X48.config_dir + s), new File(X48.config_dir + "checkpoint/" + s));
                 }
-            } catch (IOException e) {
+            } catch (Throwable e) {
                 Dlog.d("Error: " + e.getMessage());
             }
         }
@@ -599,7 +599,6 @@ public class X48 extends Activity {
         boolean ResultOK = false;
         File restoredDir = new File(X48.config_dir, "restored");
         Dlog.e("zip infile: " + outfile);
-
 
         try {
             String fileZip = outfile;
@@ -634,13 +633,6 @@ public class X48 extends Activity {
             }
             zis.closeEntry();
             zis.close();
-        } catch (Throwable e) {
-            Dlog.e("Error: " + e.getMessage());
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-
-        try {
 
             for (String s : new String[]{"hp48", "ram", "rom", "port1", "port2"}) {
                 File T = new File(X48.config_dir + "restored/" + s);
@@ -668,7 +660,6 @@ public class X48 extends Activity {
             }
         } catch (Throwable e) {
             Dlog.d("Error: " + e.getMessage());
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
         if (ResultOK)
@@ -1045,9 +1036,8 @@ public class X48 extends Activity {
                         for (int l = 0; l < size; l++)
                             fout.write(data);
                         fout.close();
-                    } catch (IOException e) {
+                    } catch (Throwable e) {
                         Dlog.d("Error: " + e.getMessage());
-                        e.printStackTrace();
                     }
                     change = true;
                 }
