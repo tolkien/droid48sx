@@ -482,17 +482,18 @@ public class X48 extends Activity {
             }
             File p1 = new File(X48.config_dir + "port1");
             if (p1.exists()) {
-                spe.putString("port1", "" + p1.length() / 1024);
+                spe.putString("port1", "128");
+            } else {
+                spe.putString("port1", "0");
             }
             File p2 = new File(X48.config_dir + "port2");
             if (p2.exists()) {
-                spe.putString("port2", "" + p2.length() / 1024);
+                spe.putString("port2", "128");
+            }else {
+                spe.putString("port2", "0");
             }
-            spe.commit();
 
-            // todo for 128
-            // SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-            // boolean msgbox = mPrefs.getBoolean("no_loadprog_msgbox", false);
+            spe.commit();
 
         } catch (Throwable e) {
             Dlog.d("Error: " + e.getMessage());
