@@ -3,7 +3,12 @@ package org.czo.droid48sx;
 import static org.czo.droid48sx.X48.sdcard_dir;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -13,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.icu.text.Collator;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -91,20 +97,24 @@ public class ProgListView extends ListActivity {
 
         // get all directories and C64 files in the given path
         final File[] files = this.currentDir.listFiles();
-        final Set<String> sorted = new TreeSet<String>();
+        final Set<String> sortedfile = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+        final Set<String> sortedfolder = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
 
         if (files != null) {
+            //Arrays.sort(files);
             for (final File file : files) {
                 final String name = file.getAbsolutePath();
 
                 if (file.isDirectory()) {
-                    sorted.add(name);
+                    sortedfolder.add(name);
                 } else {
-                    sorted.add(name);
+                    sortedfile.add(name);
                 }
             }
         }
-        this.currentFiles.addAll(sorted);
+
+        this.currentFiles.addAll(sortedfolder);
+        this.currentFiles.addAll(sortedfile);
 
         // display these images
         final Context context = this;
@@ -132,25 +142,31 @@ public class ProgListView extends ListActivity {
             final ImageView imageView = new ImageView(context);
             final File file = new File(path);
 
+            // create view for the directory name
+            final TextView textView = new TextView(context);
+
+
             if (position == 0 && PARENT_DIR.equals(path)) {
                 imageView.setImageResource(R.drawable.ic_action_folder);
                 imageView.setColorFilter(0x77ffffff);
+                textView.setText(file.getName());
             } else {
                 if (file.isDirectory()) {
                     imageView.setImageResource(R.drawable.ic_action_folder);
                     imageView.setColorFilter(0x77ffffff);
+                    textView.setText(file.getName());
                 } else {
                     imageView.setImageResource(R.drawable.ic_action_file);
                     imageView.setColorFilter(0x77ffffff);
+                    String date = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(file.lastModified()));
+                    String size = file.length()/1024 + "KB";
+                    textView.setText(file.getName() + " [ " + date + ", " + size + " ]");
                 }
             }
+
             int p = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
             // imageView.setPadding(p,p,p,p);
 
-            // create view for the directory name
-            final TextView textView = new TextView(context);
-
-            textView.setText(file.getName());
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(

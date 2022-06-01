@@ -413,14 +413,14 @@ public class X48 extends Activity {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
 
-        item = menu.add(0, SAVE_ZIP_ID, 0, R.string.save_zip);
-        item.setIcon(R.drawable.ic_action_save_zip);
+        item = menu.add(0, RESTORE_ZIP_ID, 0, R.string.restore_zip);
+        item.setIcon(R.drawable.ic_action_restore_zip);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
 
-        item = menu.add(0, RESTORE_ZIP_ID, 0, R.string.restore_zip);
-        item.setIcon(R.drawable.ic_action_restore_zip);
+        item = menu.add(0, SAVE_ZIP_ID, 0, R.string.save_zip);
+        item.setIcon(R.drawable.ic_action_save_zip);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
@@ -793,7 +793,8 @@ public class X48 extends Activity {
 
                 }
             } else {
-                showDialog(DIALOG_PROG_KO);
+                //showDialog(DIALOG_PROG_KO);
+                Toast.makeText(getApplicationContext(), "Error: " + getString(R.string.prog_ko), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -836,7 +837,7 @@ public class X48 extends Activity {
                     // showDialog(DIALOG_PROG_OK);
                 }
             } else {
-                showDialog(DIALOG_PROG_KO);
+                //showDialog(DIALOG_PROG_KO);
             }
         }
     }
