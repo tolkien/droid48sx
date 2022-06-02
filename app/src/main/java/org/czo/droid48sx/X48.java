@@ -54,6 +54,9 @@ public class X48 extends Activity {
     static final private int FULL_RESET_ID = Menu.FIRST + 9;
     static final private int SAVE_ZIP_ID = Menu.FIRST + 10;
     static final private int RESTORE_ZIP_ID = Menu.FIRST + 11;
+    static final private int MANUAL_VOL1_ID = Menu.FIRST + 12;
+    static final private int MANUAL_VOL2_ID = Menu.FIRST + 13;
+
 
     static final private int ROM_ID = 123;
     private static EmulatorThread thread;
@@ -421,6 +424,18 @@ public class X48 extends Activity {
 
         item = menu.add(0, SAVE_ZIP_ID, 0, R.string.save_zip);
         item.setIcon(R.drawable.ic_action_save_zip);
+        if (Build.VERSION.SDK_INT >= 11) {
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
+
+        item = menu.add(0, MANUAL_VOL1_ID, 0, R.string.manual_vol1);
+        item.setIcon(R.drawable.ic_action_info);
+        if (Build.VERSION.SDK_INT >= 11) {
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
+
+        item = menu.add(0, MANUAL_VOL2_ID, 0, R.string.manual_vol2);
+        item.setIcon(R.drawable.ic_action_info);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
@@ -842,6 +857,16 @@ public class X48 extends Activity {
         }
     }
 
+    public void manualVol1() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/czodroid/droid48sx/raw/master/store/doc/HP48sx-owner-manual-vol-1.pdf"));
+        startActivity(browserIntent);
+    }
+
+    public void manualVol2() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/czodroid/droid48sx/raw/master/store/doc/HP48sx-owner-manual-vol-2.pdf"));
+        startActivity(browserIntent);
+    }
+
 
     /**
      * Called when a menu item is selected.
@@ -878,6 +903,14 @@ public class X48 extends Activity {
                 saveCheckpoint();
                 return true;
 
+            case MANUAL_VOL1_ID:
+                manualVol1();
+                return true;
+
+            case MANUAL_VOL2_ID:
+                manualVol2();
+                return true;
+
             case RESET_ID:
                 Dlog.d("===================== Reset done...");
                 Toast.makeText(getApplicationContext(), "Reset done...", Toast.LENGTH_LONG).show();
@@ -912,6 +945,8 @@ public class X48 extends Activity {
     private static final int DIALOG_ROM_KO = 3;
     private static final int DIALOG_RAM_KO = 4;
     private static final int DIALOG_RAM_OK = 5;
+    private static final int DIALOG_RAM_OK2 = 6;
+
 
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -965,12 +1000,16 @@ public class X48 extends Activity {
                         .setIcon(R.drawable.ic_warning)
                         .setTitle(R.string.help)
                         .setMessage(R.string.ram_install_warning)
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.restart, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 checkPrefs();
+                                need_to_quit = true;
+                                saveonExit = false;
+                                finish();
                             }
                         })
                         .create();
+
         }
         return null;
     }

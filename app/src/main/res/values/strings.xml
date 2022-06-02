@@ -10,6 +10,7 @@
     <string name="full_reset_memory">Full reset</string>
     <string name="help">Warning</string>
     <string name="ok">OK</string>
+    <string name="restart">RESTART</string>
     <string name="prog_ok">The object has been loaded on the stack. Now, some HP knowledge is necessary:\n\n- If this is a library, push 0, then STO and shut down (right shift + on) then restart (on) the calculator: the program will be available in the LIBRARY menu.\n\n- If this is a regular object (dir, external, etc.), push a name between quotes on the stack (for example, \'FOO\'), then push STO: the object will be available in the VAR menu</string>
     <string name="prog_ko">This object cannot be loaded.\nMake sure it\'s a valid one and you have enough memory to load it</string>
     <string name="rom_ko">Rom files not found! This shouldn\'t happen :\\. Quitting now!</string>
@@ -22,12 +23,12 @@
     <string name="choose_msgbox">No program popup</string>
     <string name="choose_msgbox_value">No message box after loading</string>
     <string name="settings">Settings</string>
-    <string name="ramcards_preferences">Ports settings</string>
-    <string name="port1_install">Port1 setting</string>
-    <string name="port2_install">Port2 setting</string>
+    <string name="ramcards_preferences">Ports settings (need a restart)</string>
+    <string name="port1_install">PORT1 setting</string>
+    <string name="port2_install">PORT2 setting</string>
     <string name="ram_install">Choose an installation option</string>
     <string name="ram_install_error">The ram cards cannot be install on internal memory</string>
-    <string name="ram_install_warning">You need to quit this app by the menu to enable your ram cards.\nWARNING: you will experience an HP shutdown on the first restart! Don\'t panic, it\'s normal, just press the "ON" button on the HP interface.\nYou might want to save a checkpoint after this.</string>
+    <string name="ram_install_warning">You need to quit this app to enable your ram cards. You will experience an HP shutdown on the first restart! Just press the "ON" button on the HP interface.\n\nYou might want to save a checkpoint after this restart.\n\nNOTE: If you disable PORT1 or PORT2 when they were activated and MERGED to PORT0 (without FREE), then your HP48 will be stuck! (then uses a restore checkpoint shortcut).</string>
     <string-array name="port_1_values">
         <item>0</item>
         <item>128</item>
@@ -86,4 +87,6 @@
     <string name="build_preferences">Build info</string>
     <string name="restore_zip">Open checkpoint ZIP\.\.\.</string>
     <string name="save_zip">Save checkpoint ZIP As\.\.\.</string>
+    <string name="manual_vol1">HP 48sx Manual vol 1</string>
+    <string name="manual_vol2">HP 48sx Manual vol 2</string>
 </resources>
