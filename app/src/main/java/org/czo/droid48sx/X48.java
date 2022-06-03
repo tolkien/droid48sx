@@ -528,8 +528,7 @@ public class X48 extends Activity {
         Editor spe = mPrefs.edit();
 
         Dlog.d("===================== Full reset done...");
-        Toast.makeText(getApplicationContext(), "Full reset done...", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(getApplicationContext(), "Full reset done. Please re-run the app!", Toast.LENGTH_LONG).show();
         try {
             spe.putString("port1", "0");
             spe.putString("port2", "0");
@@ -774,21 +773,6 @@ public class X48 extends Activity {
         startActivityForResult(loadFileIntent, LOAD_ID);
     }
 
-    private void openZip() {
-        Intent loadFileIntent = new Intent();
-        loadFileIntent.setClass(this, ProgListView.class);
-        startActivityForResult(loadFileIntent, RESTORE_ZIP_ID);
-    }
-
-    private void openDocument2() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_TITLE, "currentFile");
-        //startActivityForResult(Intent.createChooser(intent, "Select File"), LOAD_ID);
-        startActivityForResult(intent, LOAD_ID);
-    }
-
     private void loadObject(final int requestCode, final int resultCode, final Intent extras) {
 
         final String filename = extras.getStringExtra("currentFile");
@@ -814,14 +798,11 @@ public class X48 extends Activity {
         }
     }
 
-    private void loadZip(final int requestCode, final int resultCode, final Intent extras) {
-
-        final String filename = extras.getStringExtra("currentFile");
-
-        if (filename != null) {
-            Dlog.d("===================== LoadZIP = " + filename);
-            restoreZIP(filename);
-        }
+    private void openDocument2() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        startActivityForResult(intent, LOAD_ID);
     }
 
     private void loadObject2(final int requestCode, final int resultCode, final Intent extras) {
@@ -850,10 +831,29 @@ public class X48 extends Activity {
                     if (mainView != null)
                         mainView.pressON();
                     // showDialog(DIALOG_PROG_OK);
+                    Toast.makeText(getApplicationContext(), filename + " loaded...", Toast.LENGTH_LONG).show();
+
                 }
             } else {
                 //showDialog(DIALOG_PROG_KO);
+                Toast.makeText(getApplicationContext(), "Error: " + getString(R.string.prog_ko), Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    private void openZip() {
+        Intent loadFileIntent = new Intent();
+        loadFileIntent.setClass(this, ProgListView.class);
+        startActivityForResult(loadFileIntent, RESTORE_ZIP_ID);
+    }
+
+    private void loadZip(final int requestCode, final int resultCode, final Intent extras) {
+
+        final String filename = extras.getStringExtra("currentFile");
+
+        if (filename != null) {
+            Dlog.d("===================== LoadZIP = " + filename);
+            restoreZIP(filename);
         }
     }
 
