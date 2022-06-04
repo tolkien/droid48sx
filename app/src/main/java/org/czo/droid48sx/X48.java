@@ -56,6 +56,7 @@ public class X48 extends Activity {
     static final private int RESTORE_ZIP_ID = Menu.FIRST + 11;
     static final private int MANUAL_VOL1_ID = Menu.FIRST + 12;
     static final private int MANUAL_VOL2_ID = Menu.FIRST + 13;
+    static final private int LOADOBJECT_ID = Menu.FIRST + 14;
 
 
     static final private int ROM_ID = 123;
@@ -416,17 +417,28 @@ public class X48 extends Activity {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
 
-        item = menu.add(0, RESTORE_ZIP_ID, 0, R.string.restore_zip);
-        item.setIcon(R.drawable.ic_action_restore_zip);
+/*
+        item = menu.add(0, LOADOBJECT_ID, 0, R.string.load_object);
+        item.setIcon(R.drawable.ic_action_load_object);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
+*/
 
         item = menu.add(0, SAVE_ZIP_ID, 0, R.string.save_zip);
         item.setIcon(R.drawable.ic_action_save_zip);
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
+
+        item = menu.add(0, RESTORE_ZIP_ID, 0, R.string.restore_zip);
+        item.setIcon(R.drawable.ic_action_restore_zip);
+        if (Build.VERSION.SDK_INT >= 11) {
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
+
+/*
+        // Hp gave the HP48 ROM in 2000, but I don't know if they also gave the manuals...
 
         item = menu.add(0, MANUAL_VOL1_ID, 0, R.string.manual_vol1);
         item.setIcon(R.drawable.ic_action_info);
@@ -439,7 +451,7 @@ public class X48 extends Activity {
         if (Build.VERSION.SDK_INT >= 11) {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
-
+*/
         item = menu.add(0, QUIT_ID, 0, R.string.button_quit);
         item.setIcon(R.drawable.ic_action_power);
         if (Build.VERSION.SDK_INT >= 11) {
@@ -763,11 +775,11 @@ public class X48 extends Activity {
                 requestPermissions(
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         123);
-            } else openDocument();
-        } else openDocument();
+            } else openLoad();
+        } else openLoad();
     }
 
-    private void openDocument() {
+    private void openLoad() {
         Intent loadFileIntent = new Intent();
         loadFileIntent.setClass(this, ProgListView.class);
         startActivityForResult(loadFileIntent, LOAD_ID);
@@ -798,14 +810,26 @@ public class X48 extends Activity {
         }
     }
 
-    private void openDocument2() {
+
+    private void storageEnabledOpenLoadObject() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                requestPermissions(
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        123);
+            } else openDocObject();
+        } else openDocObject();
+    }
+
+    private void openDocObject() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
-        startActivityForResult(intent, LOAD_ID);
+        startActivityForResult(intent, LOADOBJECT_ID);
     }
 
-    private void loadObject2(final int requestCode, final int resultCode, final Intent extras) {
+    private void loadDocObject(final int requestCode, final int resultCode, final Intent extras) {
 
         String filename = null;
 
@@ -881,6 +905,10 @@ public class X48 extends Activity {
 
             case LOAD_ID:
                 storageEnabledOpenLoad();
+                break;
+
+            case LOADOBJECT_ID:
+                storageEnabledOpenLoadObject();
                 break;
 
             case SAVE_ZIP_ID:
@@ -1024,6 +1052,11 @@ public class X48 extends Activity {
 
                 case LOAD_ID: {
                     loadObject(requestCode, resultCode, extras);
+                    break;
+                }
+
+                case LOADOBJECT_ID: {
+                    loadDocObject(requestCode, resultCode, extras);
                     break;
                 }
 

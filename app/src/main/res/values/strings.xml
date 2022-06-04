@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">48sx</string>
     <string name="load_prog">Load object on stack</string>
+    <string name="load_object">Load object on stack DOC</string>
     <string name="save_state">Save memory/state</string>
     <string name="rom_legal">This emulator need a ROM to run. HP-ROM files are copyrighted by Hewlett Packard. But since fall 2000 HP ACO allowed the non commercial use of the HP48 ROM\'s even if you\'re not an owner of this calculator type.</string>
     <string name="button_download">Download and install ROM from HPcalc.org</string>
@@ -85,7 +86,7 @@
     <string name="save_checkpoint">Save checkpoint</string>
     <string name="restore_checkpoint">Restore checkpoint</string>
     <string name="build_preferences">Build info</string>
-    <string name="restore_zip">Open checkpoint ZIP\.\.\.</string>
+    <string name="restore_zip">Restore checkpoint ZIP\.\.\.</string>
     <string name="save_zip">Save checkpoint ZIP As\.\.\.</string>
     <string name="manual_vol1">HP 48sx Manual vol 1</string>
     <string name="manual_vol2">HP 48sx Manual vol 2</string>
