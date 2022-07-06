@@ -291,6 +291,7 @@ public class X48 extends Activity {
             mainView.setKeybLite(mPrefs.getBoolean("keybLite", false));
             mainView.setHapticFeedbackEnabled(mPrefs.getBoolean("haptic", true));
             mainView.setSound(mPrefs.getBoolean("sound", false));
+            // large_width is indeed !lcd_int
             mainView.setFullWidth(mPrefs.getBoolean("large_width", false));
             mainView.setScaleControls(mPrefs.getBoolean("scale_buttons", true));
         }
@@ -1071,6 +1072,7 @@ public class X48 extends Activity {
                     managePort(1, port1);
                     String port2 = mPrefs.getString("port2", "0");
                     managePort(2, port2);
+                    getPrefs();
                     checkPrefs();
                 }
             }
