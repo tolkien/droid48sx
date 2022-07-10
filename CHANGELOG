@@ -1,10 +1,13 @@
 48sx CHANGELOG
 ==============
 
-* 10 Jul 2022 (Version 2.42)
+* 10 Jul 2022 (Version 2.42.27624074)
+ - Fixed the "Large LCD" option in the settings, and replaced it with "HP48 LCD" to get full pixels
+ - The HP48's LCD screen has now a maximum width on your device, but you can set "HP48 LCD" in the settings get full pixels
+
+* 4 June 2022 (Version 2.42.27573940)
  - Bug fixes and performance improvements
  - Intended to work from Android 4.4 to 12 on armeabi-v7a, arm64-v8a, x86 and x86_64 architectures
- - The HP48's LCD screen has a maximum width on your device by default, but you can get interger pixel scaling in the settings
  - Haptic feedback enabled by default, but can be disabled on settings
  - New menu: 'Save checkpoint ZIP As...' : save the current checkpoint in a zipped file (in Download/checkpoint_$DATE.zip).
    This zip file must contain the files 'hp48', 'rom', 'ram' and maybe 'port1' or 'port2')
