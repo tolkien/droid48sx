@@ -1,7 +1,7 @@
 48sx CHANGELOG
 ==============
 
-* 9 Jul 2022 (Version 2.42)
+* 10 Jul 2022 (Version 2.42)
  - Bug fixes and performance improvements
  - Intended to work from Android 4.4 to 12 on armeabi-v7a, arm64-v8a, x86 and x86_64 architectures
  - The HP48's LCD screen has a maximum width on your device by default, but you can get interger pixel scaling in the settings
