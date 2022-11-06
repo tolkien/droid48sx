@@ -31,7 +31,7 @@ def buildDateTxt
 
 android {
     compileSdkVersion 33
-    ndkVersion '25.1.8937393'
+    //ndkVersion '25.1.8937393'
     namespace 'org.czo.droid48sx'
     defaultConfig {
         applicationId "org.czo.droid48sx"
@@ -98,6 +98,7 @@ android {
 
     externalNativeBuild {
         cmake {
+            version "3.22.1"
             path "src/main/cpp/CMakeLists.txt"
         }
     }
