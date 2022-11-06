@@ -30,11 +30,11 @@ println("-> gitVersionName:    " + gitVersionName)
 def buildDateTxt
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     defaultConfig {
         applicationId "org.czo.droid48sx"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode minutesSinceEpoch
         versionName "2.42"
 
@@ -100,6 +100,7 @@ android {
             path "src/main/cpp/CMakeLists.txt"
         }
     }
+    namespace 'org.czo.droid48sx'
 }
 
 
