@@ -18,7 +18,7 @@ created an emulator of the Saturn processor in 1990.
 
 ### Detailed information
 
-For more information, please read the [changelog](CHANGELOG)...
+For more information, please read the [changelog](CHANGELOG.md)...
 
 
 ### Donations
