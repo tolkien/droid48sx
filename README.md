@@ -1,6 +1,6 @@
 ## 48sx : The HP48 sx emulator !
 
-HP48sx is a vintage RPN calculator. I used this calc 25 years ago ;-) I love this calc....and 
+HP48sx is a vintage RPN calculator. I used this calc 25 years ago ;-) I love this calc....and
 now I can have it in my pocket every day !
 
 ![ScreeShot](store/play/2.42/48sx_small.jpg)
@@ -18,4 +18,11 @@ created an emulator of the Saturn processor in 1990.
 
 Please read the [changelog](CHANGELOG)...
 
+
+### Donations
+
+I develop 48sx purely for fun, so no donations are required. However,
+seeing as I have been asked about this a few times, here is a link...
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?business=3Z6NMUFPGJB5J&no_recurring=1&item_name=Czo%27s+OpenSource+Projects&currency_code=EUR)
 
