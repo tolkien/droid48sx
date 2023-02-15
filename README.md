@@ -16,7 +16,9 @@ commercial use. No nag, no Ad, completely FREE!
 (author of droid48 for Android), and of course Eddie C. Dost (author of x48 for UNIX) who
 created an emulator of the Saturn processor in 1990.
 
-Please read the [changelog](CHANGELOG)...
+### Detailed information
+
+For more information, please read the [changelog](CHANGELOG)...
 
 
 ### Donations
