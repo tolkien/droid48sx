@@ -3,7 +3,7 @@
 HP48sx is a vintage RPN calculator. I used this calc 25 years ago ;-) I love this calc....and
 now I can have it in my pocket every day !
 
-![ScreeShot](store/play/2.42/48sx_small.jpg)
+![ScreenShot](store/play/2.42/48sx_small.jpg)
 
 HP48sx emulator for Android, released on the Play Store. The bundled ROM is free for non
 commercial use. No nag, no Ad, completely FREE!
